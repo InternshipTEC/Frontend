@@ -6,7 +6,6 @@ import styled from 'styled-components'
 import LogoTEC from '../../../blob/images/LogoTEC.png'
 import { useMediaQuery } from 'react-responsive'
 
-
 const TemplateNav = styled(Navbar)`
     background: transparent; 
     font-size: 20px;
@@ -20,7 +19,7 @@ const NavLink = styled(Link)`
 `
 
 const LinkWrapper = styled.div`
-    margin: ${props => props.drowpdown ? "0 0.5rem" : "0.5rem 0.5rem"};
+    margin: ${props => props.dropdown ? "0 0.5rem" : "0.5rem 0.5rem"};
     filter: ${props => props.active ? "drop-shadow(5px 4px 4px #ffffff)" : "none"} ;
 `
 
