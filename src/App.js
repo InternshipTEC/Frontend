@@ -7,11 +7,13 @@ import {
 } from "react-router-dom";
 import NavbarWebsite from './components/TemplateComponents/Navbar/NavbarWebsite'
 import {AllOpenRoutes, AllPrivateRoutes} from './routes/routes';
+import GlobalFonts from './components/shared/Fonts'
 
 function App() {
   return (
     <div className="App">
       <AuthProvider>
+        <GlobalFonts/>
         <Router>
         <NavbarWebsite/>
             {AllOpenRoutes.map(({path, component: Component})=>(
