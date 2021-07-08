@@ -25,17 +25,74 @@ const AlumnusContainer = styled.div`
 `
 const TitleContianer = styled.div`
     margin-left:50px;
-    &:hover {
+    @media screen and (max-width:960px) {
+        ${Text} {
+            font-size:1.2rem;
+        }
+    }
+    @media screen and (max-width:600px) {
+        ${Text} {
+            font-size:0.8rem;
+        }
+    }
+
+    @media screen and (max-width:425px) {
+        ${Text} {
+            font-size:0.5rem;
+        }
+    }
+
+    @media screen and (max-width:425px) {
+         {
+            margin-left:25px;
+        }
+    }
         
 `
 const DescriptionContainer = styled.div`
     position: relative;
     margin-bottom:100px;
     margin-right:30px;
+    margin-left:320px;
     
 
-    
+    @media screen and (max-width:960px) {
+        ${Text} {
+            font-size:1rem;
+        }
+    }
+
+    @media screen and (max-width:760px) {
+         {
+
+            margin-left:220px;
+            margin-bottom:10px;
+        }
+    }
+
+    @media screen and (max-width:760px) {
+        ${Text} {
+            font-size:0.6rem;
+        }
+    }
+
+
+    @media screen and (max-width:425px) {
+        ${Text} {
+            font-size:0.4rem;
+        }
+    }
+    @media screen and (max-width:425px) {
+        {
+
+           margin-left:150px;
+           margin-bottom:60px;
+       }
+   }
+   
 `
+
+
 
 const Portrait = styled.div`
     width: 100px;
@@ -57,13 +114,50 @@ const Gambar = styled.img`
     float: left;
     clear:left;
 
+
     ${props=>{
-        if(!props.mobile){
+        if(!props.medium){
+            return css`
+                width:300px;
+            `
+        }
+    }}
+
+    ${props=>{
+        if(!props.small){
             return css`
                 width:200px;
             `
         }
     }}
+
+    ${props=>{
+        if(!props.small){
+            return css`
+                width:160px;
+            `
+        }
+    }}
+
+    ${props=>{
+        if(!props.small){
+            return css`
+                width:160px;
+            `
+        }
+    }}
+
+    ${props=>{
+        if(!props.mobilebeneran){
+            return css`
+                width:120px;
+            `
+        }
+    }}
+    
+    
+
+    
 `
 const Alumnus1 = styled.img`
 border-radius:50%;
@@ -72,6 +166,13 @@ width:120px;
 margin:0px;
 padding:0px;
 transition:  0.5s ease;
+${props=>{
+    if(!props.small){
+        return css`
+            width:60px;
+        `
+    }
+}}
 `
 const Alumnus2 = styled.img`
 border-radius:50%;
@@ -80,6 +181,13 @@ width:120px;
 margin:0px;
 padding:0px;
 transition:  0.5s ease;
+${props=>{
+    if(!props.small){
+        return css`
+            width:60px;
+        `
+    }
+}}
 `
 const Alumnus3 = styled.img`
 border-radius:50%;
@@ -88,6 +196,13 @@ width:120px;
 margin:0px;
 padding:0px;
 transition:  0.5s ease;
+${props=>{
+    if(!props.small){
+        return css`
+            width:60px;
+        `
+    }
+}}
 `
 const Alumnus4 = styled.img`
 border-radius:50%;
@@ -96,6 +211,13 @@ width:120px;
 margin:0px;
 padding:0px;
 transition:  0.5s ease;
+${props=>{
+    if(!props.small){
+        return css`
+            width:60px;
+        `
+    }
+}}
 `
 const Alumnus5 = styled.img`
 border-radius:50%;
@@ -104,16 +226,41 @@ width:120px;
 margin:0px;
 padding:0px;
 transition:  0.5s ease;
-}
+
+${props=>{
+    if(!props.small){
+        return css`
+            width:60px;
+        `
+    }
+}}
 `
 
 const AlumnusListContainer = styled.div`
     margin-left:300px;
     position: relative;
-    margin-top:300px;
     flex-direction:row;
-    }
+    
+    
+    ${props=>{
+        if(!props.medium){
+            return css`
+                margin-left:50px;
+            `
+        }
+    }}
+
+    ${props=>{
+        if(!props.medium){
+            return css`
+                margin-left:20px;
+            `
+        }
+    }}
+
+
 `
+/*
 const AlumnusListContainer1 = styled.div`
     position:relative;
     display:flex;
@@ -167,7 +314,7 @@ const AlumnusListContainer5 = styled.div`
         }
     }
 `
-/*
+
 Alumnus1.addEventListener("onmouseover", scaleFunction )
 
 function scaleFunction() {
@@ -177,8 +324,14 @@ function scaleFunction() {
 
 
 const Alumnus = () => {
+    const isTablet = useMediaQuery({
+        query: '(min-width: 960px)'
+    });
     const isMobile = useMediaQuery({
-        query: '(min-width: 992px)'
+        query: '(min-width: 760px)'
+    });
+    const isMobileBeneran = useMediaQuery({
+        query: '(min-width: 425px)'
     });
     return (
         <AlumnusContainer>
@@ -188,24 +341,22 @@ const Alumnus = () => {
             </Text>
             </TitleContianer>
             
-            <Gambar src={AchmadZaky} mobile={isMobile}/>
+            <Gambar src={AchmadZaky} medium={isTablet} small={isMobile} mobilebeneran={isMobileBeneran}/>
 
             <DescriptionContainer>
                 <Text type="primary" size={2}> ACHMAD ZAKY </Text>
                 <Text type="secondary" size={2}> Founder of Bukalapak</Text>
                 <Text type="paragraph" size={1}> 
-                Lorem ipsum dolor sit amet, sconsectu r adipsicing eit. Nullam femranutm ex nibh, sed varius turpis pelllentesque viverra. praesent sollicitudin finibus odio, nec qilue nunc saggigtsed
-                assaaaa aaaaaaaaaaaaaaa aaaaaaaaaaaaa aaaaaaaaaa
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus augue ac molestie. Vivamus eget commodo purus. Proin eu ornare nisi. Integer eu vehicula ligula, at tempus augue. Suspendisse vel dictum erat. Nam mi mauris, vulputate a malesuada nec, tempus eu eros. Suspendisse magna neque, pretium vitae lectus ut, iaculis congue libero. Nulla in semper elit.
                 </Text>
             </DescriptionContainer>
 
-            <AlumnusListContainer>
-                <Alumnus1 src={AchmadZaky}/>
-                <Alumnus2 src={AchmadZaky}/>
-                <Alumnus3 src={AchmadZaky}/>
-                <Alumnus4 src={AchmadZaky}/>
-                <Alumnus5 src={AchmadZaky}/>
+            <AlumnusListContainer medium={isTablet} >
+                <Alumnus1 src={AchmadZaky} small={isMobile}/>
+                <Alumnus2 src={AchmadZaky} small={isMobile}/>
+                <Alumnus3 src={AchmadZaky} small={isMobile}/>
+                <Alumnus4 src={AchmadZaky} small={isMobile}/>
+                <Alumnus5 src={AchmadZaky} small={isMobile}/>
                 
             </AlumnusListContainer>
         </AlumnusContainer>
