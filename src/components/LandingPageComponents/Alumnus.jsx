@@ -166,6 +166,10 @@ width:120px;
 margin:0px;
 padding:0px;
 transition:  0.5s ease;
+
+&:hover {
+    cursor:pointer;
+}
 ${props=>{
     if(!props.small){
         return css`
@@ -181,6 +185,10 @@ width:120px;
 margin:0px;
 padding:0px;
 transition:  0.5s ease;
+
+&:hover {
+    cursor:pointer;
+}
 ${props=>{
     if(!props.small){
         return css`
@@ -196,6 +204,11 @@ width:120px;
 margin:0px;
 padding:0px;
 transition:  0.5s ease;
+
+&:hover {
+    cursor:pointer;
+}
+
 ${props=>{
     if(!props.small){
         return css`
@@ -211,6 +224,11 @@ width:120px;
 margin:0px;
 padding:0px;
 transition:  0.5s ease;
+
+&:hover {
+    cursor:pointer;
+}
+
 ${props=>{
     if(!props.small){
         return css`
@@ -227,6 +245,10 @@ margin:0px;
 padding:0px;
 transition:  0.5s ease;
 
+&:hover {
+    cursor:pointer;
+}
+
 ${props=>{
     if(!props.small){
         return css`
@@ -237,29 +259,39 @@ ${props=>{
 `
 
 const AlumnusListContainer = styled.div`
-    margin-left:300px;
-    position: relative;
-    flex-direction:row;
-    
-    
-    ${props=>{
-        if(!props.medium){
-            return css`
-                margin-left:50px;
-            `
-        }
-    }}
-
-    ${props=>{
-        if(!props.medium){
-            return css`
-                margin-left:20px;
-            `
-        }
-    }}
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 
 
 `
+/* 
+Section Alumnus 2
+*/
+
+const Portrait2 = styled.div`
+    width: 100px;
+    margin:0;
+    padding:0;
+    
+    @media screen and  (max-width:922){
+        width:200px;
+
+    }
+`
+
+const Gambar2 = styled.img`
+    clip-path:circle();
+    border-radius:100%;
+    width:400px;
+    margin:10px;
+    padding:0px;
+    float: left;
+    clear:left;
+`
+
+
+
 /*
 const AlumnusListContainer1 = styled.div`
     position:relative;
@@ -323,6 +355,9 @@ function scaleFunction() {
 */
 
 
+/* */
+
+
 const Alumnus = () => {
     const isTablet = useMediaQuery({
         query: '(min-width: 960px)'
@@ -352,6 +387,7 @@ const Alumnus = () => {
             </DescriptionContainer>
 
             <AlumnusListContainer medium={isTablet} >
+                
                 <Alumnus1 src={AchmadZaky} small={isMobile}/>
                 <Alumnus2 src={AchmadZaky} small={isMobile}/>
                 <Alumnus3 src={AchmadZaky} small={isMobile}/>
