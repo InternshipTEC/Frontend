@@ -1,23 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, {css} from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import Text from '../shared/Text'
 import AchmadZaky from '../../blob/images/AchmadZaky.jpg'
+import Portrait2 from '../../blob/images/img2.jpg'
+import Portrait3 from '../../blob/images/img3.jpg'
 
 /*
+HAL YANG HARUS DI UPDATE KE GITHUB
+1. Alumnus.jsx
+2. Gambarnya yang gw simpen di blob/images
+
 Notice: Image Alumnus menggunakan clip-path:circle() 
-sehingga hitboxnya bisa berada di luar lingkaran, 
 dapat digunakan border-radius agar hitbox sesuai, tetapi gambar harus 1:1 atau mendekati agar tidak oval
 
 Problem: 
-1.Kalau Paragraphnya kebanyakan, dia akan overflow ke bawah gambar utama
+1. Setiap foto harus sama ukuranya
+
+2.Kalau Paragraphnya kebanyakan, dia akan overflow ke bawah gambar utama
 Solusi yg kepikiran make position absolute
 
-2. Font "Founder of Bukalapak" belum seusai sama figma
+3. Font "Founder of Bukalapak" belum seusai sama figma
 
-3. Cara ngehover 1 per 1 tanpa harus buat banyak banget const?
-
-4.Transition ada sedikit jelek kalo make clip-path
 */
 
 const AlumnusContainer = styled.div`
@@ -265,100 +269,11 @@ const AlumnusListContainer = styled.div`
 
 
 `
-/* 
-Section Alumnus 2
-*/
 
-const Portrait2 = styled.div`
-    width: 100px;
-    margin:0;
-    padding:0;
-    
-    @media screen and  (max-width:922){
-        width:200px;
-
-    }
-`
-
-const Gambar2 = styled.img`
-    clip-path:circle();
-    border-radius:100%;
-    width:400px;
-    margin:10px;
-    padding:0px;
-    float: left;
-    clear:left;
-`
-
-
-
-/*
-const AlumnusListContainer1 = styled.div`
-    position:relative;
-    display:flex;
-    flex-direction:row;
-    &:hover {
-        ${Alumnus1}{
-            cursor: pointer;
-            transform: scale(1.1,1.1);
-        }
-    }
-`
-const AlumnusListContainer2 = styled.div`
-    position:relative;
-    display:flex;
-    flex-direction:row;
-    &:hover {
-        ${Alumnus2}{
-            cursor: pointer;
-            transform: scale(1.1,1.1);
-        }
-    }
-`
-const AlumnusListContainer3 = styled.div`
-    position:relative;
-    flex-direction:row;
-    &:hover {
-        ${Alumnus3}{
-            cursor: pointer;
-            transform: scale(1.1,1.1);
-        }
-    }
-`
-const AlumnusListContainer4 = styled.div`
-    position:relative;
-    flex-direction:row;
-    &:hover {
-        ${Alumnus4}{
-            cursor: pointer;
-            transform: scale(1.1,1.1);
-        }
-    }
-`
-
-const AlumnusListContainer5 = styled.div`
-    position:relative;
-    flex-direction:row;
-    &:hover {
-        ${Alumnus5}{
-            cursor: pointer;
-            transform: scale(1.1,1.1);
-        }
-    }
-`
-
-Alumnus1.addEventListener("onmouseover", scaleFunction )
-
-function scaleFunction() {
-
-}
-*/
-
-
-/* */
 
 
 const Alumnus = () => {
+    //MEDIA QUERY
     const isTablet = useMediaQuery({
         query: '(min-width: 960px)'
     });
@@ -368,6 +283,45 @@ const Alumnus = () => {
     const isMobileBeneran = useMediaQuery({
         query: '(min-width: 425px)'
     });
+
+    //useState Declaration
+    const [name, setName] = useState("Achmad Zaky");
+    const [title, setTitle] = useState("Founder of Bukalapak");
+    const [desc, setDesc] = useState("LOREM IPSUM MAKAN BUBUR SUMSUM cakep");
+    const [wajah, setWajah] = useState(AchmadZaky)
+
+    //CLICKABLE FUNCTION
+    function alumnusSatu() {
+        setName("Achmad Zaky");
+        setTitle("Founder ");
+        setDesc("AZAKY");
+        setWajah(AchmadZaky);
+    }
+    function alumnusDua() {
+        setName("Dono");
+        setTitle("WARKOP DKI");
+        setDesc("Desperado ");
+        setWajah(Portrait3);
+    }
+    function alumnusTiga() {
+        setName("Bambang");
+        setTitle("Pamungkas");
+        setDesc("Jago");
+        setWajah(Portrait2);
+    }
+    function alumnusEmpat() {
+        setName("Rifqi");
+        setTitle("Manusia");
+        setDesc("Yok bisa Yok");
+        setWajah(Portrait3);
+    }
+    function alumnusLima() {
+        setName("Alucard");
+        setTitle("Dracuila");
+        setDesc("DAFTAR STEI CUP GES");
+        setWajah(Portrait2);
+    }
+
     return (
         <AlumnusContainer>
             <TitleContianer>
@@ -376,23 +330,21 @@ const Alumnus = () => {
             </Text>
             </TitleContianer>
             
-            <Gambar src={AchmadZaky} medium={isTablet} small={isMobile} mobilebeneran={isMobileBeneran}/>
+            <Gambar src={wajah} medium={isTablet} small={isMobile} mobilebeneran={isMobileBeneran}/>
 
             <DescriptionContainer>
-                <Text type="primary" size={2}> ACHMAD ZAKY </Text>
-                <Text type="secondary" size={2}> Founder of Bukalapak</Text>
-                <Text type="paragraph" size={1}> 
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut porta tempus augue ac molestie. Vivamus eget commodo purus. Proin eu ornare nisi. Integer eu vehicula ligula, at tempus augue. Suspendisse vel dictum erat. Nam mi mauris, vulputate a malesuada nec, tempus eu eros. Suspendisse magna neque, pretium vitae lectus ut, iaculis congue libero. Nulla in semper elit.
-                </Text>
+                <Text type="primary" size={2}> {name} </Text>
+                <Text type="secondary" size={2}> {title}</Text>
+                <Text type="paragraph" size={1}>  {desc} </Text>
             </DescriptionContainer>
 
             <AlumnusListContainer medium={isTablet} >
                 
-                <Alumnus1 src={AchmadZaky} small={isMobile}/>
-                <Alumnus2 src={AchmadZaky} small={isMobile}/>
-                <Alumnus3 src={AchmadZaky} small={isMobile}/>
-                <Alumnus4 src={AchmadZaky} small={isMobile}/>
-                <Alumnus5 src={AchmadZaky} small={isMobile}/>
+                <Alumnus1 src={AchmadZaky} small={isMobile} onClick={alumnusSatu}></Alumnus1>
+                <Alumnus2 src={AchmadZaky} small={isMobile} onClick={alumnusDua}></Alumnus2>
+                <Alumnus3 src={AchmadZaky} small={isMobile} onClick={alumnusTiga}></Alumnus3>
+                <Alumnus4 src={AchmadZaky} small={isMobile} onClick={alumnusEmpat}></Alumnus4>
+                <Alumnus5 src={AchmadZaky} small={isMobile} onClick={alumnusLima}></Alumnus5>
                 
             </AlumnusListContainer>
         </AlumnusContainer>
