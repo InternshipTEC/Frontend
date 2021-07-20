@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled, {css} from 'styled-components'
+import styled from 'styled-components'
 import { useMediaQuery } from 'react-responsive'
 import Text from '../shared/Text'
 import AchmadZaky from '../../blob/images/AchmadZaky.jpg'

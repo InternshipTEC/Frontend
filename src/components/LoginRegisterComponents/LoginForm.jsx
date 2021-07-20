@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { Button } from "react-bootstrap";
 import Text from "../shared/Text";
 import { useMediaQuery } from "react-responsive";

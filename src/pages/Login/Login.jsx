@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import LogoFaksi1 from "../../blob/images/logofaksilogin.png";
 import LogoFaksi2 from "../../blob/images/logofaksilogin2.png";
 import { useMediaQuery } from "react-responsive";
