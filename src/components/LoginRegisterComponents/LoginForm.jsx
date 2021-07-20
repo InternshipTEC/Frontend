@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Button } from "react-bootstrap";
 import Text from "../shared/Text";
 import { useMediaQuery } from "react-responsive";
+import {useForm} from "react-hook-form";
+import * as controller from "../../controller"
 
 const Login = styled.div`
   display: flex;
@@ -47,24 +49,37 @@ const LoginForm = () => {
   const isMobile = useMediaQuery({
     query: "(max-width: 470px)",
   });
+  const { register, handleSubmit } = useForm();
+  const onSubmit = async data => {
+    try {
+      const user = await controller.handleLogin(data.email,data.password);
+      if(user.message){
+        alert(user.message)
+      }
+    } catch (err) {
+      alert(err.message)
+    }
+  }
   return (
     <Login style={isImage ? { marginTop: "6rem", marginBottom: "8rem" } : {}}>
-      <GridForm>
-        <GridItem style={isMobile ? { width: "300px" } : {}}>
-          <Text type="secondary" style={{ color: "white" }}>
-            Email
-          </Text>
-          <Input type="email" id="email" name="email" required />
-        </GridItem>
-        <GridItem style={isMobile ? { width: "300px" } : {}}>
-          <Text type="secondary" style={{ color: "white" }}>
-            Password
-          </Text>
-          <Input type="password" id="password" name="password" required />
-        </GridItem>
-      </GridForm>
-      <Submit>Login</Submit>
-      <Text type="Paragraph" style={{ color: "#696969" }}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <GridForm>
+          <GridItem style={isMobile ? { width: "300px" } : {}}>
+            <Text type="secondary" style={{ color: "white" }}>
+              Email
+            </Text>
+            <Input type="email" id="email" {...register("email",{required:"This is required"})}/>
+          </GridItem>
+          <GridItem style={isMobile ? { width: "300px" } : {}}>
+            <Text type="secondary" style={{ color: "white" }}>
+              Password
+            </Text>
+            <Input type="password" id="password" {...register("password",{required:"This is required"})}/>
+          </GridItem>
+        </GridForm>
+        <Submit type="submit">Login</Submit>
+    </form>
+     <Text type="Paragraph" style={{ color: "#696969" }}>
         Belum punya akun? {""}
         <a href="/" style={{ color: "#939496" }}>
           Klik disini

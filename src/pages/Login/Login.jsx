@@ -12,6 +12,7 @@ const LoginPage = styled.div`
   flex-direction: column;
   align-items: center;
   background: linear-gradient(0deg, #19161b, #19161b);
+  height:100vh;
 `;
 
 const Faksi = styled.div`
@@ -24,6 +25,7 @@ const Faksi = styled.div`
 const NavLog = styled.div`
   display: flex;
   align-items: center;
+  justify-content:center;
   gap: 8rem;
 `;
 

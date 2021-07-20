@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Button } from "react-bootstrap";
 import Text from "../shared/Text";
 import { useMediaQuery } from "react-responsive";
+import { useForm } from 'react-hook-form';
+import * as controller from "../../controller"
 
 const RegisForm = styled.div`
   display: flex;
@@ -75,59 +77,75 @@ const RegisterForm = () => {
   const isMobile = useMediaQuery({
     query: "(max-width: 470px)",
   });
+  const { register, handleSubmit } = useForm();
+  const onSubmit = async data => {
+    if(data.password === data.confirm){
+      try {
+        const user = await controller.handleSignup(data.email,data.password);
+        if(user.message){
+          console.log(user)
+          alert(user.message)
+        }
+      } catch (err) {
+        alert(err.message)
+      }
+    }
+ }
   return (
     <RegisForm>
-      <GridForm>
-        <GridItem style={isMobile ? { width: "300px" } : {}}>
-          <Text type="secondary" style={{ color: "white" }}>
-            Email
-          </Text>
-          <Input type="email" id="email" name="email" required />
-        </GridItem>
-        <GridItem style={isMobile ? { width: "300px" } : {}}>
-          <Text type="secondary" style={{ color: "white" }}>
-            Nama
-          </Text>
-          <Input type="text" id="nama" name="nama" required />
-        </GridItem>
-        <GridItem style={isMobile ? { width: "300px" } : {}}>
-          <Text type="secondary" style={{ color: "white" }}>
-            Fakultas
-          </Text>
-          <Select id="fakultas" name="fakultas" placeholder="Pilih Fakultas" required>
-            <option disabled selected value>
-              -- Pilih Fakultas --
-            </option>
-            {Fakultas.map((q) => (
-              <option value={q} style={{ color: "black" }}>
-                {q}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <GridForm>
+          <GridItem style={isMobile ? { width: "300px" } : {}}>
+            <Text type="secondary" style={{ color: "white" }}>
+              Email
+            </Text>
+            <Input type="email" id="email" {...register("email")} required />
+          </GridItem>
+          <GridItem style={isMobile ? { width: "300px" } : {}}>
+            <Text type="secondary" style={{ color: "white" }}>
+              Nama
+            </Text>
+            <Input type="text" id="nama" {...register("nama")} required />
+          </GridItem>
+          <GridItem style={isMobile ? { width: "300px" } : {}}>
+            <Text type="secondary" style={{ color: "white" }}>
+              Fakultas
+            </Text>
+            <Select id="fakultas" {...register("fakultas")} placeholder="Pilih Fakultas" required>
+              <option disabled selected value>
+                -- Pilih Fakultas --
               </option>
-            ))}
-          </Select>
-        </GridItem>
-        <GridItem style={isMobile ? { width: "300px" } : {}}>
-          <Text type="secondary" style={{ color: "white" }}>
-            Password
-          </Text>
-          <Input type="password" id="password" name="password" required />
-        </GridItem>
-        <GridItem style={isMobile ? { width: "300px" } : {}}>
-          <Text type="secondary" style={{ color: "white" }}>
-            Konfirmasi Password
-          </Text>
-          <Input type="password" id="confirm" name="confirm" required />
-        </GridItem>
-        <GridItem style={isMobile ? { width: "300px" } : {}}>
-          <Text type="secondary" style={{ color: "white" }}>
-            Upload Bukti Pembayaran
-          </Text>
-          <CustomUpload>
-            Choose a file
-            <Upload type="file" id="upload" name="upload" data-multiple-caption="Files selected" required />
-          </CustomUpload>
-        </GridItem>
-      </GridForm>
-      <Submit>Register</Submit>
+              {Fakultas.map((q) => (
+                <option value={q} style={{ color: "black" }}>
+                  {q}
+                </option>
+              ))}
+            </Select>
+          </GridItem>
+          <GridItem style={isMobile ? { width: "300px" } : {}}>
+            <Text type="secondary" style={{ color: "white" }}>
+              Password
+            </Text>
+            <Input type="password" id="password" {...register("password")} required />
+          </GridItem>
+          <GridItem style={isMobile ? { width: "300px" } : {}}>
+            <Text type="secondary" style={{ color: "white" }}>
+              Konfirmasi Password
+            </Text>
+            <Input type="password" id="confirm" {...register("confirm")} required />
+          </GridItem>
+          <GridItem style={isMobile ? { width: "300px" } : {}}>
+            <Text type="secondary" style={{ color: "white" }}>
+              Upload Bukti Pembayaran
+            </Text>
+            <CustomUpload>
+              Choose a file
+              <Upload type="file" id="upload" {...register("upload")} data-multiple-caption="Files selected" />
+            </CustomUpload>
+          </GridItem>
+        </GridForm>
+        <Submit type="submit">Register</Submit>
+      </form>
       <Text type="Paragraph" style={{ color: "#696969", marginBottom: "2rem" }}>
         Sudah punya akun? {""}
         <a href="/" style={{ color: "#939496" }}>
