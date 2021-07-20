@@ -1,11 +1,8 @@
 import React from 'react'
 import styled, {css} from 'styled-components'
 import {ReactComponent as InstagramBlank}  from '../../blob/svg/instagram _blank.svg'
-import {ReactComponent as InstagramColored}  from '../../blob/svg/instagram_colored.svg'
 import {ReactComponent as LinkedinBlank}  from '../../blob/svg/linkedin_blank.svg'
-import {ReactComponent as LinkedinColored}  from '../../blob/svg/linkedin_colored.svg'
 import {ReactComponent as LineBlank}  from '../../blob/svg/line_blank.svg'
-import {ReactComponent as LineColored}  from '../../blob/svg/line_colored.svg'
 import Logo from '../shared/Logo'
 import { useMediaQuery } from 'react-responsive'
 import Text from '../shared/Text'
@@ -56,18 +53,15 @@ const LogoCol = styled.div`
 
 const Logos = [
     {
-        before:InstagramBlank,
-        after:InstagramColored,
+        img:InstagramBlank,
         link:"https://www.instagram.com/tec.itb/"
     },
     {
-        before:LineBlank,
-        after:LineColored,
+        img:LineBlank,
         link:"https://www.instagram.com/tec.itb/"
     },
     {
-        before:LinkedinBlank,
-        after:LinkedinColored,
+        img:LinkedinBlank,
         link:"https://www.linkedin.com/company/techno-entrepreneur-club-itb/"
     }
 ]
@@ -85,7 +79,7 @@ const Footer = () => {
             </CopyrightCol>
             <LogoCol stacked={isStacked}>
                 {
-                    Logos.map(logoDatas=><Logo LogoBefore={logoDatas.before} LogoAfter={logoDatas.after} link={logoDatas.link} />)
+                    Logos.map(logoDatas=><Logo img={logoDatas.img} link={logoDatas.link} />)
                 }
             </LogoCol>
         </CustomFooter>

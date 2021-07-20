@@ -29,7 +29,7 @@ const NavbarWebsite = () => {
     });
     return ( <>
         <TemplateNav variant="dark" expand="lg">
-        <img src={LogoTEC} alt="logo tec"/>
+        <img style={{width:"5rem"}} src={LogoTEC} alt="logo tec"/>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto"></Nav>
@@ -38,7 +38,7 @@ const NavbarWebsite = () => {
                         <NavLink dropdown={isDropdown} to="/">Home</NavLink>
                     </LinkWrapper>
                     <LinkWrapper>
-                        <NavLink dropdown={isDropdown} to="#about">About TEC</NavLink>
+                        <NavLink dropdown={isDropdown} to="/about">About TEC</NavLink>
                     </LinkWrapper>
                     <LinkWrapper active={isDropdown}>
                         <NavLink to="/login" active={isDropdown}>Log in</NavLink>
