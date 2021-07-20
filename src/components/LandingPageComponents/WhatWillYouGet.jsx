@@ -16,6 +16,8 @@ const Card = styled.div`
 `;
 
 const BenefitCard = styled.div`
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -24,6 +26,12 @@ const BenefitCard = styled.div`
   width: 261px;
   height: 336px;
 `;
+
+const Image = styled.img`
+  width: 200px;
+  height: 200px;
+`;
+
 const WhatWillYouGet = () => {
   const isCol = useMediaQuery({
     query: "(min-width: 918px)",
@@ -35,16 +43,19 @@ const WhatWillYouGet = () => {
       </Text>
       <Card style={isCol ? {} : { flexDirection: "column" }}>
         <BenefitCard>
+          <Image src="https://campbelltaylorwashburn.com/wp-content/uploads/2019/07/Consulting-Illustration.png" />
           <Text type="secondary" style={{ fontSize: "28px" }}>
             Business Knowledge
           </Text>
         </BenefitCard>
         <BenefitCard>
+          <Image src="https://campbelltaylorwashburn.com/wp-content/uploads/2019/07/Consulting-Illustration.png" />
           <Text type="secondary" style={{ fontSize: "28px" }}>
             Hands On Business
           </Text>
         </BenefitCard>
         <BenefitCard>
+          <Image src="https://campbelltaylorwashburn.com/wp-content/uploads/2019/07/Consulting-Illustration.png" />
           <Text type="secondary" style={{ fontSize: "28px" }}>
             Networking
           </Text>
