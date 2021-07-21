@@ -16,3 +16,11 @@ export const handleSignup = (email, password) => {
         return err
     }
 }
+
+export const handleLogout = async (email, password) => {
+    try {
+        return await app.auth().signOut()
+    } catch (err) {
+        return err
+    }
+}

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Button } from "react-bootstrap";
 import Text from "../shared/Text";
+import { Link, useHistory } from "react-router-dom"
 import { useMediaQuery } from "react-responsive";
 import {useForm} from "react-hook-form";
 import * as controller from "../../controller"
@@ -42,7 +43,8 @@ const Submit = styled(Button)`
   margin-bottom: 0.5rem;
 `;
 
-const LoginForm = () => {
+const LoginForm = ({changePage}) => {
+  const history = useHistory();
   const isImage = useMediaQuery({
     query: "(max-width: 1170px)",
   });
@@ -55,6 +57,8 @@ const LoginForm = () => {
       const user = await controller.handleLogin(data.email,data.password);
       if(user.message){
         alert(user.message)
+      } else {
+        history.push("/")
       }
     } catch (err) {
       alert(err.message)
@@ -81,9 +85,9 @@ const LoginForm = () => {
     </form>
      <Text type="Paragraph" style={{ color: "#696969" }}>
         Belum punya akun? {""}
-        <a href="/" style={{ color: "#939496" }}>
+        <Link onClick={()=>changePage()} style={{ color: "#939496" }}>
           Klik disini
-        </a>
+        </Link>
       </Text>
     </Login>
   );

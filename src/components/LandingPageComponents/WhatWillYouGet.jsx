@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Text from "../shared/Text";
 import { useMediaQuery } from "react-responsive";
 
@@ -38,7 +38,7 @@ const WhatWillYouGet = () => {
   });
   return (
     <BenefitPage>
-      <Text type="primary" style={{ fontSize: "48px", marginBottom: "5rem", textAlign: "center" }}>
+      <Text type="primary" size={3} style={{ marginBottom: "5rem", textAlign: "center" }}>
         What Will You Get
       </Text>
       <Card style={isCol ? {} : { flexDirection: "column" }}>

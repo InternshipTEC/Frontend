@@ -61,7 +61,7 @@ const Login = () => {
             <img src={LogoFaksi2} alt="Faksi 2" style={{ width: "468px", height: "229px" }} />
           </Faksi>
         )}
-        {formTypes ? <LoginForm /> : <RegisterForm />}
+        {formTypes ? <LoginForm changePage={()=>setFormTypes(false)}/> : <RegisterForm changePage={()=>setFormTypes(true)}/>}
       </NavLog>
     </LoginPage>
   );

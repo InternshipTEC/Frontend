@@ -5,6 +5,7 @@ import Text from "../shared/Text";
 import { useMediaQuery } from "react-responsive";
 import { useForm } from 'react-hook-form';
 import * as controller from "../../controller"
+import { Link, useHistory } from 'react-router-dom'
 
 const RegisForm = styled.div`
   display: flex;
@@ -73,7 +74,8 @@ const Upload = styled.input`
 // Ini gatau udah lengkap ato enggak
 const Fakultas = ["FITB", "FMIPA", "FSRD", "FSRD-J", "FSRD-C", "FTI", "FTI-J", "FTMD", "FTTM", "FTTM-J", "FTSL", "FTSL-J", "SAPPK", "SBM", "SF", "STIH", "STEI"];
 
-const RegisterForm = () => {
+const RegisterForm = ({changePage}) => {
+  const history = useHistory();
   const isMobile = useMediaQuery({
     query: "(max-width: 470px)",
   });
@@ -83,12 +85,15 @@ const RegisterForm = () => {
       try {
         const user = await controller.handleSignup(data.email,data.password);
         if(user.message){
-          console.log(user)
           alert(user.message)
+        } else {
+          history.push("/")
         }
       } catch (err) {
         alert(err.message)
       }
+    } else {
+      alert("Password and password confirmation does not match!")
     }
  }
   return (
@@ -148,9 +153,9 @@ const RegisterForm = () => {
       </form>
       <Text type="Paragraph" style={{ color: "#696969", marginBottom: "2rem" }}>
         Sudah punya akun? {""}
-        <a href="/" style={{ color: "#939496" }}>
+        <Link onClick={()=>changePage()} style={{ color: "#939496" }}>
           Klik disini
-        </a>
+        </Link>
       </Text>
     </RegisForm>
   );
