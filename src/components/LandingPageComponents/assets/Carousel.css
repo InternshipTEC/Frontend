@@ -1,0 +1,123 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+.Car {
+  width: 80%;
+  margin: 10rem auto;
+  height: 570px;
+}
+
+
+.slide{
+  width: 33.33;
+  transition: transform 300ms;
+  padding: auto;
+  margin-bottom: 20%;
+  margin-top: 20%;
+  opacity: 0.2;
+
+}
+.slide img{
+  width: 100%;
+  border-radius: 21px;
+
+}
+
+.slide .text{
+  visibility: hidden;
+  color: #DAC269;
+  text-align: center;
+  font-style: italic;
+  font-size: 26px;
+  padding-bottom: 27px;
+}
+
+.activeSlide {
+  transform: scale(1.4);
+  position: relative;
+  opacity: 1;
+  z-index: 1;
+}
+
+.activeSlide img{
+  width: 100%;
+  border: 4px solid rgba(218, 194, 105, 0.9);
+}
+
+.activeSlide .text{
+  visibility: visible;
+}
+
+
+
+.slick-dots li button::before {
+    margin-top: 25px;
+    font-size: 16px;
+    color: #6B6B6B;
+    opacity: 1;
+  }
+
+  .slick-dots li.slick-active button::before {
+    color: #DAC269;
+    opacity: 1;
+  }
+
+  @media screen and (max-width: 1150px) {
+    .slide img{
+      width: 100%;
+    }
+    .slide .text{
+      font-size: 21px;
+    }
+    
+  }
+  @media all and (max-width: 930px) {
+    .Car {
+      height: 80%;
+    }
+
+    .activeSlide {
+      transform: scale(1);
+    }
+
+    .activeSlide .text{
+      font-size: 28px;
+    }
+
+  }
+  
+
+  @media all and (max-width: 576px) {
+    .slide .text{
+      font-size: 21px;
+    }
+    
+  }
+  @media all and (max-width: 476px){
+
+    .slide .text {
+      font-size: 18px;
+    }
+
+    .buschal .text {
+      font-size: 14px;
+    }
+
+    .activeSlide img {
+      border: 2px solid rgba(218, 194, 105, 0.9);
+    }
+  }
+
+  @media all and (max-width: 366px){
+    .slide .text {
+      font-size: 12px;
+    }
+
+    .buschal .text {
+      font-size: 10px;
+    }
+
+    .activeSlide img {
+      border: 2px solid rgba(218, 194, 105, 0.9);
+    }
+  }
