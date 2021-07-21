@@ -92,7 +92,7 @@ const Jumbotron = () => {
                 <Image src="logoTEC.svg" height="300rem"/>
                 <Text type="secondary">
                     <LinkWrapper>
-                        <NavLink to="/signup">
+                        <NavLink to="/login">
                             Join Us
                         </NavLink>
                     </LinkWrapper>
