@@ -27,7 +27,7 @@ const LinkWrapper = styled.div`
 `
 
 const Parg = styled.div`
-    margin: ${props => props.mobile ?` 3rem 9rem` : "0 1rem"};
+    margin: ${props => props.mobile ?` 3rem 9rem 0 9rem` : "0 1rem"};
 `
 
 const RegistrationDeadline = styled.div`

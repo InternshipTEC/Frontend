@@ -2,11 +2,39 @@ import React from 'react'
 import "./assets/Carousel.css"
 import { useState } from "react";
 import Slider from "react-slick";
-import NightPre from "./assets/NightPre";
-import BusChal from "./assets/BusChal";
-import BusClass from "./assets/BusClass";
+import NightPreneur from "../../blob/images/NightPre.png"
+import BusinessClass from "../../blob/images/BusClass.png"
+import BusinessChallenge from "../../blob/images/BusChal.png";
+import Text from "../shared/Text"
 
-const elements = [<NightPre />, <BusChal />, <BusClass />, <NightPre />, <BusChal />];
+
+const data = [
+  {
+    className:"elem",
+    text:"Nightinternship",
+    src: NightPreneur
+  },
+  {
+    className:"elem",
+    text:"Business Class",
+    src: BusinessClass
+  },
+  {
+    className:"buschal",
+    text:"Business Challenge",
+    src: BusinessChallenge 
+  },
+  {
+    className:"elem",
+    text:"Business Class",
+    src: BusinessClass
+  },
+  {
+    className:"buschal",
+    text:"Business Challenge",
+    src: BusinessChallenge 
+  },
+]
 
 const Carousel = () => {
 
@@ -33,17 +61,21 @@ const Carousel = () => {
           slidesToScroll: 1,
           infinite: true,
           centerPadding: "60px",
-          dots: true,
+          dots: false,
         },
       },
     ],
   };
   return (
     <div className="Car">
+      <Text type="primary" size={3} align="center">What we do</Text>
       <Slider {...settings}>
-        {elements.map((element, idx) => (
+        {data.map((data, idx) => (
           <div className={idx === Index ? "slide activeSlide" : "slide"}>
-            {element}
+            <div className={data.className}>
+                <Text type="secondary" className="text">{data.text}</Text>
+                <img src={data.src} alt={data.text}/>
+            </div>
           </div>
         ))}
       </Slider>
