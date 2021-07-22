@@ -34,4 +34,31 @@ export default createGlobalStyle`
         font-weight: 300;
         font-style: normal;
     }
+    :root{
+            font-size: 0.6rem;
+    }
+
+    @media (min-width: 575.98px) {
+        :root{
+            font-size: 0.7rem;
+        }
+    }
+
+    @media (min-width: 767.98px) { 
+        :root{
+            font-size: 0.8rem;
+        }
+    }
+
+    @media (min-width: 991.98px) { 
+        :root {
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (min-width: 1199.98px) { 
+        :root {
+            font-size: 1rem;
+        }
+    }
 `;

@@ -1,3 +1,6 @@
+#Hello Alumnus Gengs
+Dit ini udah gua tambahin responsive, tinggal ganti2nya aja
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

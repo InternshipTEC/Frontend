@@ -8,7 +8,7 @@ import BusClass from "./assets/BusClass";
 
 const elements = [<NightPre />, <BusChal />, <BusClass />, <NightPre />, <BusChal />];
 
-function Carousel() {
+const Carousel = () => {
 
   const [Index, setIndex] = useState(0);
 

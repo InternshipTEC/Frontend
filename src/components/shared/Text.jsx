@@ -3,6 +3,9 @@ import styled, { css } from 'styled-components'
 export default styled.div`
     font-size: ${props=>props.size ? props.size+"rem" : "1rem" };
     font-style: ${props=>props.fontStyle ? props.fontStyle : "normal"  };
+    ${props=>props.align ? css`
+        text-align:${props.align}; 
+    `: ""};
     ${props => {
         if(props.type === "primary"){
             return css`
