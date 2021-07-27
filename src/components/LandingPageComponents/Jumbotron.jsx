@@ -86,8 +86,8 @@ const Jumbotron = () => {
                 <Text size={2.75} type="primary">
                     WELCOME TO TEC INTERNSHIP
                 </Text>
-                <Text size={2} fontStyle="italic" type="secondary">
-                    Global • Enrich •  High Impact
+                 <Text size={2} fontStyle="italic" type="secondary">
+                    Global &nbsp; &nbsp; &nbsp; • &nbsp; &nbsp; &nbsp;  Enrich &nbsp; &nbsp; &nbsp;   •  &nbsp; &nbsp; &nbsp;  High Impact
                 </Text>
                 <Image src="logoTEC.svg" height="300rem"/>
                 <Text type="secondary">
