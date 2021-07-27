@@ -41,6 +41,7 @@ const Submit = styled(Button)`
   border-radius: 50px;
   margin-top: 2.5rem;
   margin-bottom: 0.5rem;
+  font-size:1.4rem;
 `;
 
 const LoginForm = ({changePage}) => {
@@ -85,7 +86,7 @@ const LoginForm = ({changePage}) => {
     </form>
      <Text type="Paragraph" style={{ color: "#696969" }}>
         Belum punya akun? {""}
-        <Link onClick={()=>changePage()} style={{ color: "#939496" }}>
+        <Link onClick={()=>changePage()} style={{ color: "#fff" }}>
           Klik disini
         </Link>
       </Text>
