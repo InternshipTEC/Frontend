@@ -12,7 +12,7 @@ const LoginPage = styled.div`
   flex-direction: column;
   align-items: center;
   background: linear-gradient(0deg, #19161b, #19161b);
-  height:100vh;
+  height:100%;
 `;
 
 const Faksi = styled.div`

@@ -15,15 +15,16 @@ const Jumtron = styled.div`
 `
 
 const NavLink = styled(Link)`
-    color: white;
-    padding: 0.7rem 2rem;
-    clip-path: polygon(25% 0%, 100% 0, 100% 60%, 80% 100%, 0 100%, 0 40%);
-    background: #016081;
+    width: 36rem;
+    margin: 0 auto;
+    padding: 10px;
+    background: linear-gradient(355.42deg, #B9C4D6 -138.68%, #016081 120.58%);
+    box-shadow: 0px 10px 9px rgba(255, 255, 255, 0.25), inset 0px -10px 11px rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
 `
 
 const LinkWrapper = styled.div`
     margin: 2rem 0.5rem;
-    filter: drop-shadow(5px 4px 4px #ffffff);
 `
 
 const Parg = styled.div`
@@ -86,8 +87,8 @@ const Jumbotron = () => {
                 <Text size={2.75} type="primary">
                     WELCOME TO TEC INTERNSHIP
                 </Text>
-                <Text size={2} fontStyle="italic" type="secondary">
-                    Global • Enrich •  High Impact
+                 <Text size={2} fontStyle="italic" type="secondary">
+                    Global &nbsp; &nbsp; &nbsp; • &nbsp; &nbsp; &nbsp;  Enrich &nbsp; &nbsp; &nbsp;   •  &nbsp; &nbsp; &nbsp;  High Impact
                 </Text>
                 <Image src="logoTEC.svg" height="300rem"/>
                 <Text type="secondary">

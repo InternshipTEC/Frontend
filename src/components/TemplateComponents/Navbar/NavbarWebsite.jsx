@@ -10,6 +10,8 @@ import * as controller from "../../../controller"
 const TemplateNav = styled(Navbar)`
     background: transparent; 
     font-size: 20px;
+    background: linear-gradient(296.83deg, #016081 -76.79%, #17161B 148.1%);
+    border-bottom: 5px solid #B9C4D6;
 `
 
 const NavLink = styled(Link)`
