@@ -1,17 +1,26 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import IdrisElba from "../../blob/images/FactionIdrisElba.png";
 import Beatrice from "../../blob/images/FactionBeatrice.png";
 import Candor from "../../blob/images/FactionCandor.png"
 import Text from "../shared/Text";
 import Bar from "../../blob/images/FactionBar.png"
+import { useMediaQuery } from "react-responsive";
 
 const Wrapper = styled.div`
 
 `
 
 const WelcomeTo = styled.div`
-    padding-top: 3rem;
-    padding-left:7rem;
+    padding: 3rem 0 0 7rem;
+    ${props=>{
+        if(!props.mobile){
+            return css`
+                padding-left: 4rem;
+                text-align:center;
+                
+            `
+        }
+    }}
     
 `
 //BATAS EROR
@@ -46,9 +55,12 @@ const BeatriceDiv= styled.div`
 
 
 const WelcomeFaction = () => {
+    const isMobile = useMediaQuery({
+        query: "(min-width: 425px)",
+      });
     return (
         <Wrapper>
-            <WelcomeTo>
+            <WelcomeTo mobile={isMobile}>
                 <Text type='secondary' size={1.5}style={{color:"#fff"}}> Welcome To </Text>
                 <img src={Bar} style={{width:"12rem"}}></img>
             </WelcomeTo>
