@@ -59,7 +59,7 @@ const WelcomeFaction = () => {
                 <MainContent>
                     <img src={Candor} style={{width:"100%", height:"auto",}}></img>
                     <TextDiv> 
-                        <Text type="secondary" style={{color:"#fff"}}> Candor </Text>
+                        <Text type="secondary" size={2} style={{color:"#fff", paddingBottom:"1rem"}}> Candor </Text>
                         <Text type="paragraph"> The one dedicated to the virtue of honesty. The one that believes that truth is the most important virtue and that it is one-dimensional and black and white - no little white lies allowed.</Text>
                     </TextDiv>
                 </MainContent>
