@@ -15,7 +15,7 @@ const route = (label, path, component) => ({
 export const SIGNUP_PAGE = route("Signup","/signup",Signup)
 export const LOGIN_PAGE = route('Login', '/login', Login)
 export const LANDING_PAGE = route('Landing', '/', Landing)
-export const FACTION_PAGE = route('Factoin', '/faction', Faction)
+export const FACTION_PAGE = route('Faction', '/faction', Faction)
 //Misal nanti ada page ini:
 
 // yang gak bisa diakses tanpa authentication
@@ -27,5 +27,6 @@ export const AllOpenRoutes = [
     LANDING_PAGE,
     LOGIN_PAGE,
     SIGNUP_PAGE,
+    FACTION_PAGE,
 ]
 
