@@ -5,7 +5,7 @@ import Text from "../shared/Text";
 import { useMediaQuery } from "react-responsive";
 import { useForm } from 'react-hook-form';
 import * as controller from "../../controller"
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const RegisForm = styled.div`
   display: flex;
@@ -20,26 +20,14 @@ const GridForm = styled.div`
 `;
 
 const Input = styled.input`
-  background: rgba(255, 255, 255, 0.15);
-  /* neon blue */
   font-size: 20px;
-  border: 4px solid #016081;
+  border: 0px;
   border-radius: 10px;
   color: white;
   height: 40px;
   padding: 0px 0px 0px 6px;
 `;
 
-const Select = styled.select`
-  background: rgba(255, 255, 255, 0.15);
-  /* neon blue */
-  border: 4px solid #016081;
-  box-sizing: border-box;
-  border-radius: 10px;
-  color: white;
-  font-size: 20px;
-  height: 40px;
-`;
 
 const GridItem = styled.div`
   display: flex;
@@ -50,32 +38,20 @@ const GridItem = styled.div`
 const Submit = styled(Button)`
   background: #016081;
   border-radius: 50px;
-  margin-top: 2.5rem;
-  margin-bottom: 0.5rem;
+  margin-top 2.5rem;
+  font-size:1.4rem;
+  margin-left: 14vw;
+  font-size:1rem;
+  width:8rem;
 `;
 
-const CustomUpload = styled.label`
-  background: #016081;
-  /* neon blue */
-  font-size: 20px;
-  border: 4px solid #016081;
-  padding: 0px 0px 0px 6px;
-  border-radius: 10px;
-  color: white;
-  height: 40px;
-  cursor: pointer;
-  width: 140px;
-`;
 
-const Upload = styled.input`
-  visibility: hidden;
-`;
-
-// Ini gatau udah lengkap ato enggak
-const Fakultas = ["FITB", "FMIPA", "FSRD", "FSRD-J", "FSRD-C", "FTI", "FTI-J", "FTMD", "FTTM", "FTTM-J", "FTSL", "FTSL-J", "SAPPK", "SBM", "SF", "STIH", "STEI"];
 
 const RegisterForm = ({changePage}) => {
   const history = useHistory();
+  const isImage = useMediaQuery({
+    query: "(max-width: 1170px)",
+  });
   const isMobile = useMediaQuery({
     query: "(max-width: 470px)",
   });
@@ -101,19 +77,43 @@ const RegisterForm = ({changePage}) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <GridForm>
           <GridItem style={isMobile ? { width: "300px" } : {}}>
-            <Text type="secondary" style={{ color: "white" }}>
+            <Text type="secondary" style={{ color: "#6D6E70" }}>
               Email
             </Text>
             <Input type="email" id="email" {...register("email")} required />
           </GridItem>
           <GridItem style={isMobile ? { width: "300px" } : {}}>
-            <Text type="secondary" style={{ color: "white" }}>
+            <Text type="secondary" style={{ color: "#6D6E70" }}>
+              Password
+            </Text>
+            <Input type="password" id="password" {...register("password")} required />
+          </GridItem>
+          <GridItem style={isMobile ? { width: "300px" } : {}}>
+            <Text type="secondary" style={{ color: "#6D6E70" }}>
+              Konfirmasi Password
+            </Text>
+            <Input type="password" id="confirm" {...register("confirm")} required />
+          </GridItem>
+        </GridForm>
+        <Submit type="submit" style={isImage ? {marginLeft: "18rem", marginBottom:"18rem"} : {}}>Lanjut</Submit>
+      </form>
+    </RegisForm>
+  );
+};
+
+export default RegisterForm;
+
+
+
+{/*Yang Yandy Bikin:
+          <GridItem style={isMobile ? { width: "300px" } : {}}>
+            <Text type="secondary" style={{ color: "#6D6E70" }}>
               Nama
             </Text>
             <Input type="text" id="nama" {...register("nama")} required />
           </GridItem>
           <GridItem style={isMobile ? { width: "300px" } : {}}>
-            <Text type="secondary" style={{ color: "white" }}>
+            <Text type="secondary" style={{ color: "#6D6E70" }}>
               Fakultas
             </Text>
             <Select id="fakultas" {...register("fakultas")} placeholder="Pilih Fakultas" required>
@@ -127,18 +127,7 @@ const RegisterForm = ({changePage}) => {
               ))}
             </Select>
           </GridItem>
-          <GridItem style={isMobile ? { width: "300px" } : {}}>
-            <Text type="secondary" style={{ color: "white" }}>
-              Password
-            </Text>
-            <Input type="password" id="password" {...register("password")} required />
-          </GridItem>
-          <GridItem style={isMobile ? { width: "300px" } : {}}>
-            <Text type="secondary" style={{ color: "white" }}>
-              Konfirmasi Password
-            </Text>
-            <Input type="password" id="confirm" {...register("confirm")} required />
-          </GridItem>
+
           <GridItem style={isMobile ? { width: "300px" } : {}}>
             <Text type="secondary" style={{ color: "white" }}>
               Upload Bukti Pembayaran
@@ -148,17 +137,12 @@ const RegisterForm = ({changePage}) => {
               <Upload type="file" id="upload" {...register("upload")} data-multiple-caption="Files selected" />
             </CustomUpload>
           </GridItem>
-        </GridForm>
-        <Submit type="submit">Register</Submit>
-      </form>
+
+
       <Text type="Paragraph" style={{ color: "#696969", marginBottom: "2rem" }}>
         Sudah punya akun? {""}
         <Link onClick={()=>changePage()} style={{ color: "#939496" }}>
           Klik disini
         </Link>
       </Text>
-    </RegisForm>
-  );
-};
-
-export default RegisterForm;
+*/}
