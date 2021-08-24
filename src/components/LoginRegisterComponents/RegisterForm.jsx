@@ -95,54 +95,10 @@ const RegisterForm = ({changePage}) => {
             <Input type="password" id="confirm" {...register("confirm")} required />
           </GridItem>
         </GridForm>
-        <Submit type="submit" style={isImage ? {marginLeft: "18rem", marginBottom:"18rem"} : {}}>Lanjut</Submit>
+        <Submit type="submit" style={isImage ? {marginLeft: "30vw", marginBottom:"18rem"} : {}}>Lanjut</Submit>
       </form>
     </RegisForm>
   );
 };
 
 export default RegisterForm;
-
-
-
-{/*Yang Yandy Bikin:
-          <GridItem style={isMobile ? { width: "300px" } : {}}>
-            <Text type="secondary" style={{ color: "#6D6E70" }}>
-              Nama
-            </Text>
-            <Input type="text" id="nama" {...register("nama")} required />
-          </GridItem>
-          <GridItem style={isMobile ? { width: "300px" } : {}}>
-            <Text type="secondary" style={{ color: "#6D6E70" }}>
-              Fakultas
-            </Text>
-            <Select id="fakultas" {...register("fakultas")} placeholder="Pilih Fakultas" required>
-              <option disabled selected value>
-                -- Pilih Fakultas --
-              </option>
-              {Fakultas.map((q) => (
-                <option value={q} style={{ color: "black" }}>
-                  {q}
-                </option>
-              ))}
-            </Select>
-          </GridItem>
-
-          <GridItem style={isMobile ? { width: "300px" } : {}}>
-            <Text type="secondary" style={{ color: "white" }}>
-              Upload Bukti Pembayaran
-            </Text>
-            <CustomUpload>
-              Choose a file
-              <Upload type="file" id="upload" {...register("upload")} data-multiple-caption="Files selected" />
-            </CustomUpload>
-          </GridItem>
-
-
-      <Text type="Paragraph" style={{ color: "#696969", marginBottom: "2rem" }}>
-        Sudah punya akun? {""}
-        <Link onClick={()=>changePage()} style={{ color: "#939496" }}>
-          Klik disini
-        </Link>
-      </Text>
-*/}

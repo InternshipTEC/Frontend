@@ -66,7 +66,7 @@ const LoginForm = ({changePage}) => {
     }
   }
   return (
-    <Login style={isImage ? { marginTop: "6rem", marginBottom: "8rem" } : {}}>
+    <Login style={isImage ? { marginTop: "0rem", marginBottom: "8rem" } : {}}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <GridForm>
           <GridItem style={isMobile ? { width: "300px" } : {}}>
@@ -88,7 +88,7 @@ const LoginForm = ({changePage}) => {
           Klik disini
         </Link>
       </Text>
-        <Submit type="submit" style={isImage ? {marginLeft: "18rem", marginBottom:'8rem'} : {}}>Login</Submit>
+        <Submit type="submit" style={isImage ? {marginLeft: "30vw", marginBottom:'30vh'} : {}}>Login</Submit>
     </form>
     </Login>
   );

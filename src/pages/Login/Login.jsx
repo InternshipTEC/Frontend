@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import Text from "../../components/shared/Text";
 import RegisterForm from "../../components/LoginRegisterComponents/RegisterForm";
@@ -20,6 +20,8 @@ const Faksi = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-right:-4rem;
+  margin-top:-8rem;
 `;
 
 const NavLog = styled.div`
@@ -31,8 +33,18 @@ const NavLog = styled.div`
 
 const TextNav = styled.div`
   display: flex;
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin-top: 10rem;
+  margin-bottom:-4rem;
+  margin-left:55vw;
+  z-index:999;
+  ${props=>{
+    if(!props.stacked){
+        return css`
+            margin-left:0;
+            margin-bottom:0;
+        `
+    }
+}}
 `;
 
 const Login = () => {
@@ -45,11 +57,11 @@ const Login = () => {
   });
   return (
     <LoginPage>
-      <TextNav style={isMobile ? { flexDirection: "column", gap: "1rem" } : { flexDirection: "row", gap: "3.5rem" }}>
-        <Text type="primary" style={formTypes ? { fontSize: "36px", borderBottom: "13px solid #90844F", cursor: "pointer" } : { fontSize: "36px", cursor: "pointer" }} onClick={() => setFormTypes(true)}>
+      <TextNav stacked={isImage} style={isMobile ? { flexDirection: "column", gap: "1rem" } : { flexDirection: "row", gap: "3.5rem" }}>
+        <Text type="primary" style={formTypes ? { fontSize: "24px", borderBottom: "13px solid #90844F", cursor: "pointer", color:"#90844F"} : { fontSize: "24px", cursor: "pointer", color:"#90844F" }} onClick={() => setFormTypes(true)}>
           Login
         </Text>
-        <Text type="primary" style={formTypes ? { fontSize: "36px", cursor: "pointer" } : { fontSize: "36px", cursor: "pointer", borderBottom: "13px solid #90844F" }} onClick={() => setFormTypes(false)}>
+        <Text type="primary" style={formTypes ? { fontSize: "24px", cursor: "pointer", color:"#90844F" } : { fontSize: "24px", cursor: "pointer", borderBottom: "13px solid #90844F", color: "#90844F" }} onClick={() => setFormTypes(false)}>
           Register
         </Text>
       </TextNav>
@@ -58,7 +70,7 @@ const Login = () => {
           <Faksi>
             {/*<img src={LogoFaksi1} alt="Faksi 1" style={{ width: "570px", height: "334px" }} />
             <img src={LogoFaksi2} alt="Faksi 2" style={{ width: "468px", height: "229px" }} /> */}
-            <img src={Carrousel} alt="Faksi" style={{width:"40vw", height:"auto"}}/>
+            <img src={Carrousel} alt="Faksi" style={{width:"50vw", height:"auto"}}/>
           </Faksi>
         )}
         {formTypes ? <LoginForm changePage={()=>setFormTypes(false)}/> : <RegisterForm changePage={()=>setFormTypes(true)}/>}
