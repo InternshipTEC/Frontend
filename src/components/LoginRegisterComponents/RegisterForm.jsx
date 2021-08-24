@@ -6,6 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import { useForm } from 'react-hook-form';
 import * as controller from "../../controller"
 import { Link, useHistory } from 'react-router-dom'
+import { GlobalContext } from "../../Auth";
 
 const RegisForm = styled.div`
   display: flex;
@@ -30,16 +31,6 @@ const Input = styled.input`
   padding: 0px 0px 0px 6px;
 `;
 
-const Select = styled.select`
-  background: rgba(255, 255, 255, 0.15);
-  /* neon blue */
-  border: 4px solid #016081;
-  box-sizing: border-box;
-  border-radius: 10px;
-  color: white;
-  font-size: 20px;
-  height: 40px;
-`;
 
 const GridItem = styled.div`
   display: flex;
@@ -54,27 +45,8 @@ const Submit = styled(Button)`
   margin-bottom: 0.5rem;
 `;
 
-const CustomUpload = styled.label`
-  background: #016081;
-  /* neon blue */
-  font-size: 20px;
-  border: 4px solid #016081;
-  padding: 0px 0px 0px 6px;
-  border-radius: 10px;
-  color: white;
-  height: 40px;
-  cursor: pointer;
-  width: 140px;
-`;
-
-const Upload = styled.input`
-  visibility: hidden;
-`;
-
-// Ini gatau udah lengkap ato enggak
-const Fakultas = ["FITB", "FMIPA", "FSRD", "FSRD-J", "FSRD-C", "FTI", "FTI-J", "FTMD", "FTTM", "FTTM-J", "FTSL", "FTSL-J", "SAPPK", "SBM", "SF", "STIH", "STEI"];
-
 const RegisterForm = ({changePage}) => {
+  const {checkUser} = React.useContext(GlobalContext);
   const history = useHistory();
   const isMobile = useMediaQuery({
     query: "(max-width: 470px)",
@@ -84,10 +56,11 @@ const RegisterForm = ({changePage}) => {
     if(data.password === data.confirm){
       try {
         const user = await controller.handleSignup(data.email,data.password);
-        if(user.message){
+        checkUser()
+        if(user && user.message){
           alert(user.message)
         } else {
-          history.push("/")
+          history.push("/signup")
         }
       } catch (err) {
         alert(err.message)
@@ -108,27 +81,6 @@ const RegisterForm = ({changePage}) => {
           </GridItem>
           <GridItem style={isMobile ? { width: "300px" } : {}}>
             <Text type="secondary" style={{ color: "white" }}>
-              Nama
-            </Text>
-            <Input type="text" id="nama" {...register("nama")} required />
-          </GridItem>
-          <GridItem style={isMobile ? { width: "300px" } : {}}>
-            <Text type="secondary" style={{ color: "white" }}>
-              Fakultas
-            </Text>
-            <Select id="fakultas" {...register("fakultas")} placeholder="Pilih Fakultas" required>
-              <option disabled selected value>
-                -- Pilih Fakultas --
-              </option>
-              {Fakultas.map((q) => (
-                <option value={q} style={{ color: "black" }}>
-                  {q}
-                </option>
-              ))}
-            </Select>
-          </GridItem>
-          <GridItem style={isMobile ? { width: "300px" } : {}}>
-            <Text type="secondary" style={{ color: "white" }}>
               Password
             </Text>
             <Input type="password" id="password" {...register("password")} required />
@@ -138,15 +90,6 @@ const RegisterForm = ({changePage}) => {
               Konfirmasi Password
             </Text>
             <Input type="password" id="confirm" {...register("confirm")} required />
-          </GridItem>
-          <GridItem style={isMobile ? { width: "300px" } : {}}>
-            <Text type="secondary" style={{ color: "white" }}>
-              Upload Bukti Pembayaran
-            </Text>
-            <CustomUpload>
-              Choose a file
-              <Upload type="file" id="upload" {...register("upload")} data-multiple-caption="Files selected" />
-            </CustomUpload>
           </GridItem>
         </GridForm>
         <Submit type="submit">Register</Submit>

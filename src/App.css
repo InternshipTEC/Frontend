@@ -14,5 +14,12 @@ a:hover {
 }
 
 .App {
-  background: linear-gradient(4.62deg, #016081 -21.78%, #17161B 105.14%);
+  background: linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(5.06deg, #CCE4FA 19.38%, #DEE7F4 83.76%);
+  min-height: 100vh;
+}
+
+/* HOT FIX */
+.MuiTimelineOppositeContent-root{
+  margin-right: 0 !important;
+  padding:0 !important;
 }
