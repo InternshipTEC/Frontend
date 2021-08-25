@@ -6,6 +6,7 @@ import { Link, useHistory } from "react-router-dom"
 import { useMediaQuery } from "react-responsive";
 import {useForm} from "react-hook-form";
 import * as controller from "../../controller"
+import { GlobalContext } from "../../Auth";
 
 const Login = styled.div`
   display: flex;
@@ -45,6 +46,7 @@ const Submit = styled(Button)`
 `;
 
 const LoginForm = ({changePage}) => {
+  const {checkUser} = React.useContext(GlobalContext);
   const history = useHistory();
   const isImage = useMediaQuery({
     query: "(max-width: 1170px)",
@@ -56,6 +58,7 @@ const LoginForm = ({changePage}) => {
   const onSubmit = async data => {
     try {
       const user = await controller.handleLogin(data.email,data.password);
+      checkUser()
       if(user.message){
         alert(user.message)
       } else {

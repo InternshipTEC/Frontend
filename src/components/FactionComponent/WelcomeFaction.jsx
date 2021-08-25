@@ -17,7 +17,6 @@ const WelcomeTo = styled.div`
             return css`
                 padding-left: 4rem;
                 text-align:center;
-                
             `
         }
     }}
@@ -62,21 +61,21 @@ const WelcomeFaction = () => {
         <Wrapper>
             <WelcomeTo mobile={isMobile}>
                 <Text type='secondary' size={1.5}style={{color:"#fff"}}> Welcome To </Text>
-                <img src={Bar} style={{width:"12rem"}}></img>
+                <img src={Bar} style={{width:"12rem"}} alt="Bar"></img>
             </WelcomeTo>
             <Layout>
                 <ElbaDiv>
-                    <img src={IdrisElba} style={{width:"100%", height:"auto", maxWidth:"500px"}}></img>
+                    <img src={IdrisElba} alt="idris-elba" style={{width:"100%", height:"auto", maxWidth:"500px"}}></img>
                 </ElbaDiv>
                 <MainContent>
-                    <img src={Candor} style={{width:"100%", height:"auto",}}></img>
+                    <img src={Candor} alt="candor" style={{width:"100%", height:"auto",}}></img>
                     <TextDiv> 
                         <Text type="secondary" size={2} style={{color:"#fff", paddingBottom:"1rem"}}> Candor </Text>
                         <Text type="paragraph"> The one dedicated to the virtue of honesty. The one that believes that truth is the most important virtue and that it is one-dimensional and black and white - no little white lies allowed.</Text>
                     </TextDiv>
                 </MainContent>
                 <BeatriceDiv>
-                    <img src={Beatrice} style={{width:"100%", height:"auto",}}></img>
+                    <img src={Beatrice} alt="beatrice" style={{width:"100%", height:"auto",}}></img>
                 </BeatriceDiv>
             </Layout>
 

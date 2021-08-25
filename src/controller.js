@@ -1,17 +1,36 @@
-import app from './base';
-import 'firebase/auth';
+import axios from 'axios';
+
+export const BACKEND_URL = "http://localhost:3000";
 
 export const handleLogin = async (email, password) => {
     try {
-        return await app.auth().signInWithEmailAndPassword(email,password);
+        const response = await axios.post(`${BACKEND_URL}/auth/login`, {
+            email,
+            password
+        })
+        if(response.status === 200){
+            localStorage.setItem("auth",response.data.data.accessToken)
+            return response.data.data
+        } else {
+            throw response.data.msg
+        }
     } catch (err) {
         return err
     }
 }
 
-export const handleSignup = (email, password) => {
+export const handleSignup = async (email, password) => {
     try {
-        app.auth().createUserWithEmailAndPassword(email,password);
+        const response = await axios.post(`${BACKEND_URL}/auth/signup`, {
+            email,
+            password
+        })
+        if(response.status === 200){
+            localStorage.setItem("auth",response.data.data.accessToken)
+            return response.data.data
+        } else {
+            throw response.data.msg
+        }
     } catch (err) {
         return err
     }
@@ -19,7 +38,7 @@ export const handleSignup = (email, password) => {
 
 export const handleLogout = async (email, password) => {
     try {
-        return await app.auth().signOut()
+        localStorage.clear("auth")
     } catch (err) {
         return err
     }

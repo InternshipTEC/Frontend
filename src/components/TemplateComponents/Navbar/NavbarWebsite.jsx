@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import LogoTEC from '../../../blob/images/LogoPojok.png'
 import { useMediaQuery } from 'react-responsive'
-import { AuthContext } from "../../../Auth";
+import { GlobalContext } from "../../../Auth";
 import * as controller from "../../../controller"
 import Text from '../../shared/Text'
 
@@ -32,7 +32,7 @@ const NavbarWebsite = () => {
     const isDropdown = useMediaQuery({
         query: '(min-width: 992px)'
     });
-    const {currentUser} = useContext(AuthContext);
+    const {currentUser, checkUser} = useContext(GlobalContext);
     return ( <>
         <TemplateNav variant="dark" expand="lg">
         <img style={{width:"5rem"}} onClick={()=>history.push("/")} src={LogoTEC} alt="logo tec"/>
@@ -50,7 +50,7 @@ const NavbarWebsite = () => {
                         currentUser 
                         ?
                         <LinkWrapper active={isDropdown}>
-                            <NavLink onClick={controller.handleLogout} color="red" active={isDropdown}>Log out</NavLink>
+                            <NavLink onClick={()=>{controller.handleLogout();checkUser()}} color="red" active={isDropdown}>Log out</NavLink>
                         </LinkWrapper>
                         : 
                         <LinkWrapper active={isDropdown}>

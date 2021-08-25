@@ -1,5 +1,5 @@
 import './App.css'
-import {AuthProvider} from "./Auth";
+import {GlobalProvider} from "./Auth";
 import PrivateRoute from "./PrivateRoute";
 import {
   BrowserRouter as Router,
@@ -12,7 +12,7 @@ import GlobalFonts from './components/shared/Fonts'
 function App() {
   return (
     <div className="App">
-      <AuthProvider>
+      <GlobalProvider>
         <GlobalFonts/>
         <Router>
         <NavbarWebsite/>
@@ -33,7 +33,7 @@ function App() {
             />
             ))}
        </Router>
-      </AuthProvider>
+      </GlobalProvider>
     </div>
   );
 }
