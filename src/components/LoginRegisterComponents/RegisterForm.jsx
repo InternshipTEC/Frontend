@@ -1,12 +1,13 @@
 import React from "react";
-import styled from "styled-components";
 import { Button } from "react-bootstrap";
-import Text from "../shared/Text";
-import { useMediaQuery } from "react-responsive";
 import { useForm } from 'react-hook-form';
-import * as controller from "../../controller"
-import { Link, useHistory } from 'react-router-dom'
+import { useMediaQuery } from "react-responsive";
+import { useHistory } from 'react-router-dom';
+import styled from "styled-components";
 import { GlobalContext } from "../../Auth";
+import { ADD_TOKEN, ADD_USER, UPDATE_AUTH } from "../../authReducers";
+import * as controller from "../../controller";
+import Text from "../shared/Text";
 
 const RegisForm = styled.div`
   display: flex;
@@ -21,12 +22,9 @@ const GridForm = styled.div`
 `;
 
 const Input = styled.input`
-  background: rgba(255, 255, 255, 0.15);
-  /* neon blue */
   font-size: 20px;
-  border: 4px solid #016081;
+  border: 0px;
   border-radius: 10px;
-  color: white;
   height: 40px;
   padding: 0px 0px 0px 6px;
 `;
@@ -42,12 +40,20 @@ const Submit = styled(Button)`
   background: #016081;
   border-radius: 50px;
   margin-top: 2.5rem;
-  margin-bottom: 0.5rem;
+  font-size:1.4rem;
+  margin-left: 14vw;
+  font-size:1rem;
+  width:8rem;
 `;
 
+
+
 const RegisterForm = ({changePage}) => {
-  const {checkUser} = React.useContext(GlobalContext);
+  const {dispatch} = React.useContext(GlobalContext);
   const history = useHistory();
+  const isImage = useMediaQuery({
+    query: "(max-width: 1170px)",
+  });
   const isMobile = useMediaQuery({
     query: "(max-width: 470px)",
   });
@@ -55,13 +61,13 @@ const RegisterForm = ({changePage}) => {
   const onSubmit = async data => {
     if(data.password === data.confirm){
       try {
-        const user = await controller.handleSignup(data.email,data.password);
-        checkUser()
-        if(user && user.message){
-          alert(user.message)
-        } else {
-          history.push("/signup")
-        }
+        const response = await controller.handleSignup(data.email,data.password);
+        const user = response.user
+        const token = response.accessToken
+        dispatch({type:ADD_TOKEN, token})
+        dispatch({type:ADD_USER, user})
+        dispatch({type:UPDATE_AUTH})
+        history.push("/signup")
       } catch (err) {
         alert(err.message)
       }
@@ -74,32 +80,26 @@ const RegisterForm = ({changePage}) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <GridForm>
           <GridItem style={isMobile ? { width: "300px" } : {}}>
-            <Text type="secondary" style={{ color: "white" }}>
+            <Text type="secondary" style={{ color: "#6D6E70" }}>
               Email
             </Text>
             <Input type="email" id="email" {...register("email")} required />
           </GridItem>
           <GridItem style={isMobile ? { width: "300px" } : {}}>
-            <Text type="secondary" style={{ color: "white" }}>
+            <Text type="secondary" style={{ color: "#6D6E70" }}>
               Password
             </Text>
             <Input type="password" id="password" {...register("password")} required />
           </GridItem>
           <GridItem style={isMobile ? { width: "300px" } : {}}>
-            <Text type="secondary" style={{ color: "white" }}>
+            <Text type="secondary" style={{ color: "#6D6E70" }}>
               Konfirmasi Password
             </Text>
             <Input type="password" id="confirm" {...register("confirm")} required />
           </GridItem>
         </GridForm>
-        <Submit type="submit">Register</Submit>
+        <Submit type="submit" style={isImage ? {marginLeft: "30vw", marginBottom:"18rem"} : {}}>Lanjut</Submit>
       </form>
-      <Text type="Paragraph" style={{ color: "#696969", marginBottom: "2rem" }}>
-        Sudah punya akun? {""}
-        <Link onClick={()=>changePage()} style={{ color: "#939496" }}>
-          Klik disini
-        </Link>
-      </Text>
     </RegisForm>
   );
 };

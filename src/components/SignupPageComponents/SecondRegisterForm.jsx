@@ -3,8 +3,10 @@ import Button from '@material-ui/core/Button';
 import React from 'react';
 import { Form } from 'react-bootstrap';
 import Text from '../shared/Text';
-import { SET_NAMA_PEMILIK_REKENING, SET_NO_REKENING, SET_JUMLAH_ORANG_DIWAKILKAN, SET_MEDIA_PEMBAYARAN, SET_METODE_PEMBAYARAN, SET_PEMBAYAR } from './reducers';
+import { SET_NAMA_PEMILIK_REKENING, SET_NO_REKENING, SET_JUMLAH_ORANG_DIWAKILKAN, SET_MEDIA_PEMBAYARAN, SET_METODE_PEMBAYARAN, SET_PEMBAYAR, SET_EMAIL_YANG_DIWAKILKAN } from './reducers';
 import { SignupContext } from './SignupProvider';
+import axios from 'axios';
+import { BACKEND_URL } from '../../controller';
 
 const tipePembayaran = [
     "BNI",
@@ -22,8 +24,37 @@ const banyakOrang = [
     "5 Orang (Rp.40.000,00 per orang, total Rp.200.000,00)"
 ]
 
+const MenuProps = {
+    PaperProps: {
+        style: {
+        maxHeight: 48 * 4.5 + 8,
+        width: 250,
+        },
+    },
+};
+
 const SecondRegisterForm = () => {
-    const { whichForm, setWhichForm, noRekening, namaPemilikRekening, mediaPembayaran, pembayar, metodePembayaran, jumlahOrangDiwakilkan, handleChange} = React.useContext(SignupContext)
+    const { emailYangDiwakilkan, whichForm, setWhichForm, noRekening, namaPemilikRekening, mediaPembayaran, pembayar, metodePembayaran, jumlahOrangDiwakilkan, handleChange} = React.useContext(SignupContext)
+    const [emails, setEmails] = React.useState([])
+
+    React.useEffect(()=>{
+        var form = [];
+        for(var i=0;i<jumlahOrangDiwakilkan;i++){
+            form.push(emailYangDiwakilkan[i])
+        }
+        handleChange(SET_EMAIL_YANG_DIWAKILKAN)(form)
+    },[jumlahOrangDiwakilkan])
+
+    React.useEffect(()=>{
+        axios.get(`${BACKEND_URL}/users`,{
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem("auth")}`
+            }
+        })
+        .then(res=>res.data)
+        .then(data=>setEmails(data.map(x=>x.email)))
+        .catch(err=>alert(err.toString()))
+    },[])
 
     return (
         <>
@@ -116,7 +147,38 @@ const SecondRegisterForm = () => {
                                         )
                                 }
                             </RadioGroup>
+
                         </Form.Group>
+                    }
+                    {
+                        (pembayar === "Ya" && metodePembayaran === "Bersama")
+                        &&
+                        emailYangDiwakilkan.map((_,index)=><>
+                            <Form.Group className="mb-3" controlId={index}>
+                                <Form.Label>Email terwakili {index+1}</Form.Label>
+                                <br/>
+                                <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
+                                    value={emailYangDiwakilkan[parseInt(index)]}
+                                    onChange={(e)=>{
+                                        var tempForm = [...emailYangDiwakilkan];
+                                        tempForm[index] = e.target.value;
+                                        handleChange(SET_EMAIL_YANG_DIWAKILKAN)(tempForm)
+                                    }}
+                                    MenuProps={MenuProps}
+                                    label="Tipe Pembayaran"
+                                >
+                                {
+                                    emails.map(tipe=>
+                                        <MenuItem value={tipe} >
+                                            {tipe}
+                                        </MenuItem>
+                                        )
+                                }
+                                </Select>
+                            </Form.Group>
+                        </>)
                     }
                     </>
                }

@@ -54,14 +54,14 @@ const AlumnusDisplay = styled.div`
   ${(props) => {
     if (props.picked) {
       return css`
-        border: solid 3px yellow;
+        border: solid 3px #016081;
       `;
     }
     if (props.clickable) {
       return css`
         &:hover {
           cursor: pointer;
-          border: solid 3px yellow;
+          border: solid 3px #016081;
         }
       `;
     }

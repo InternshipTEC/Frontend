@@ -1,4 +1,3 @@
-import Button from '@material-ui/core/Button';
 import AccountBox from '@material-ui/icons/AccountBox';
 import Backup from '@material-ui/icons/Backup';
 import LaptopMacIcon from '@material-ui/icons/LaptopMac';
@@ -12,7 +11,6 @@ import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
 import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import styled from 'styled-components';
-import app from '../../base';
 import Text from '../../components/shared/Text';
 import FirstRegisterForm from '../../components/SignupPageComponents/FirstRegisterForm';
 import SecondRegisterForm from '../../components/SignupPageComponents/SecondRegisterForm';
@@ -25,7 +23,8 @@ const Wrapper = styled.div`
     margin:0 auto;
 `
 const Positioner = styled.div`
-    min-height:90vh;
+    margin-top:2rem;
+    min-height:80vh;
     width:100%;
     display:flex;
     justify-content:center;
@@ -89,7 +88,7 @@ const Signup = () => {
                                 </TimelineDot>
                                 </TimelineSeparator>
                                 <TimelineContent>
-                                    Penunggahan File
+                                    Pembayaran dan pengunggahan file
                                </TimelineContent>
                             </TimelineItem>
                         </Timeline>

@@ -15,7 +15,7 @@ export default styled.div`
         } else if(props.type === 'secondary' || props.type === "button"){
             return css`
                 font-family: 'Manifold';
-                color: ${props.color ? props.color :  '#016081'};
+                color: ${props.color ? props.color : '#016081'};
             `
         } else if(props.type === 'paragraph'){
             return css`

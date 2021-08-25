@@ -1,71 +1,102 @@
+import { MenuItem, Select } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
+import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import React from 'react'
 import { Form } from 'react-bootstrap'
 import Text from '../shared/Text'
-import Button from '@material-ui/core/Button'
-import { MenuItem, Select } from '@material-ui/core'
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import { SET_FILE, SET_JUMLAH_ORANG_DIWAKILKAN, SUBMIT } from './reducers'
 import { SignupContext } from './SignupProvider'
-import { SET_EMAIL_YANG_DIWAKILKAN, SET_FILE, SET_JUMLAH_ORANG_DIWAKILKAN, SUBMIT } from './reducers'
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
 
 const ThirdRegisterForm = () => {
-    const {metodePembayaran, jumlahOrangDiwakilkan, emailYangDiwakilkan, handleChange} = React.useContext(SignupContext)
+    const {mediaPembayaran, pembayar, metodePembayaran, jumlahOrangDiwakilkan, handleChange} = React.useContext(SignupContext)
+    const [rekTujuan, setRekTujuan] = React.useState("")
+    const [harga, setHarga] = React.useState()
+    const [currentUser] = React.useState(JSON.parse(localStorage.getItem("user")))
 
     React.useEffect(()=>{
-        var form = [];
-        for(var i=0;i<jumlahOrangDiwakilkan;i++){
-            form.push(emailYangDiwakilkan[i])
+        switch (mediaPembayaran) {
+            case "BNI":
+                setRekTujuan("0983529604 a.n Ahmad Farkhanudin")
+                break;
+            case "Gopay":
+                setRekTujuan("081387824200 a.n. Nisa Amilia")
+                break;
+            case "BCA":
+                setRekTujuan("0160057602 a.n. Elizabeth Michele S.")
+                break;
+            case "OVO":
+                setRekTujuan("081387824200 a.n. Nisa Amilia")
+                break;
+            case "Dana":
+                setRekTujuan("081387824200 a.n. Nisa Amilia Tabina")
+                break;
+            case "BRI":
+                setRekTujuan("0593-01-018997-50-5 a.n. Daniel Jeans Ricard Silitonga")
+                break;
+            case "Mandiri":
+                setRekTujuan("105-00-1546052-4 a.n. Daniel Jeans Ricard Silitonga")
+                break;
+            default:
+                break;
         }
-        handleChange(SET_EMAIL_YANG_DIWAKILKAN)(form)
-    },[jumlahOrangDiwakilkan])
+    },[mediaPembayaran])
+
+    React.useEffect(()=>{
+        switch (parseInt(jumlahOrangDiwakilkan)) {
+            case 0:
+                setHarga(50000)
+                break;
+            case 1:
+                setHarga(90000)
+                break;
+            case 2:
+                setHarga(120000)
+                break;
+            case 3:
+                setHarga(160000)
+                break;
+            case 4:
+                setHarga(200000)
+                break;
+            default:
+                break;
+        }
+        if(metodePembayaran === "Sendiri"){
+            setHarga(50000)
+        }
+    },[jumlahOrangDiwakilkan, metodePembayaran])
 
     return (
         <div>
             <Text size={1.75} style={{marginBottom:"1rem"}}>
-                Lengkapi data dirimu
+                Pembayaran dan pengunggahan file
             </Text>
-            <Text size={1}>
-                Lengkapi data diri untuk melakukan finalisasi akunmu.
-            </Text>
-            <hr/>
+            {
+                   (mediaPembayaran && (pembayar === "Ya" || metodePembayaran === "Sendiri") )
+                   ?
+                   <>
+                    <hr/>
+                    <p>Silahkan melakukan pembayaran menuju:</p>
+                    <h5>
+                        Akun {mediaPembayaran} dengan rekening {rekTujuan}. Dengan nominal Rp.{numberWithCommas(harga+currentUser.id)},00 
+                    </h5>
+                   </>
+                   :
+                   <>
+                    <p>
+                        Terimakasih sudah mengisi form! Jangan lupa untuk mengingatkan perwakilan untuk melakukan pembayaran!
+                    </p>
+                   </>
+            }
+            {
+            (mediaPembayaran && (pembayar === "Ya" || metodePembayaran === "Sendiri") )
+            &&
             <Form>
-                {
-                    metodePembayaran !== "Sendiri"
-                    &&
-                <>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Jumlah orang yang diwakili</Form.Label>
-                        <br/>
-                            <Select
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
-                                value={jumlahOrangDiwakilkan}
-                                onChange={handleChange(SET_JUMLAH_ORANG_DIWAKILKAN)}
-                                label="Tipe Pembayaran"
-                            >
-                            {
-                                [1,2,3,4].map(tipe=>
-                                    <MenuItem value={tipe} >
-                                        {tipe}
-                                    </MenuItem>
-                                    )
-                            }
-                            </Select>
-                    </Form.Group>
-                    {
-                        emailYangDiwakilkan.map((_,index)=><>
-                            <Form.Group className="mb-3" controlId={index}>
-                                <Form.Label>Email terwakili {index+1}</Form.Label>
-                                <Form.Control value={emailYangDiwakilkan[parseInt(index)]} onChange={(e)=>{
-                                    var tempForm = [...emailYangDiwakilkan];
-                                    tempForm[index] = e.target.value;
-                                    handleChange(SET_EMAIL_YANG_DIWAKILKAN)(tempForm)
-                                }} type="email"/>
-                            </Form.Group>
-                        </>)
-                    }
-                </>
-                }
+                <br/>
                <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Upload bukti pembayaran</Form.Label>
                     <br/>
@@ -89,8 +120,10 @@ const ThirdRegisterForm = () => {
                     </label>
                 </Form.Group>
             </Form>
+            }
             <br/>
-            <Button variant="contained" color="primary" onClick={handleChange(SUBMIT)}>Continue</Button>
+            <br/>
+            <Button variant="contained" color="primary" onClick={handleChange(SUBMIT)} style={{position:"absolute", bottom:"1rem", width:"97%"}}>Continue</Button>
         </div>
     )
 }

@@ -9,7 +9,6 @@ export const handleLogin = async (email, password) => {
             password
         })
         if(response.status === 200){
-            localStorage.setItem("auth",response.data.data.accessToken)
             return response.data.data
         } else {
             throw response.data.msg
@@ -26,7 +25,6 @@ export const handleSignup = async (email, password) => {
             password
         })
         if(response.status === 200){
-            localStorage.setItem("auth",response.data.data.accessToken)
             return response.data.data
         } else {
             throw response.data.msg
@@ -39,6 +37,7 @@ export const handleSignup = async (email, password) => {
 export const handleLogout = async (email, password) => {
     try {
         localStorage.clear("auth")
+        localStorage.clear("user")
     } catch (err) {
         return err
     }
