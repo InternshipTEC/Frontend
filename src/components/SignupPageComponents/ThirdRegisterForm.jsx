@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import React from 'react'
 import { Form } from 'react-bootstrap'
+import { useHistory } from 'react-router'
 import Text from '../shared/Text'
 import { SET_FILE, SET_JUMLAH_ORANG_DIWAKILKAN, SUBMIT } from './reducers'
 import { SignupContext } from './SignupProvider'
@@ -12,9 +13,11 @@ function numberWithCommas(x) {
 }
 
 const ThirdRegisterForm = () => {
+    const history = useHistory()
     const {mediaPembayaran, pembayar, metodePembayaran, jumlahOrangDiwakilkan, handleChange} = React.useContext(SignupContext)
     const [rekTujuan, setRekTujuan] = React.useState("")
     const [harga, setHarga] = React.useState()
+    const [buttonState, setButtonState] = React.useState("Submit")
     const [currentUser] = React.useState(JSON.parse(localStorage.getItem("user")))
 
     React.useEffect(()=>{
@@ -123,7 +126,7 @@ const ThirdRegisterForm = () => {
             }
             <br/>
             <br/>
-            <Button variant="contained" color="primary" onClick={handleChange(SUBMIT)} style={{position:"absolute", bottom:"1rem", width:"97%"}}>Continue</Button>
+            <Button variant="contained" color="primary" onClick={()=>{setButtonState("Loading...");handleChange(SUBMIT)(history)}} style={{position:"absolute", bottom:"1rem", width:"97%"}}>{buttonState}</Button>
         </div>
     )
 }

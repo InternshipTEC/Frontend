@@ -29,3 +29,8 @@ a:hover {
   margin-right: 0 !important;
   padding:0 !important;
 }
+
+.aws-btn--primary .aws-btn__content{
+  background: #6277A1 !important;
+  border-radius: 20px 
+}

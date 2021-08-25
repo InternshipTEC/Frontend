@@ -50,9 +50,14 @@ const NavbarWebsite = () => {
                     {
                         token
                         ?
-                        <LinkWrapper active={isDropdown}>
-                            <NavLink onClick={()=>{controller.handleLogout();dispatch({type:UPDATE_AUTH});dispatch({type:ADD_USER,user:null})}} color="red" active={isDropdown}>Log out</NavLink>
+                        <>
+                        <LinkWrapper>
+                            <NavLink to="/profile">Profile</NavLink>
                         </LinkWrapper>
+                        <LinkWrapper active={isDropdown}>
+                            <NavLink onClick={()=>{controller.handleLogout();dispatch({type:UPDATE_AUTH});localStorage.clear("user")}} color="red" active={isDropdown}>Log out</NavLink>
+                        </LinkWrapper>
+                        </>
                         : 
                         <LinkWrapper active={isDropdown}>
                             <NavLink to="/login" active={isDropdown}>Log in</NavLink>

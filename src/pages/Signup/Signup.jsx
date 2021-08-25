@@ -10,6 +10,8 @@ import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
 import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
+import { Redirect } from 'react-router';
 import styled from 'styled-components';
 import Text from '../../components/shared/Text';
 import FirstRegisterForm from '../../components/SignupPageComponents/FirstRegisterForm';
@@ -33,7 +35,8 @@ const Positioner = styled.div`
 
 const TimelineCard = styled(Card)`
     padding:1rem;
-    background: #e5e8ec;
+    background: rgba(255,255,255,0.5);
+    box-shadow: 0px 4px 8px #ffffff;
     border: 2px solid white;
     min-height: 100%;
 `
@@ -46,10 +49,26 @@ const forms = [
 
 const Signup = () => {
     const [whichForm, setWhichForm] = React.useState(0)
+    const [user, setUser] = React.useState(localStorage.getItem('user'))
+    React.useEffect(()=>{
+        setUser(JSON.parse(localStorage.getItem('user')))
+    },[])
+
+    const isNotMobile = useMediaQuery({
+        query: "(min-width: 1040px)",
+    });
+
+    if(user.transaction){
+        return <Redirect to={"/"} />
+    }
+
     return (
         <Positioner>
             <Wrapper>
                 <Row>
+                    {
+                    isNotMobile
+                    &&
                     <Col xs={3}>
                         <TimelineCard style={{padding:"1rem`"}}>
                             <Text size={1.75}>
@@ -94,6 +113,7 @@ const Signup = () => {
                         </Timeline>
                         </TimelineCard>
                     </Col>
+                    }
                     <Col>
                         <TimelineCard>
                             <SignupProvider setWhichForm={setWhichForm} whichForm={whichForm}>

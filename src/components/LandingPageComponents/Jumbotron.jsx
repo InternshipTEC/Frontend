@@ -18,12 +18,13 @@ const Jumtron = styled.div`
 `
 
 const NavLink = styled(Link)`
+    color:white;
     width: 36rem;
     margin: 0 auto;
     padding: 18px;
     border-radius: 25px;
     background: #6F80A8;
-    box-shadow: 0px 10px 9px rgba(255, 255, 255, 0.25), inset 0px -10px 11px rgba(255, 255, 255, 0.25);
+    box-shadow: 0px 10px 9px #413f3f, inset 0px -10px 11px rgba(255, 255, 255, 0.25);
     border-radius: 21px;
 `
 

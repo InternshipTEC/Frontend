@@ -29,7 +29,7 @@ const setNoRekening = (noRekening, state) => ({...state, noRekening})
 const setNamaPemilikRekening = (namaPemilikRekening, state) => ({...state, namaPemilikRekening})
 const setFile = (file, state) => ({...state, file})
 const setNIM = (nim, state) => ({...state, nim})
-const submit = async (_,state) => {
+const submit = async (history,state) => {
   const {
     nama,
     fakultas,
@@ -116,14 +116,23 @@ const submit = async (_,state) => {
         }
       })
       .catch(err=>alert(err.toString()))
+      axios.get(`${BACKEND_URL}/users/${user.id}`,{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem("auth")}`
+        }
+      }).then((res)=>{
+        localStorage.setItem("user",JSON.stringify(res.data.data))
+      }).catch(err=>alert(err.toString()))
+      history.push('/')
     } else if (metodePembayaran === "Bersama" && !pembayar) {
-      return
+      return state;
     } else {
       alert("File tidak terunggah")
     }
   } else {
       alert("Data diri tidak lengkap!")
   }
+  history.push("/")
   return state
 }
 
@@ -154,7 +163,7 @@ export const formReducer = (state, action) => {
     case SET_NIM:
       return setNIM(action.payload, state);
     case SUBMIT:
-      return submit(action, state);
+      return submit(action.payload, state);
     default:
       return state;
   }
