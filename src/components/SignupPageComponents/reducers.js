@@ -1,7 +1,10 @@
 import app from '../../base'
 import 'firebase/storage'
+import axios from 'axios';
+import { BACKEND_URL } from '../../controller';
 
 export const SET_NAME = 'SET_NAME'; 
+export const SET_NIM = 'SET_NIM'; 
 export const SET_FAKULTAS = 'SET_FAKULTAS';
 export const SET_IDLINE = 'SET_IDLINE'; 
 export const SET_MEDIA_PEMBAYARAN = 'SET_MEDIA_PEMBAYARAN';
@@ -25,14 +28,102 @@ const setEmailYangDiwakilkan = (emailYangDiwakilkan, state) => ({...state, email
 const setNoRekening = (noRekening, state) => ({...state, noRekening})
 const setNamaPemilikRekening = (namaPemilikRekening, state) => ({...state, namaPemilikRekening})
 const setFile = (file, state) => ({...state, file})
+const setNIM = (nim, state) => ({...state, nim})
 const submit = async (_,state) => {
-  const storage = app.storage()
-  const storageRef = storage.ref()
-  const res = await fetch(state.file)
-  const blob = await res.blob()
+  const {
+    nama,
+    fakultas,
+    idLine,
+    mediaPembayaran,
+    metodePembayaran,
+    noRekening,
+    namaPemilikRekening,
+    jumlahOrangDiwakilkan,
+    pembayar,
+    emailYangDiwakilkan,
+    file,
+    nim
+  } = state
 
-  await storageRef.child("nana.jpg").put(blob)
+  const user = JSON.parse(localStorage.getItem("user"))
 
+  var harga
+
+  switch (parseInt(jumlahOrangDiwakilkan)) {
+    case 0:
+        harga = 50000
+        break;
+    case 1:
+        harga = 90000
+        break;
+    case 2:
+        harga = 120000
+        break;
+    case 3:
+        harga = 160000
+        break;
+    case 4:
+        harga = 200000
+        break;
+    default:
+        break;
+  }
+
+  if(metodePembayaran === "Sendiri"){
+      harga = 50000
+  }
+  if(nama && fakultas && idLine){
+    axios.put(`${BACKEND_URL}/users/${user.id}`, {
+        name:nama,
+        nim,
+        fakultas
+    },
+    {
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem("auth")}`
+      }      
+    }).catch(err=>{alert(err.toString());return})
+    if(file){
+      const storage = app.storage()
+      const storageRef = storage.ref()
+      const imageRef = storageRef.child(state.file.name)
+      await imageRef.put(state.file)
+      const photoUrl = await imageRef.getDownloadURL()
+      axios.post(`${BACKEND_URL}/transaction`,{
+          metode:metodePembayaran,
+          media:mediaPembayaran,
+          nominal:harga,
+          uniqueIdentifier:user.id,
+          pemilikRekening:namaPemilikRekening,
+          usersEmail:[...emailYangDiwakilkan,
+            user.email
+          ],
+          noRekening,
+          photoUrl
+        },
+        {
+          headers:{
+            Authorization: `Bearer ${localStorage.getItem("auth")}`
+          }
+        }
+      )
+      .then(res=>res.status)
+      .then(status=>{
+        if(status===200){
+          alert("Successfully registered!")
+        } else {
+          alert("Error! cek kembali form atau kontak cp")
+        }
+      })
+      .catch(err=>alert(err.toString()))
+    } else if (metodePembayaran === "Bersama" && !pembayar) {
+      return
+    } else {
+      alert("File tidak terunggah")
+    }
+  } else {
+      alert("Data diri tidak lengkap!")
+  }
   return state
 }
 
@@ -60,6 +151,8 @@ export const formReducer = (state, action) => {
       return setNamaPemilikRekening(action.payload,state);
     case SET_FILE:
       return setFile(action.payload, state);
+    case SET_NIM:
+      return setNIM(action.payload, state);
     case SUBMIT:
       return submit(action, state);
     default:

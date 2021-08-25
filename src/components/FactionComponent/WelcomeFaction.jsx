@@ -22,6 +22,7 @@ const WelcomeTo = styled.div`
     }}
     
 `
+
 //BATAS EROR
 const TextDiv = styled.div`
     justify-content:center;

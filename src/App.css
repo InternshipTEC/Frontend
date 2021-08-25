@@ -14,7 +14,9 @@ a:hover {
 }
 
 .App {
-  background: linear-gradient(0deg, #FFFFFF, #FFFFFF), linear-gradient(5.06deg, #CCE4FA 19.38%, #DEE7F4 83.76%);
+  background: linear-gradient(
+    5.06deg
+    ,#CCE4FA 19.38%,#DEE7F4 83.76%);
   min-height: 100vh;
 }
 

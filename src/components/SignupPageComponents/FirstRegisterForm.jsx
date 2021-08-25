@@ -3,10 +3,27 @@ import { Form } from 'react-bootstrap'
 import Text from '../shared/Text'
 import Button from '@material-ui/core/Button';
 import {SignupContext} from './SignupProvider'
-import { SET_FAKULTAS, SET_IDLINE, SET_NAME } from './reducers';
+import { SET_FAKULTAS, SET_IDLINE, SET_NAME, SET_NIM } from './reducers';
+import { MenuItem, Select } from '@material-ui/core';
+
+
+const listFakultas = [
+    "FITB",
+    "FMIPA",
+    "FSRD",
+    "FTI",
+    "FTMD",
+    "FTTM",
+    "FTSL",
+    "SAPPK",
+    "SBM",
+    "SF",
+    "SITH",
+    "STEI",
+]
 
 const FirstRegisterForm = () => {
-    const {whichForm, setWhichForm, nama,fakultas,idLine,handleChange} = React.useContext(SignupContext)
+    const {whichForm, nim, setWhichForm, nama,fakultas,idLine,handleChange} = React.useContext(SignupContext)
 
     return (
         <>
@@ -23,11 +40,31 @@ const FirstRegisterForm = () => {
                     <Form.Control type="text" value={nama} onChange={handleChange(SET_NAME)} placeholder="Nama Lengkap" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Fakultas</Form.Label>
-                    <Form.Control type="text" value={fakultas} onChange={handleChange(SET_FAKULTAS)}  placeholder="Fakultas" />
+                    <Form.Label>NIM</Form.Label>
+                    <Form.Control type="text" value={nim} onChange={handleChange(SET_NIM)} placeholder="NIM" />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>idLine</Form.Label>
+                    <Form.Label>Fakultas</Form.Label>
+                    <br/>
+                    <Select
+                        style={{marginLeft:"0.25rem"}}
+                        labelId="demo-simple-select-outlined-label"
+                        id="demo-simple-select-outlined"
+                        value={fakultas}
+                        onChange={handleChange(SET_FAKULTAS)}
+                        label="Fakultas"
+                    >
+                    {
+                        listFakultas.map(tipe=>
+                            <MenuItem value={tipe} >
+                                {tipe}
+                            </MenuItem>
+                            )
+                    }
+                    </Select>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Id Line</Form.Label>
                     <Form.Control type="text" value={idLine} onChange={handleChange(SET_IDLINE)} placeholder="Id Line" />
                 </Form.Group>
             </Form>

@@ -1,18 +1,21 @@
 import React, { useState } from "react";
+import { authReducer } from "./authReducers";
+
+const initialState = {
+  token:localStorage.getItem("auth")||"",
+  currentUser:null
+}
+
+
 export const GlobalContext = React.createContext();
 
 export const GlobalProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(localStorage.getItem("auth") || "");
-
-  const checkUser = () => {
-    setCurrentUser(localStorage.getItem("auth"))
-  }
-
+  const [state, dispatch] = React.useReducer(authReducer, initialState)
   return (
     <GlobalContext.Provider
       value={{
-        currentUser,
-        checkUser
+        ...state,
+        dispatch
       }}
     >
       {children}
