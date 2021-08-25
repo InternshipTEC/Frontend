@@ -10,17 +10,17 @@ export default styled.div`
         if(props.type === "primary"){
             return css`
                 font-family: 'Divergent';
-                color: ${props.color ? props.color : '#DAC269'};
+                color: ${props.color ? props.color : '#016081'};
             `
         } else if(props.type === 'secondary' || props.type === "button"){
             return css`
                 font-family: 'Manifold';
-                color: ${props.color ? props.color : '#DAC269'};
+                color: ${props.color ? props.color :  '#016081'};
             `
         } else if(props.type === 'paragraph'){
             return css`
                 font-family: 'Poppins';
-                color: ${props.color ? props.color : '#ffffff'};
+                color: ${props.color ? props.color : '#24272C'};
             `
         } 
     }}
