@@ -2,23 +2,24 @@ import React, {useContext} from 'react'
 import { Navbar, Nav} from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import LogoTEC from '../../../blob/images/LogoTEC.png'
+import LogoTEC from '../../../blob/images/LogoPojok.png'
 import { useMediaQuery } from 'react-responsive'
 import { AuthContext } from "../../../Auth";
 import * as controller from "../../../controller"
+import Text from '../../shared/Text'
 
 const TemplateNav = styled(Navbar)`
     background: transparent; 
     font-size: 20px;
-    background: linear-gradient(296.83deg, #016081 -76.79%, #17161B 148.1%);
+    background: linear-gradient(180deg, #B9C4D6 0%, rgba(185, 196, 214, 0) 150.54%);
     border-bottom: 5px solid #B9C4D6;
 `
 
 const NavLink = styled(Link)`
     color: white;
     padding: ${props => props.active ? "0.7rem 2rem" : "0.5rem 0"};
-    clip-path: ${props => props.active ? "polygon(25% 0%, 100% 0, 100% 60%, 80% 100%, 0 100%, 0 40%)" : "none"};
-    background:  ${props => props.active ? (props.color ? props.color : "#016081") : "none"};
+    border-radius: 25px;
+    background:  ${props => props.active ? (props.color ? props.color : "#6F80A8") : "none"};
 `
 
 const LinkWrapper = styled.div`

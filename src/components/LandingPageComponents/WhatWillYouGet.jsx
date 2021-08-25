@@ -4,6 +4,9 @@ import Text from "../shared/Text";
 import { useMediaQuery } from "react-responsive";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import BusinessKnowledge from "../../blob/images/BusinessKnowledge.png";
+import HandsOn from "../../blob/images/Hands-On.png";
+import Networking from "../../blob/images/Networking.png";
 
 const BenefitPage = styled.div`
   display: flex;
@@ -37,15 +40,15 @@ const Image = styled.img`
 const dataCards = [
   {
     name: "Business Knowledge",
-    imageUrl: "https://campbelltaylorwashburn.com/wp-content/uploads/2019/07/Consulting-Illustration.png",
+    imageUrl: BusinessKnowledge,
   },
   {
     name: "Hands On Business",
-    imageUrl: "https://campbelltaylorwashburn.com/wp-content/uploads/2019/07/Consulting-Illustration.png",
+    imageUrl: HandsOn,
   },
   {
     name: "Networking",
-    imageUrl: "https://campbelltaylorwashburn.com/wp-content/uploads/2019/07/Consulting-Illustration.png",
+    imageUrl: Networking,
   },
 ];
 

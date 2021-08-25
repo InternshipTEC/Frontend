@@ -1,3 +1,7 @@
+html, body {
+  overflow-x: hidden;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -14,5 +18,5 @@ a:hover {
 }
 
 .App {
-  background: linear-gradient(4.62deg, #016081 -21.78%, #17161B 105.14%);
+  background:  linear-gradient(5.06deg, #CCE4FA 19.38%, #DEE7F4 83.76%);
 }
