@@ -6,6 +6,7 @@ import Image from 'react-bootstrap/Image'
 import { useMediaQuery } from 'react-responsive'
 import { motion,useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import Logo from "../../blob/svg/LogoUtama.svg"
 
 
 const Jumtron = styled.div`
@@ -19,14 +20,16 @@ const Jumtron = styled.div`
 const NavLink = styled(Link)`
     width: 36rem;
     margin: 0 auto;
-    padding: 10px;
-    background: linear-gradient(355.42deg, #B9C4D6 -138.68%, #016081 120.58%);
+    padding: 18px;
+    border-radius: 25px;
+    background: #6F80A8;
     box-shadow: 0px 10px 9px rgba(255, 255, 255, 0.25), inset 0px -10px 11px rgba(255, 255, 255, 0.25);
-    border-radius: 8px;
+    border-radius: 21px;
 `
 
 const LinkWrapper = styled.div`
-    margin: 2rem 0.5rem;
+    margin: 5rem 0.5rem;
+ 
 `
 
 const Parg = styled.div`
@@ -37,9 +40,9 @@ const RegistrationDeadline = styled.div`
     width: 36rem;
     margin: 0 auto;
     padding: 10px;
-    background: linear-gradient(355.42deg, #B9C4D6 -138.68%, #016081 120.58%);
+    background: linear-gradient(355.42deg, #B9C4D6 -138.68%, #6277A1 120.58%);
     box-shadow: 0px 10px 9px rgba(255, 255, 255, 0.25), inset 0px -10px 11px rgba(255, 255, 255, 0.25);
-    border-radius: 8px;
+    border-radius: 40px;
 `
 
 const Jumbotron = () => {
@@ -112,7 +115,7 @@ const Jumbotron = () => {
                  <Text size={2} fontStyle="italic" type="secondary">
                     Global &nbsp; &nbsp; &nbsp; • &nbsp; &nbsp; &nbsp;  Enrich &nbsp; &nbsp; &nbsp;   •  &nbsp; &nbsp; &nbsp;  High Impact
                 </Text>
-                <Image src="logoTEC.svg" height="300rem"/>
+                <Image src={Logo} height="300rem"/>
                 <Text type="secondary">
                     <LinkWrapper>
                         <NavLink to="/login">
