@@ -141,7 +141,7 @@ const Jumbotron = () => {
                     TEC INTERNSHIP
                 </Text>
                 <Text type="paragraph" align="justify" size={1.1}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                TEC Internship adalah proses penerimaan anggota baru yang dijalani oleh mahasiswa ITB sebelum menjadi anggota resmi TEC ITB. TEC Internship menjadi langkah awal calon anggota memperoleh keilmuan bisnis di TEC ITB. Pada TEC Internship akan banyak kegiatan untuk belajar ilmu bisnis seperti business class berupa webinar dan mentoring ataupun praktik langsung merancang suatu bisnis dengan diadakannya kompetisi bisnis antar peserta.
                 </Text>
             </Parg>
             </motion.p>

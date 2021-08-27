@@ -3,8 +3,8 @@ import styled, { css } from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import Text from "../shared/Text";
 import AchmadZaky from "../../blob/images/AchmadZaky.jpg";
-import Portrait2 from "../../blob/images/img2.jpg";
-import Portrait3 from "../../blob/images/img3.jpg";
+import HafizhCrisbar from "../../blob/images/HafizhCrisbar.png";
+import Andriansyah from "../../blob/images/Andriansyah.png";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
@@ -73,29 +73,22 @@ const dataAlumnus = [
     nama: "Achmad Zaky",
     status: "Founder of Bukalapak",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      "Achmad Zaky adalah founder dan mantan CEO dari salah satu ecommerce terbesar di Indonesia yaitu Bukalapak. Selain itu, Achmad Zaky juga merupakan founding fathers dari TEC ITB sendiri bersama dengan 5 rekannya.",
     image: AchmadZaky,
   },
   {
-    nama: "Siapa anjir",
-    status: "Founder of mwehehe",
+    nama: "Hafizh Ihsaanuddin",
+    status: "Founder of Ayam Geprek Crisbar",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    image: Portrait3,
+      "Hafizh Ihsaanuddin merupakan pendiri dari ayam geprek yang terkenal di Bandung yaitu Ayam Geprek Crisbar. Ia mendirikan Ayam Geprek Crisbar bersama satu orang temannya.",
+    image: HafizhCrisbar,
   },
   {
-    nama: "Gw gak kenal siapa",
-    status: "Founder of Tse",
+    nama: "Andriansyah Putra",
+    status: "CEO of Dr.Ganesha Education",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    image: Portrait2,
-  },
-  {
-    nama: "Siapa anjir",
-    status: "Founder of mwehehe",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    image: Portrait3,
+      "Andriansyah Putra adalah CEO of Dr.Ganesha Education yang merupakan platform tryout dan bimbingan belajar untuk persiapan UTBK. Selain itu, Andriansyah juga pernah menjadi presiden TEC ITB pada kepengurusan 2019/2020.",
+    image: Andriansyah,
   },
 ];
 
