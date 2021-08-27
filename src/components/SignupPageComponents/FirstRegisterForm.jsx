@@ -3,8 +3,9 @@ import { Form } from 'react-bootstrap'
 import Text from '../shared/Text'
 import Button from '@material-ui/core/Button';
 import {SignupContext} from './SignupProvider'
-import { SET_FAKULTAS, SET_IDLINE, SET_NAME, SET_NIM } from './reducers';
+import { SET_FAKULTAS, SET_IDLINE, SET_NAME, SET_NIM, SET_SS } from './reducers';
 import { MenuItem, Select } from '@material-ui/core';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 
 
 const listFakultas = [
@@ -23,7 +24,7 @@ const listFakultas = [
 ]
 
 const FirstRegisterForm = () => {
-    const {whichForm, nim, setWhichForm, nama,fakultas,idLine,handleChange} = React.useContext(SignupContext)
+    const {whichForm, nim, SSfollow, setWhichForm, nama,fakultas,idLine,handleChange} = React.useContext(SignupContext)
 
     return (
         <>
@@ -32,6 +33,10 @@ const FirstRegisterForm = () => {
             </Text>
             <Text size={1}>
                 Lengkapi data diri untuk melakukan finalisasi akunmu.
+            </Text>
+            <Text>
+                <br/>
+                Contact person line : djrs.sdtel
             </Text>
             <hr/>
             <Form>
@@ -66,6 +71,40 @@ const FirstRegisterForm = () => {
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Id Line</Form.Label>
                     <Form.Control type="text" value={idLine} onChange={handleChange(SET_IDLINE)} placeholder="Id Line" />
+                </Form.Group>
+                <br/>
+               <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Upload bukti follow instagram <a style={{color:"blue"}} href="https://www.instagram.com/tec.internship/">@tec.internship</a></Form.Label>
+                    <br/>
+                    <input
+                        accept="image/*"
+                        id="contained-button-file"
+                        style={{display:"none"}}
+                        multiple
+                        type="file"
+                        onChange={handleChange(SET_SS)}
+                    />
+                    <label htmlFor="contained-button-file">
+                    <Button
+                        variant="contained"
+                        color="default"
+                        component="span"
+                        startIcon={<CloudUploadIcon/>}
+                    >
+                        Upload
+                    </Button>
+                    {
+                        SSfollow
+                        &&
+                        <>
+                            <br/>
+                            <br/>
+                            <Text color="green">
+                                Bukti SS telah terunggah: {SSfollow.name}
+                            </Text>
+                        </>
+                    }
+                    </label>
                 </Form.Group>
             </Form>
             <br/>

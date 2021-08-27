@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button'
 import CloudUploadIcon from '@material-ui/icons/CloudUpload'
 import React from 'react'
 import { Form } from 'react-bootstrap'
+import { useHistory } from 'react-router'
 import Text from '../shared/Text'
 import { SET_FILE, SET_JUMLAH_ORANG_DIWAKILKAN, SUBMIT } from './reducers'
 import { SignupContext } from './SignupProvider'
@@ -12,9 +13,11 @@ function numberWithCommas(x) {
 }
 
 const ThirdRegisterForm = () => {
-    const {mediaPembayaran, pembayar, metodePembayaran, jumlahOrangDiwakilkan, handleChange} = React.useContext(SignupContext)
+    const history = useHistory()
+    const {file, mediaPembayaran, pembayar, metodePembayaran, jumlahOrangDiwakilkan, handleChange} = React.useContext(SignupContext)
     const [rekTujuan, setRekTujuan] = React.useState("")
     const [harga, setHarga] = React.useState()
+    const [buttonState, setButtonState] = React.useState("Submit")
     const [currentUser] = React.useState(JSON.parse(localStorage.getItem("user")))
 
     React.useEffect(()=>{
@@ -57,10 +60,7 @@ const ThirdRegisterForm = () => {
                 setHarga(120000)
                 break;
             case 3:
-                setHarga(160000)
-                break;
-            case 4:
-                setHarga(200000)
+                setHarga(140000)
                 break;
             default:
                 break;
@@ -82,7 +82,7 @@ const ThirdRegisterForm = () => {
                     <hr/>
                     <p>Silahkan melakukan pembayaran menuju:</p>
                     <h5>
-                        Akun {mediaPembayaran} dengan rekening {rekTujuan}. Dengan nominal Rp.{numberWithCommas(harga+currentUser.id)},00 
+                        Akun {mediaPembayaran} dengan rekening {rekTujuan}. Dengan nominal Rp{numberWithCommas(harga+currentUser.id)},00 
                     </h5>
                    </>
                    :
@@ -117,13 +117,24 @@ const ThirdRegisterForm = () => {
                     >
                         Upload
                     </Button>
+                    {
+                        file
+                        &&
+                        <>
+                            <br/>
+                            <br/>
+                            <Text color="green">
+                                Bukti pembayaran telah terunggah
+                            </Text>
+                        </>
+                    }
                     </label>
                 </Form.Group>
             </Form>
             }
             <br/>
             <br/>
-            <Button variant="contained" color="primary" onClick={handleChange(SUBMIT)} style={{position:"absolute", bottom:"1rem", width:"97%"}}>Continue</Button>
+            <Button variant="contained" color="primary" onClick={()=>{setButtonState("Loading...");handleChange(SUBMIT)(history)}} style={{position:"absolute", bottom:"1rem", width:"97%"}}>{buttonState}</Button>
         </div>
     )
 }

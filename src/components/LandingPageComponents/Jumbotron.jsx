@@ -6,6 +6,7 @@ import Image from 'react-bootstrap/Image'
 import { useMediaQuery } from 'react-responsive'
 import { motion,useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
+import Logo from "../../blob/svg/LogoUtama.svg"
 
 
 const Jumtron = styled.div`
@@ -17,16 +18,19 @@ const Jumtron = styled.div`
 `
 
 const NavLink = styled(Link)`
+    color:white;
     width: 36rem;
     margin: 0 auto;
-    padding: 10px;
-    background: linear-gradient(355.42deg, #B9C4D6 -138.68%, #016081 120.58%);
-    box-shadow: 0px 10px 9px rgba(255, 255, 255, 0.25), inset 0px -10px 11px rgba(255, 255, 255, 0.25);
-    border-radius: 8px;
+    padding: 18px;
+    border-radius: 25px;
+    background: #6F80A8;
+    box-shadow: 0px 10px 9px #413f3f, inset 0px -10px 11px rgba(255, 255, 255, 0.25);
+    border-radius: 21px;
 `
 
 const LinkWrapper = styled.div`
-    margin: 2rem 0.5rem;
+    margin: 5rem 0.5rem;
+ 
 `
 
 const Parg = styled.div`
@@ -37,9 +41,9 @@ const RegistrationDeadline = styled.div`
     width: 36rem;
     margin: 0 auto;
     padding: 10px;
-    background: linear-gradient(355.42deg, #B9C4D6 -138.68%, #016081 120.58%);
+    background: linear-gradient(355.42deg, #B9C4D6 -138.68%, #6277A1 120.58%);
     box-shadow: 0px 10px 9px rgba(255, 255, 255, 0.25), inset 0px -10px 11px rgba(255, 255, 255, 0.25);
-    border-radius: 8px;
+    border-radius: 40px;
 `
 
 const Jumbotron = () => {
@@ -47,7 +51,7 @@ const Jumbotron = () => {
         query: '(min-width: 500px)'
     });
     const calculateTimeLeft = () => {
-        const difference = +new Date(`${new Date().getFullYear()}-10-1`) - +new Date();
+        const difference = +new Date(`${new Date().getFullYear()}-09-1`) - +new Date();
         let timeLeft = {};
     
         if (difference > 0) {
@@ -112,7 +116,7 @@ const Jumbotron = () => {
                  <Text size={2} fontStyle="italic" type="secondary">
                     Global &nbsp; &nbsp; &nbsp; • &nbsp; &nbsp; &nbsp;  Enrich &nbsp; &nbsp; &nbsp;   •  &nbsp; &nbsp; &nbsp;  High Impact
                 </Text>
-                <Image src="logoTEC.svg" height="300rem"/>
+                <Image src={Logo} height="300rem"/>
                 <Text type="secondary">
                     <LinkWrapper>
                         <NavLink to="/login">
@@ -137,7 +141,7 @@ const Jumbotron = () => {
                     TEC INTERNSHIP
                 </Text>
                 <Text type="paragraph" align="justify" size={1.1}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                TEC Internship adalah proses penerimaan anggota baru yang dijalani oleh mahasiswa ITB sebelum menjadi anggota resmi TEC ITB. TEC Internship menjadi langkah awal calon anggota memperoleh keilmuan bisnis di TEC ITB. Pada TEC Internship akan banyak kegiatan untuk belajar ilmu bisnis seperti business class berupa webinar dan mentoring ataupun praktik langsung merancang suatu bisnis dengan diadakannya kompetisi bisnis antar peserta.
                 </Text>
             </Parg>
             </motion.p>
