@@ -2,11 +2,12 @@ import React, {useContext} from 'react'
 import { Navbar, Nav} from 'react-bootstrap'
 import { Link, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import LogoTEC from '../../../blob/images/LogoTEC.png'
+import LogoTEC from '../../../blob/images/LogoPojok.png'
 import { useMediaQuery } from 'react-responsive'
 import { GlobalContext } from "../../../Auth";
 import * as controller from "../../../controller"
 import { UPDATE_AUTH, ADD_USER } from '../../../authReducers'
+import Text from '../../shared/Text'
 
 const TemplateNav = styled(Navbar)`
     background: transparent; 
@@ -49,9 +50,14 @@ const NavbarWebsite = () => {
                     {
                         token
                         ?
-                        <LinkWrapper active={isDropdown}>
-                            <NavLink onClick={()=>{controller.handleLogout();dispatch({type:UPDATE_AUTH});dispatch({type:ADD_USER,user:null})}} color="red" active={isDropdown}>Log out</NavLink>
+                        <>
+                        <LinkWrapper>
+                            <NavLink to="/profile">Profile</NavLink>
                         </LinkWrapper>
+                        <LinkWrapper active={isDropdown}>
+                            <NavLink onClick={()=>{controller.handleLogout();dispatch({type:UPDATE_AUTH});localStorage.clear("user")}} color="red" active={isDropdown}>Log out</NavLink>
+                        </LinkWrapper>
+                        </>
                         : 
                         <LinkWrapper active={isDropdown}>
                             <NavLink to="/login" active={isDropdown}>Log in</NavLink>

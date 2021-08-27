@@ -41,7 +41,7 @@
 
 .activeSlide img{
   width: 100%;
-  border: 4px solid rgba(218, 194, 105, 0.9);
+  border: 4px solid #016081;
 }
 
 .activeSlide .text{

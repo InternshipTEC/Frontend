@@ -5,6 +5,7 @@ import Text from "../../components/shared/Text";
 import RegisterForm from "../../components/LoginRegisterComponents/RegisterForm";
 import LoginForm from "../../components/LoginRegisterComponents/LoginForm";
 import Carrousel from "../../blob/images/Carrousel.png"
+import { Redirect } from "react-router";
 
 const LoginPage = styled.div`
   display: flex;
@@ -55,13 +56,22 @@ const Login = () => {
   const isMobile = useMediaQuery({
     query: "(max-width: 470px)",
   });
+  const [user, setUser] = React.useState(localStorage.getItem("user"))
+  React.useEffect(()=>{
+    setUser(localStorage.getItem("user"))
+  },[])
+
+  if(user){
+    return <Redirect to="/"/>
+  }
+
   return (
     <LoginPage>
       <TextNav stacked={isImage} style={isMobile ? { flexDirection: "column", gap: "1rem" } : { flexDirection: "row", gap: "3.5rem" }}>
-        <Text type="primary" style={formTypes ? { fontSize: "24px", borderBottom: "13px solid #90844F", cursor: "pointer", color:"#90844F"} : { fontSize: "24px", cursor: "pointer", color:"#90844F" }} onClick={() => setFormTypes(true)}>
+        <Text type="primary" style={formTypes ? { fontSize: "24px", borderBottom: "13px solid #016081", cursor: "pointer", color:"#016081"} : { fontSize: "24px", cursor: "pointer", color:"#016081" }} onClick={() => setFormTypes(true)}>
           Login
         </Text>
-        <Text type="primary" style={formTypes ? { fontSize: "24px", cursor: "pointer", color:"#90844F" } : { fontSize: "24px", cursor: "pointer", borderBottom: "13px solid #90844F", color: "#90844F" }} onClick={() => setFormTypes(false)}>
+        <Text type="primary" style={formTypes ? { fontSize: "24px", cursor: "pointer", color:"#016081" } : { fontSize: "24px", cursor: "pointer", borderBottom: "13px solid #016081", color: "#016081" }} onClick={() => setFormTypes(false)}>
           Register
         </Text>
       </TextNav>

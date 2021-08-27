@@ -6,6 +6,7 @@ import Text from '../shared/Text';
 import { SET_NAMA_PEMILIK_REKENING, SET_NO_REKENING, SET_JUMLAH_ORANG_DIWAKILKAN, SET_MEDIA_PEMBAYARAN, SET_METODE_PEMBAYARAN, SET_PEMBAYAR, SET_EMAIL_YANG_DIWAKILKAN } from './reducers';
 import { SignupContext } from './SignupProvider';
 import axios from 'axios';
+import { Typeahead } from 'react-bootstrap-typeahead';
 import { BACKEND_URL } from '../../controller';
 
 const tipePembayaran = [
@@ -14,14 +15,14 @@ const tipePembayaran = [
     "OVO",
     "Dana",
     "BCA",
-    "Mandiri"
+    "Mandiri",
+    "BRI"
 ]
 
 const banyakOrang = [
     "2 Orang (Rp.45.000,00 per orang, total Rp.90.000,00)",
     "3 Orang (Rp.40.000,00 per orang, total Rp.120.000,00)",
-    "4 Orang (Rp.40.000,00 per orang, total Rp.160.000,00)",
-    "5 Orang (Rp.40.000,00 per orang, total Rp.200.000,00)"
+    "4 Orang (Rp.35.000,00 per orang, total Rp.140.000,00)",
 ]
 
 const MenuProps = {
@@ -32,6 +33,13 @@ const MenuProps = {
         },
     },
 };
+
+const checkMedia = (text) => {
+    if(text === "Gopay" || text === "OVO" || text === "Dana"){
+        return false
+    }
+    return true
+}
 
 const SecondRegisterForm = () => {
     const { emailYangDiwakilkan, whichForm, setWhichForm, noRekening, namaPemilikRekening, mediaPembayaran, pembayar, metodePembayaran, jumlahOrangDiwakilkan, handleChange} = React.useContext(SignupContext)
@@ -63,6 +71,10 @@ const SecondRegisterForm = () => {
             </Text>
             <Text size={1}>
                 Untuk menjadi intern resmi, kamu diharuskan mengisi data registrasi
+            </Text>
+            <Text>
+                <br/>
+                Contact person line : djrs.sdtel
             </Text>
             <hr/>
             <Form>
@@ -113,12 +125,13 @@ const SecondRegisterForm = () => {
                     &&
                     <>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Nama pemilik rekening</Form.Label>
-                            <Form.Control type="text" value={namaPemilikRekening} onChange={handleChange(SET_NAMA_PEMILIK_REKENING)} placeholder="Nama Pemilik Rekening" />
+                            <Form.Label>Nama pemilik {checkMedia(mediaPembayaran) ? "rekening" : "no. handphone"}</Form.Label>
+                            <Form.Control type="text" value={namaPemilikRekening} onChange={handleChange(SET_NAMA_PEMILIK_REKENING)} />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Nomor rekening</Form.Label>
-                            <Form.Control type="text" value={noRekening} onChange={handleChange(SET_NO_REKENING)} placeholder="Nomor Rekening" />
+                            <Form.Label>Nomor {checkMedia(mediaPembayaran) ? "rekening" : "handphone"}</Form.Label>
+                            <br/>
+                            <Form.Control type="text" value={noRekening} onChange={handleChange(SET_NO_REKENING)} placeholder={`Contoh: ${checkMedia(mediaPembayaran) ? "0593-01-018997-50-5" : "081387824200"}`} />
                         </Form.Group>
                     </>
                 }
@@ -154,30 +167,16 @@ const SecondRegisterForm = () => {
                         (pembayar === "Ya" && metodePembayaran === "Bersama")
                         &&
                         emailYangDiwakilkan.map((_,index)=><>
-                            <Form.Group className="mb-3" controlId={index}>
-                                <Form.Label>Email terwakili {index+1}</Form.Label>
-                                <br/>
-                                <Select
-                                    labelId="demo-simple-select-outlined-label"
-                                    id="demo-simple-select-outlined"
-                                    value={emailYangDiwakilkan[parseInt(index)]}
-                                    onChange={(e)=>{
-                                        var tempForm = [...emailYangDiwakilkan];
-                                        tempForm[index] = e.target.value;
-                                        handleChange(SET_EMAIL_YANG_DIWAKILKAN)(tempForm)
-                                    }}
-                                    MenuProps={MenuProps}
-                                    label="Tipe Pembayaran"
-                                >
-                                {
-                                    emails.map(tipe=>
-                                        <MenuItem value={tipe} >
-                                            {tipe}
-                                        </MenuItem>
-                                        )
-                                }
-                                </Select>
-                            </Form.Group>
+                            <Form.Label>Email terwakilkan {index+1}</Form.Label>
+                            <Typeahead
+                                onChange={(selected)=>{
+                                            var tempForm = [...emailYangDiwakilkan];
+                                            tempForm[index] = selected;
+                                            handleChange(SET_EMAIL_YANG_DIWAKILKAN)(tempForm)
+                                }}
+                                options={emails} 
+                            />
+                            <br/>
                         </>)
                     }
                     </>

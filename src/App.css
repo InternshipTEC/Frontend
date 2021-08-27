@@ -1,3 +1,7 @@
+html, body {
+  overflow-x: hidden;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -24,4 +28,9 @@ a:hover {
 .MuiTimelineOppositeContent-root{
   margin-right: 0 !important;
   padding:0 !important;
+}
+
+.aws-btn--primary .aws-btn__content{
+  background: #6277A1 !important;
+  border-radius: 20px 
 }

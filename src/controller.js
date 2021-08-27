@@ -9,6 +9,7 @@ export const handleLogin = async (email, password) => {
             password
         })
         if(response.status === 200){
+            delete response.data.data.password
             return response.data.data
         } else {
             throw response.data.msg
@@ -25,6 +26,7 @@ export const handleSignup = async (email, password) => {
             password
         })
         if(response.status === 200){
+            delete response.data.data.password
             return response.data.data
         } else {
             throw response.data.msg
