@@ -14,7 +14,7 @@ function numberWithCommas(x) {
 
 const ThirdRegisterForm = () => {
     const history = useHistory()
-    const {mediaPembayaran, pembayar, metodePembayaran, jumlahOrangDiwakilkan, handleChange} = React.useContext(SignupContext)
+    const {file, mediaPembayaran, pembayar, metodePembayaran, jumlahOrangDiwakilkan, handleChange} = React.useContext(SignupContext)
     const [rekTujuan, setRekTujuan] = React.useState("")
     const [harga, setHarga] = React.useState()
     const [buttonState, setButtonState] = React.useState("Submit")
@@ -60,10 +60,7 @@ const ThirdRegisterForm = () => {
                 setHarga(120000)
                 break;
             case 3:
-                setHarga(160000)
-                break;
-            case 4:
-                setHarga(200000)
+                setHarga(140000)
                 break;
             default:
                 break;
@@ -85,7 +82,7 @@ const ThirdRegisterForm = () => {
                     <hr/>
                     <p>Silahkan melakukan pembayaran menuju:</p>
                     <h5>
-                        Akun {mediaPembayaran} dengan rekening {rekTujuan}. Dengan nominal Rp.{numberWithCommas(harga+currentUser.id)},00 
+                        Akun {mediaPembayaran} dengan rekening {rekTujuan}. Dengan nominal Rp{numberWithCommas(harga+currentUser.id)},00 
                     </h5>
                    </>
                    :
@@ -120,6 +117,17 @@ const ThirdRegisterForm = () => {
                     >
                         Upload
                     </Button>
+                    {
+                        file
+                        &&
+                        <>
+                            <br/>
+                            <br/>
+                            <Text color="green">
+                                Bukti pembayaran telah terunggah
+                            </Text>
+                        </>
+                    }
                     </label>
                 </Form.Group>
             </Form>

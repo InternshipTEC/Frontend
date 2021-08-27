@@ -51,7 +51,7 @@ const Jumbotron = () => {
         query: '(min-width: 500px)'
     });
     const calculateTimeLeft = () => {
-        const difference = +new Date(`${new Date().getFullYear()}-10-1`) - +new Date();
+        const difference = +new Date(`${new Date().getFullYear()}-09-1`) - +new Date();
         let timeLeft = {};
     
         if (difference > 0) {

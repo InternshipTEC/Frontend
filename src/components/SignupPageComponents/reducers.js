@@ -15,6 +15,7 @@ export const SET_EMAIL_YANG_DIWAKILKAN = 'SET_EMAIL_YANG_DIWAKILKAN';
 export const SET_NO_REKENING = 'SET_NO_REKENING';
 export const SET_NAMA_PEMILIK_REKENING = 'SET_NAMA_PEMILIK_REKENING';
 export const SET_FILE = 'SET_FILE'
+export const SET_SS = 'SET_SS'
 export const SUBMIT = 'SUBMIT';
 
 const setNama = (nama, state) => ({...state, nama})
@@ -29,6 +30,7 @@ const setNoRekening = (noRekening, state) => ({...state, noRekening})
 const setNamaPemilikRekening = (namaPemilikRekening, state) => ({...state, namaPemilikRekening})
 const setFile = (file, state) => ({...state, file})
 const setNIM = (nim, state) => ({...state, nim})
+const setSS = (SSfollow, state) => ({...state, SSfollow})
 const submit = async (history,state) => {
   const {
     nama,
@@ -42,7 +44,8 @@ const submit = async (history,state) => {
     pembayar,
     emailYangDiwakilkan,
     file,
-    nim
+    nim,
+    SSfollow
   } = state
 
   const user = JSON.parse(localStorage.getItem("user"))
@@ -72,7 +75,7 @@ const submit = async (history,state) => {
   if(metodePembayaran === "Sendiri"){
       harga = 50000
   }
-  if(nama && fakultas && idLine){
+  if(nama && fakultas && idLine ){
     axios.put(`${BACKEND_URL}/users/${user.id}`, {
         name:nama,
         nim,
@@ -82,8 +85,11 @@ const submit = async (history,state) => {
       headers:{
         Authorization: `Bearer ${localStorage.getItem("auth")}`
       }      
-    }).catch(err=>{alert(err.toString());return})
-    if(file){
+    }).catch(err=>{alert(err.toString());return state})
+    if(!!file){
+      if(!SSfollow){
+        alert("Bukti SS tidak terunggah")
+      }
       const storage = app.storage()
       const storageRef = storage.ref()
       const imageRef = storageRef.child(state.file.name)
@@ -99,7 +105,7 @@ const submit = async (history,state) => {
             user.email
           ],
           noRekening,
-          photoUrl
+          photoUrl,
         },
         {
           headers:{
@@ -123,8 +129,17 @@ const submit = async (history,state) => {
       }).then((res)=>{
         localStorage.setItem("user",JSON.stringify(res.data.data))
       }).catch(err=>alert(err.toString()))
+      history.push('/profile')
+    } else if (metodePembayaran === "Bersama" && !(pembayar === "Ya")) {
+      axios.get(`${BACKEND_URL}/users/${user.id}`,{
+        headers:{
+          Authorization: `Bearer ${localStorage.getItem("auth")}`
+        }
+      }).then((res)=>{
+        localStorage.setItem("user",JSON.stringify(res.data.data))
+      }).catch(err=>alert(err.toString()))
+      alert("Successfully registered!")
       history.push('/')
-    } else if (metodePembayaran === "Bersama" && !pembayar) {
       return state;
     } else {
       alert("File tidak terunggah")
@@ -132,7 +147,6 @@ const submit = async (history,state) => {
   } else {
       alert("Data diri tidak lengkap!")
   }
-  history.push("/")
   return state
 }
 
@@ -140,6 +154,8 @@ export const formReducer = (state, action) => {
   switch (action.type) {
     case SET_NAME:
       return setNama(action.payload, state);
+    case SET_SS:
+      return setSS(action.payload, state);
     case SET_FAKULTAS:
       return setFakultas(action.payload, state);
     case SET_IDLINE:

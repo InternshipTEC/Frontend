@@ -39,6 +39,7 @@ const TimelineCard = styled(Card)`
     box-shadow: 0px 4px 8px #ffffff;
     border: 2px solid white;
     min-height: 100%;
+    overflow: hidden;
 `
 
 const forms = [
