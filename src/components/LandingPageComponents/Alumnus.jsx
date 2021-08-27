@@ -5,6 +5,8 @@ import Text from "../shared/Text";
 import AchmadZaky from "../../blob/images/AchmadZaky.jpg";
 import HafizhCrisbar from "../../blob/images/HafizhCrisbar.png";
 import Andriansyah from "../../blob/images/Andriansyah.png";
+import Umar from "../../blob/images/Umar.png";
+import Hermawansyah from "../../blob/images/Hermawansyah.png";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
@@ -73,22 +75,37 @@ const dataAlumnus = [
     nama: "Achmad Zaky",
     status: "Founder of Bukalapak",
     description:
-      "Achmad Zaky adalah founder dan mantan CEO dari salah satu ecommerce terbesar di Indonesia yaitu Bukalapak. Selain itu, Achmad Zaky juga merupakan founding fathers dari TEC ITB sendiri bersama dengan 5 rekannya.",
+      "Ahmad Zaky merupakan Founder dari Unit TEC ITB. Dia merupakan mantan CEO dan Founder dari Bukalapak. Bukalapak sendiri merupakan situs belanja online terpercaya di Indonesia yang menjual berbagai produk kebutuhan masyarakat Indonesia.",
     image: AchmadZaky,
   },
   {
     nama: "Hafizh Ihsaanuddin",
     status: "Founder of Ayam Geprek Crisbar",
     description:
-      "Hafizh Ihsaanuddin merupakan pendiri dari ayam geprek yang terkenal di Bandung yaitu Ayam Geprek Crisbar. Ia mendirikan Ayam Geprek Crisbar bersama satu orang temannya.",
+      "Hafizh Ihsannudin merupakan mahasiswa Manajemen’16 ITB dan merupakan alumni TEC ITB. Dia merupakan Founder dari Ayam Crispy Bakar atau sering disebut Crisbar yang terkenal di Bandung.",
     image: HafizhCrisbar,
   },
   {
     nama: "Andriansyah Putra",
-    status: "CEO of Dr.Ganesha Education",
+    status: "Founder of Dr. Ganesha Education",
     description:
-      "Andriansyah Putra adalah CEO of Dr.Ganesha Education yang merupakan platform tryout dan bimbingan belajar untuk persiapan UTBK. Selain itu, Andriansyah juga pernah menjadi presiden TEC ITB pada kepengurusan 2019/2020.",
+      "Andriansyah Putra merupakan founder dari salah satu platform try out terbaik yakni, Dr. Ganesha Education. Dr. Ganesha Education merupakan platform daring yang menyediakan kebutuhan siswa dalam mempersiapkan diri menempuh tes masuk PTN. Selain itu, Andriansyah juga pernah menjadi presiden TEC ITB pada kepengurusan 2019/2020.",
     image: Andriansyah,
+  },
+  {
+    nama: "Umar Hilmi Fadhilah ",
+    status: "Founder and CEO of BACOAT",
+    description:
+      "Tidak hanya sebagai pemenang Carbon Footprint Challenge 2019, Umar Hilmi merupakan Founder juga CEO dari BACOAT. BACOAT merupakan produk kemasan yang terbuat dari material organik dan bertujuan memperpanjang jangka kesegaran produk, terutama untuk sayur dan buah.",
+    image: Umar,
+  },
+  
+  {
+    nama: "Hermawansyah Hidayat ",
+    status: "Founder of @hidupmedia",
+    description:
+      "Hermawansyah merupakan Alumnus TEC. Dia merupakan founder dari Hidup atau sebuah  platform untuk menghubungkan masyarakat dengan psikolog/psikiater. ",
+    image: Hermawansyah,
   },
 ];
 
