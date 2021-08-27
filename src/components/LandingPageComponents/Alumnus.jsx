@@ -3,8 +3,10 @@ import styled, { css } from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import Text from "../shared/Text";
 import AchmadZaky from "../../blob/images/AchmadZaky.jpg";
-import Portrait2 from "../../blob/images/img2.jpg";
-import Portrait3 from "../../blob/images/img3.jpg";
+import HafizhCrisbar from "../../blob/images/HafizhCrisbar.png";
+import Andriansyah from "../../blob/images/Andriansyah.png";
+import Umar from "../../blob/images/Umar.png";
+import Hermawansyah from "../../blob/images/Hermawansyah.png";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
@@ -73,29 +75,37 @@ const dataAlumnus = [
     nama: "Achmad Zaky",
     status: "Founder of Bukalapak",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      "Ahmad Zaky merupakan Founder dari Unit TEC ITB. Dia merupakan mantan CEO dan Founder dari Bukalapak. Bukalapak sendiri merupakan situs belanja online terpercaya di Indonesia yang menjual berbagai produk kebutuhan masyarakat Indonesia.",
     image: AchmadZaky,
   },
   {
-    nama: "Siapa anjir",
-    status: "Founder of mwehehe",
+    nama: "Hafizh Ihsaanuddin",
+    status: "Founder of Ayam Geprek Crisbar",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    image: Portrait3,
+      "Hafizh Ihsannudin merupakan mahasiswa Manajemen’16 ITB dan merupakan alumni TEC ITB. Dia merupakan Founder dari Ayam Crispy Bakar atau sering disebut Crisbar yang terkenal di Bandung.",
+    image: HafizhCrisbar,
   },
   {
-    nama: "Gw gak kenal siapa",
-    status: "Founder of Tse",
+    nama: "Andriansyah Putra",
+    status: "Founder of Dr. Ganesha Education",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    image: Portrait2,
+      "Andriansyah Putra merupakan founder dari salah satu platform try out terbaik yakni, Dr. Ganesha Education. Dr. Ganesha Education merupakan platform daring yang menyediakan kebutuhan siswa dalam mempersiapkan diri menempuh tes masuk PTN. Selain itu, Andriansyah juga pernah menjadi presiden TEC ITB pada kepengurusan 2019/2020.",
+    image: Andriansyah,
   },
   {
-    nama: "Siapa anjir",
-    status: "Founder of mwehehe",
+    nama: "Umar Hilmi Fadhilah ",
+    status: "Founder and CEO of BACOAT",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-    image: Portrait3,
+      "Tidak hanya sebagai pemenang Carbon Footprint Challenge 2019, Umar Hilmi merupakan Founder juga CEO dari BACOAT. BACOAT merupakan produk kemasan yang terbuat dari material organik dan bertujuan memperpanjang jangka kesegaran produk, terutama untuk sayur dan buah.",
+    image: Umar,
+  },
+  
+  {
+    nama: "Hermawansyah Hidayat ",
+    status: "Founder of @hidupmedia",
+    description:
+      "Hermawansyah merupakan Alumnus TEC. Dia merupakan founder dari Hidup atau sebuah  platform untuk menghubungkan masyarakat dengan psikolog/psikiater. ",
+    image: Hermawansyah,
   },
 ];
 
