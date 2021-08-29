@@ -8,6 +8,7 @@ import {
 import NavbarWebsite from './components/TemplateComponents/Navbar/NavbarWebsite'
 import {AllOpenRoutes, AllPrivateRoutes} from './routes/routes';
 import GlobalFonts from './components/shared/Fonts'
+import UnderConstruction from './components/UnderConstruction/UnderConstruction';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
         <GlobalFonts/>
         <Router>
         <NavbarWebsite/>
-            {AllOpenRoutes.map(({path, component: Component})=>(
+            <UnderConstruction/>
+            {/* {AllOpenRoutes.map(({path, component: Component})=>(
               <Route
               exact
               key={path}
@@ -31,7 +33,7 @@ function App() {
               path={path}
               component={Component}
             />
-            ))}
+            ))} */}
        </Router>
       </GlobalProvider>
     </div>

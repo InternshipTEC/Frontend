@@ -30,8 +30,8 @@ export const AllPrivateRoutes = [
 
 export const AllOpenRoutes = [
     LANDING_PAGE,
-    LOGIN_PAGE,
-    FACTION_PAGE,
-    ABOUT_PAGE
+    // LOGIN_PAGE,
+    // FACTION_PAGE,
+    // ABOUT_PAGE
 ]
 
