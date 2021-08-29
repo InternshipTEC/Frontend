@@ -51,7 +51,10 @@ const Jumbotron = () => {
         query: '(min-width: 500px)'
     });
     const calculateTimeLeft = () => {
-        const difference = +new Date(`${new Date().getFullYear()}-09-1`) - +new Date();
+	var now = new Date()
+	now.setHours(now.getHours()-17)
+        var difference = new Date("2021-09-02") - now
+
         let timeLeft = {};
     
         if (difference > 0) {

@@ -48,6 +48,7 @@ const submit = async (history,state) => {
     SSfollow
   } = state
 
+
   const user = JSON.parse(localStorage.getItem("user"))
 
   var harga
@@ -128,8 +129,8 @@ const submit = async (history,state) => {
         }
       }).then((res)=>{
         localStorage.setItem("user",JSON.stringify(res.data.data))
+	      history.push('/profile')
       }).catch(err=>alert(err.toString()))
-      history.push('/profile')
     } else if (metodePembayaran === "Bersama" && !(pembayar === "Ya")) {
       axios.get(`${BACKEND_URL}/users/${user.id}`,{
         headers:{
@@ -137,10 +138,9 @@ const submit = async (history,state) => {
         }
       }).then((res)=>{
         localStorage.setItem("user",JSON.stringify(res.data.data))
+	      alert("Successfully registered!")
+	      history.push('/profile')
       }).catch(err=>alert(err.toString()))
-      alert("Successfully registered!")
-      history.push('/')
-      return state;
     } else {
       alert("File tidak terunggah")
     }

@@ -2,6 +2,10 @@ import { Avatar } from "@material-ui/core";
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { GlobalProvider } from "../../Auth";
+import { GlobalContext } from "../../Auth";
+import { BACKEND_URL } from "../../controller";
+import axios from "axios";
+import { ADD_USER } from "../../authReducers";
 import Text from "../../components/shared/Text";
 import {Redirect} from 'react-router-dom'
 import { Button } from "react-bootstrap";
@@ -42,8 +46,18 @@ const parseIdTEC = (number) => {
 
 const Profile = () => {
     const [user, setUser] = React.useState(JSON.parse(localStorage.getItem("user")))
+    const {dispatch} = React.useContext(GlobalContext)
     React.useEffect(()=>{
-      setUser(JSON.parse(localStorage.getItem("user")))
+      axios.get(`${BACKEND_URL}/users/${user.id}`,{
+	      headers:{
+		Authorization: `Bearer ${localStorage.getItem("auth")}`
+	      }
+      }) 
+	    .then(res=>res.data)
+	    .then(data=>{
+	      dispatch({type:ADD_USER,user:data.data})
+	      setUser(JSON.parse(localStorage.getItem("user")))
+	    })
     },[])
 
     if(user.name){
