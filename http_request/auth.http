@@ -1,0 +1,44 @@
+### Invalid signup request test
+POST http://localhost:3000/auth/signup HTTP/1.1
+content-type: application/json
+
+{
+    "email": "test@gmail.com"
+}
+
+### Invalid login request test
+POST http://localhost:3000/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "gmail.com"
+}
+
+### Valid signup request test
+POST http://localhost:3000/auth/signup HTTP/1.1
+content-type: application/json
+
+{
+
+	"email": "teste@gmail.com",
+	"password": "Patriot*100"
+}
+
+### Valid login request test
+POST https://api.tecinternship2021.com/transaction HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ2ZXJpZmllZCI6ZmFsc2UsImFkbWluIjpmYWxzZSwiaWQiOjU1OCwiZW1haWwiOiJtc3VsdGhhbm1hemF5YUBnbWFpbC5jb20iLCJuaW0iOiIxMzMyMDAyOCIsIm5hbWUiOiJNdWhhbW1hZCBTdWx0aGFuIE1hemF5YSIsImZha3VsdGFzIjpudWxsLCJ0cmFuc2FjdGlvbiI6ZmFsc2UsImlhdCI6MTYzMDMzMjg4MSwiZXhwIjoxNjMwNTA1NjgxfQ.Svtj9UAyKZ6YY-JnbDC4H4ArBcVrk4P59ocw87bfDys
+
+{
+    "photoUrl":"https://images.unsplash.com/photo-1534353436294-0dbd4bdac845?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+    "metode":"test",
+    "media":"BNI",
+    "noRekening":"3413431412",
+    "nominal":"123123",
+    "uniqueIdentifier":"341341341234",
+    "pemilikRekening":"Nana",
+    "usersEmail":[
+        "nanano@gmail.com",
+        "toto@gmail.com"
+    ]
+}

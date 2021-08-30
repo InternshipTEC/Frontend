@@ -60,10 +60,12 @@ const LoginForm = ({changePage}) => {
       const response = await controller.handleLogin(data.email,data.password);
       const user = response.user
       const token = response.accessToken
-      dispatch({type:ADD_TOKEN, token})
-      dispatch({type:ADD_USER, user})
-      dispatch({type:UPDATE_AUTH})
-      history.push("/")
+      if(user && token) {
+        dispatch({type:ADD_TOKEN, token})
+        dispatch({type:ADD_USER, user})
+        dispatch({type:UPDATE_AUTH})
+        history.push("/")
+      }
     } catch (err) {
       alert(err.message)
     }

@@ -17,8 +17,8 @@ function App() {
         <GlobalFonts/>
         <Router>
         <NavbarWebsite/>
-            <UnderConstruction/>
-            {/* {AllOpenRoutes.map(({path, component: Component})=>(
+            {/* <UnderConstruction/> */}
+            {AllOpenRoutes.map(({path, component: Component})=>(
               <Route
               exact
               key={path}
@@ -33,7 +33,7 @@ function App() {
               path={path}
               component={Component}
             />
-            ))} */}
+            ))}
        </Router>
       </GlobalProvider>
     </div>

@@ -169,7 +169,7 @@ const SecondRegisterForm = () => {
                         emailYangDiwakilkan.map((_,index)=><>
                             <Form.Label>Email terwakilkan {index+1}</Form.Label>
                             <Typeahead
-                                onChange={(selected)=>{
+                                onInputChange={(selected)=>{
                                             var tempForm = [...emailYangDiwakilkan];
                                             tempForm[index] = selected;
                                             handleChange(SET_EMAIL_YANG_DIWAKILKAN)(tempForm)

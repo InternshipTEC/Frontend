@@ -64,10 +64,14 @@ const RegisterForm = ({changePage}) => {
         const response = await controller.handleSignup(data.email,data.password);
         const user = response.user
         const token = response.accessToken
-        dispatch({type:ADD_TOKEN, token})
-        dispatch({type:ADD_USER, user})
-        dispatch({type:UPDATE_AUTH})
-        history.push("/signup")
+        if (user && token) {
+          dispatch({type:ADD_TOKEN, token})
+          dispatch({type:ADD_USER, user})
+          dispatch({type:UPDATE_AUTH})
+          history.push("/signup")
+        } else {
+          alert("Email have been taken or else, please contact admin for more information.")
+        }
       } catch (err) {
         alert(err.message)
       }

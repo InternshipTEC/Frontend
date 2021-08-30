@@ -54,23 +54,20 @@ const submit = async (history,state) => {
   var harga
 
   switch (parseInt(jumlahOrangDiwakilkan)) {
-    case 0:
-        harga = 50000
-        break;
-    case 1:
-        harga = 90000
-        break;
-    case 2:
-        harga = 120000
-        break;
-    case 3:
-        harga = 160000
-        break;
-    case 4:
-        harga = 200000
-        break;
-    default:
-        break;
+      case 0:
+          harga = 50000
+          break;
+      case 1:
+          harga = 90000
+          break;
+      case 2:
+          harga = 120000
+          break;
+      case 3:
+          harga = 140000
+          break;
+      default:
+          break;
   }
 
   if(metodePembayaran === "Sendiri"){

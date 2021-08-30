@@ -37,7 +37,7 @@ const NavbarWebsite = () => {
     return ( <>
         <TemplateNav variant="dark" expand="lg">
         <img style={{width:"5rem"}} onClick={()=>history.push("/")} src={LogoTEC} alt="logo tec"/>
-        {/* <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto"></Nav>
                 <Nav> 
@@ -64,7 +64,7 @@ const NavbarWebsite = () => {
                         </LinkWrapper>
                     }
                 </Nav>
-           </Navbar.Collapse> */}
+           </Navbar.Collapse>
         </TemplateNav>
         </>
     )

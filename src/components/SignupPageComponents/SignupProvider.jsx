@@ -22,6 +22,7 @@ export const SignupProvider = ({ children, whichForm, setWhichForm }) => {
   const [state,dispatch] = React.useReducer(formReducer,initialState)
 
   const handleChange = type => e => {
+    console.log(e)
     if(type === SET_EMAIL_YANG_DIWAKILKAN || type === SUBMIT){
       dispatch({type,payload:e})
     } else if (type===SET_FILE) {
