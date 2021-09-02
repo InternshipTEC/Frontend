@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import { Navbar, Nav} from 'react-bootstrap'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import LogoTEC from '../../../blob/images/LogoPojok.png'
 import { useMediaQuery } from 'react-responsive'
@@ -30,10 +30,14 @@ const LinkWrapper = styled.div`
 
 const NavbarWebsite = () => {
     const history = useHistory();
+    const location = useLocation();
     const isDropdown = useMediaQuery({
         query: '(min-width: 992px)'
     });
     const {token, dispatch} = useContext(GlobalContext);
+    if(location.pathname.includes('/faction')){
+        return <></>
+    }
     return ( <>
         <TemplateNav variant="dark" expand="lg">
         <img style={{width:"5rem"}} onClick={()=>history.push("/")} src={LogoTEC} alt="logo tec"/>

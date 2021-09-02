@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, {css} from "styled-components";
 import WelcomeFaction from '../../components/FactionComponent/WelcomeFaction';
+import Layout from '../../components/FactionComponent/Layout';
 import { useMediaQuery } from "react-responsive";
 const FactionWrapper = styled.div`
     background-color: #010103;
@@ -23,7 +24,10 @@ const Faction = () => {
       });
     return (
         <FactionWrapper mobile={isMobile}>
-            <WelcomeFaction></WelcomeFaction>
+            <Layout>
+                <h1>Hello</h1>
+            </Layout>
+            {/* <WelcomeFaction/> */}
         </FactionWrapper>
     )
 }
