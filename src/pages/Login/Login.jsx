@@ -71,9 +71,9 @@ const Login = () => {
         <Text type="primary" style={formTypes ? { fontSize: "24px", borderBottom: "13px solid #016081", cursor: "pointer", color:"#016081"} : { fontSize: "24px", cursor: "pointer", color:"#016081" }} onClick={() => setFormTypes(true)}>
           Login
         </Text>
-        {/* <Text type="primary" style={formTypes ? { fontSize: "24px", cursor: "pointer", color:"#016081" } : { fontSize: "24px", cursor: "pointer", borderBottom: "13px solid #016081", color: "#016081" }} onClick={() => setFormTypes(false)}>
+        <Text type="primary" style={formTypes ? { fontSize: "24px", cursor: "pointer", color:"#016081" } : { fontSize: "24px", cursor: "pointer", borderBottom: "13px solid #016081", color: "#016081" }} onClick={() => setFormTypes(false)}>
           Register
-        </Text> */}
+        </Text>
       </TextNav>
       <NavLog>
         {isImage && (

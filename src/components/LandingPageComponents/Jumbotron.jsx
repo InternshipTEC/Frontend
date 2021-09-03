@@ -53,7 +53,7 @@ const Jumbotron = () => {
     const calculateTimeLeft = () => {
 	var now = new Date()
 	now.setHours(now.getHours()-17)
-        var difference = new Date("2021-09-02") - now
+        var difference = new Date("2021-09-04") - now
 
         let timeLeft = {};
     
@@ -120,17 +120,16 @@ const Jumbotron = () => {
                     Global &nbsp; &nbsp; &nbsp; • &nbsp; &nbsp; &nbsp;  Enrich &nbsp; &nbsp; &nbsp;   •  &nbsp; &nbsp; &nbsp;  High Impact
                 </Text>
                 <Image src={Logo} height="300rem"/>
-                {/* <Text type="secondary">
+                <Text type="secondary">
                     <LinkWrapper>
                         <NavLink to="/login">
                             Join Us
                         </NavLink>
                     </LinkWrapper>
-                </Text> */}
+                </Text>
                 <RegistrationDeadline>
-                    <Text size={1.25} type="secondary" color="white">Registration is closed!</Text>
-                    {/* <Text size={1.25} type="secondary" color="white">Registration will be closed in &nbsp;</Text>
-                    <Text size={1.25} type="secondary"> {timerComponents} </Text> */}
+                    <Text size={1.25} type="secondary" color="white">Registration will be closed in &nbsp;</Text>
+                    <Text size={1.25} type="secondary"> {timerComponents} </Text>
                 </RegistrationDeadline>
                 </motion.div>
             </Jumtron>
