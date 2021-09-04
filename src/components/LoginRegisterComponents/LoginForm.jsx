@@ -92,7 +92,7 @@ const LoginForm = ({changePage}) => {
         <Link onClick={()=>changePage()} style={{ color: "#fff"}}>
           Klik disini
         </Link>
-      </Text>
+      </Text> 
         <Submit type="submit" style={isImage ? {marginLeft: "30vw", marginBottom:'30vh'} : {}}>Login</Submit>
     </form>
     </Login>
