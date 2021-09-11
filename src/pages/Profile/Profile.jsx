@@ -9,6 +9,7 @@ import { ADD_USER } from "../../authReducers";
 import Text from "../../components/shared/Text";
 import {Redirect} from 'react-router-dom'
 import { Button } from "react-bootstrap";
+import {motion} from 'framer-motion'
 
 const Page = styled.div`
   display: flex;
@@ -66,6 +67,12 @@ const [lineLink, setLineLink] = React.useState("https://line.me/R/ti/g/41K9vPf8H
 
     if(user.name){
       return (
+        <motion.div
+          initial={{opacity:0}}
+          animate={{opacity:1}}
+          exit={{ opacity: 0 }}
+          transition={{duration:1}}    
+        >
         <Page>
           <Card>
                 <div style={{display:"flex", alignItems:"center", gap:"1rem"}}>
@@ -109,6 +116,7 @@ const [lineLink, setLineLink] = React.useState("https://line.me/R/ti/g/41K9vPf8H
                 }
           </Card>
         </Page>
+    </motion.div>
       );
     }
 

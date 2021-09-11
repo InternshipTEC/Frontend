@@ -4,6 +4,7 @@ import Footer from "../../components/LandingPageComponents/Footer";
 // import Gallery from "../../components/AboutComponents/GallerySlider";
 import UnderConstruction from "../../components/UnderConstruction/UnderConstruction";
 import styled from "styled-components";
+import {motion} from 'framer-motion'
 // import Text from "../../components/shared/Text";
 
 const Wrapper = styled.div`
@@ -22,6 +23,12 @@ const TextNav = styled.div`
 const About = () => {
   // const [aboutTypes, setAboutTypes] = useState(true);
   return (
+    <motion.div
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      exit={{ opacity: 0 }}
+      transition={{duration:1}}    
+    >
     <Wrapper>
       <UnderConstruction />
       {/* <TextNav>
@@ -35,6 +42,7 @@ const About = () => {
       {aboutTypes ? <Organogram /> : <Gallery />} */}
       <Footer />
     </Wrapper>
+</motion.div>
   );
 };
 

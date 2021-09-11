@@ -6,6 +6,7 @@ import RegisterForm from "../../components/LoginRegisterComponents/RegisterForm"
 import LoginForm from "../../components/LoginRegisterComponents/LoginForm";
 import Carrousel from "../../blob/images/Carrousel.png"
 import { Redirect } from "react-router";
+import { motion } from "framer-motion";
 
 const LoginPage = styled.div`
   display: flex;
@@ -66,14 +67,18 @@ const Login = () => {
   }
 
   return (
+    <motion.div
+      initial={{opacity:0}}
+      animate={{opacity:1}}
+      exit={{ opacity: 0 }}
+      transition={{duration:1}}    
+    >
     <LoginPage>
       <TextNav stacked={isImage} style={isMobile ? { flexDirection: "column", gap: "1rem" } : { flexDirection: "row", gap: "3.5rem" }}>
         <Text type="primary" style={formTypes ? { fontSize: "24px", borderBottom: "13px solid #016081", cursor: "pointer", color:"#016081"} : { fontSize: "24px", cursor: "pointer", color:"#016081" }} onClick={() => setFormTypes(true)}>
           Login
         </Text>
-        <Text type="primary" style={formTypes ? { fontSize: "24px", cursor: "pointer", color:"#016081" } : { fontSize: "24px", cursor: "pointer", borderBottom: "13px solid #016081", color: "#016081" }} onClick={() => setFormTypes(false)}>
-          Register
-        </Text>
+        
       </TextNav>
       <NavLog>
         {isImage && (
@@ -83,13 +88,10 @@ const Login = () => {
             <img src={Carrousel} alt="Faksi" style={{width:"50vw", height:"auto", marginTop:"1rem"}}/>
           </Faksi>
         )}
-        {formTypes ? (
-          <LoginForm changePage={() => setFormTypes(false)} />
-        ) : (
-          <RegisterForm changePage={() => setFormTypes(true)} />
-        )}
+        <LoginForm changePage={() => setFormTypes(false)} />
       </NavLog>
     </LoginPage>
+  </motion.div>
   );
 };
 
