@@ -87,12 +87,6 @@ const LoginForm = ({changePage}) => {
             <Input type="password" id="password" {...register("password",{required:"This is required"})}/>
           </GridItem>
         </GridForm>
-        <Text type="Paragraph" style={{ color: "#696969" , paddingTop:"16px"}}>
-        Belum punya akun? {""}
-        <Link onClick={()=>changePage()} style={{ color: "#fff"}}>
-          Klik disini
-        </Link>
-      </Text>
         <Submit type="submit" style={isImage ? {marginLeft: "30vw", marginBottom:'30vh'} : {}}>Login</Submit>
     </form>
     </Login>

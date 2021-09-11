@@ -122,15 +122,11 @@ const Jumbotron = () => {
                 <Image src={Logo} height="300rem"/>
                 <Text type="secondary">
                     <LinkWrapper>
-                        <NavLink to="/login">
-                            Join Us
+                        <NavLink to="/faction">
+                            Start The Journey
                         </NavLink>
                     </LinkWrapper>
                 </Text>
-                <RegistrationDeadline>
-                    <Text size={1.25} type="secondary" color="white">Registration will be closed in &nbsp;</Text>
-                    <Text size={1.25} type="secondary"> {timerComponents} </Text>
-                </RegistrationDeadline>
                 </motion.div>
             </Jumtron>
             <motion.p
