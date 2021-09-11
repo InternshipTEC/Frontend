@@ -47,6 +47,7 @@ const parseIdTEC = (number) => {
 
 const Profile = () => {
     const [user, setUser] = React.useState(JSON.parse(localStorage.getItem("user")))
+const [lineLink, setLineLink] = React.useState("https://line.me/R/ti/g/41K9vPf8H_")
     const {dispatch} = React.useContext(GlobalContext)
     React.useEffect(()=>{
       axios.get(`${BACKEND_URL}/users/${user.id}`,{
@@ -58,6 +59,9 @@ const Profile = () => {
 	    .then(data=>{
 	      dispatch({type:ADD_USER,user:data.data})
 	      setUser(JSON.parse(localStorage.getItem("user")))
+		if(data.data.id > 925){
+			setLineLink("https://line.me/R/ti/g/E7uy2TqMU_")
+		}
 	    })
     },[])
 
@@ -107,7 +111,7 @@ const Profile = () => {
                   <Text>
                     Group line
                   </Text>
-                  <Button href="https://line.me/R/ti/g/41K9vPf8H_">Link group line</Button>
+                  <Button href={lineLink}>Link group line</Button>
                 </div>
                 }
           </Card>
