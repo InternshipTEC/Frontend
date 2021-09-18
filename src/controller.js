@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const BACKEND_URL = "http://localhost:3000";
+export const BACKEND_URL = "https://tec.internship2021.com";
 
 export const handleLogin = async (email, password) => {
     try {
