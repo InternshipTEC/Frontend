@@ -19,6 +19,7 @@ export const LOGIN_PAGE = route('Login', '/login', Login)
 export const LANDING_PAGE = route('Landing', '/', Landing)
 export const FACTION_PAGE = route('Faction', '/faction', FactionLayout)
 export const FACTION_ABSEN_PAGE = route('Faction', '/faction/absen', FactionLayout)
+export const FACTION_TUGAS_PAGE = route('Faction', '/faction/tugas', FactionLayout)
 export const ABOUT_PAGE = route('About', '/about', About)
 export const PROFILE_PAGE = route('Profile', '/profile', Profile)
 //Misal nanti ada page ini:
@@ -27,7 +28,8 @@ export const PROFILE_PAGE = route('Profile', '/profile', Profile)
 export const AllPrivateRoutes = [
     PROFILE_PAGE,
     FACTION_PAGE,
-    FACTION_ABSEN_PAGE
+    FACTION_ABSEN_PAGE,
+    FACTION_TUGAS_PAGE 
 ]
 
 export const AllOpenRoutes = [

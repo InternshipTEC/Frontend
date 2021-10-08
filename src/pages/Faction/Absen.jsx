@@ -149,7 +149,7 @@ const Absen = () => {
               <Button
                 style={{ position: "absolute", right: "1rem", bottom: "1rem" }}
                 variant="contained"
-                color="light"
+                color="red"
                 onClick={absen(event.event_id)}
               >
                 Tandai Hadir
@@ -166,7 +166,7 @@ const Absen = () => {
             >
               <hr
                 style={{
-                  backgroundColor: "white",
+                  backgroundColor: "red",
                   height: "0.25rem",
                   width: "90%",
                   margin: "1rem auto",

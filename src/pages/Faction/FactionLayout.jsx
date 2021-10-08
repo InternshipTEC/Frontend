@@ -5,12 +5,11 @@ import styled, { css } from "styled-components";
 import Layout from "../../components/FactionComponent/Layout";
 import WelcomeFaction from "../../components/FactionComponent/WelcomeFaction";
 import { motion } from "framer-motion";
-import Acara from "./Acara";
-import Main from "./Main";
 import Absen from "./Absen";
+import Tugas from "./Tugas";
 
 const FactionWrapper = styled.div`
-  background-color: white;
+  background-color: #fff;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -41,7 +40,9 @@ const FactionLayout = () => {
             <Route exact path="/faction">
               <WelcomeFaction />
             </Route>
-            <Route path={`/faction/tugas`}>Acara</Route>
+            <Route path={`/faction/tugas`}>
+              <Tugas />
+            </Route>
             <Route path={`/faction/absen`}>
               <Absen />
             </Route>
