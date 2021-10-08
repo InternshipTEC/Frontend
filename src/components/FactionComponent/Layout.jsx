@@ -13,9 +13,9 @@ import { useRouteMatch } from "react-router";
 import { useHistory, useLocation } from "react-router-dom";
 import LogoTEC from "../../blob/images/LogoTEC.png";
 import DauntlessShade from "../../blob/images/DauntlessShade.png";
+import EruditeShade from "../../blob/images/eruditeShade.png";
 import { ReactComponent as Candor } from "../../blob/svg/candor.svg";
-import { ReactComponent as Dauntless } from "../../blob/svg/dauntless.svg";
-import { ReactComponent as ShadeDauntless } from "../../blob/svg/ShadeDauntless.svg";
+import Erudite from "../../blob/images/Erudite.png";
 
 import Text from "../shared/Text";
 
@@ -24,7 +24,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => {
   return {
     page: {
-      background: "#17161B",
+      background: "#fcfbf1",
       width: "100%",
       minHeight: "100vh",
       padding: theme.spacing(3),
@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => {
       fontFamily: "Manifold",
     },
     active: {
-      background: "#DE0E30",
+      background: "#01448a",
       color: "#24272C",
       fontWeight: "bold",
       borderTopRightRadius: "10px",
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => {
     appBar: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
-      backgroundColor: "#17161B",
+      backgroundColor: "#fcfbf1",
       maxHeight: "100vh",
     },
     date: {
@@ -95,10 +95,6 @@ export default function Layout({ children }) {
     {
       text: "Home",
       path: `/faction`,
-    },
-    {
-      text: "Tugas",
-      path: `/faction/tugas`,
     },
     {
       text: "Absen",
@@ -139,7 +135,7 @@ export default function Layout({ children }) {
         color="primary"
       >
         <Toolbar>
-          <Text type="secondary" color="white" className={classes.date}>
+          <Text type="secondary" color="black" className={classes.date}>
             Hello {username}
           </Text>
           <Avatar
@@ -183,9 +179,9 @@ export default function Layout({ children }) {
               flexDirection: "column",
             }}
           >
-            <Dauntless style={{ height: "1.5rem" }} />
+            <img src={Erudite} style={{ height: "1.5rem" }} />
             <Text size={0.5} color="red">
-              Dauntless
+              Erudite
             </Text>
           </div>
         </div>
@@ -209,7 +205,7 @@ export default function Layout({ children }) {
               )}
               <Text
                 type="secondary"
-                color={location.pathname == item.path ? "black" : "red"}
+                color={location.pathname == item.path ? "#fcfbf1" : "#5ca0e9"}
               >
                 {item.text}
               </Text>
@@ -217,10 +213,10 @@ export default function Layout({ children }) {
           ))}
         </List>
       </Drawer>
-      {isShade && (
+      {/* {isShade && (
         <>
           <img
-            src={DauntlessShade}
+            src={EruditeShade}
             style={{
               position: "absolute",
               zIndex: 1000000,
@@ -230,7 +226,7 @@ export default function Layout({ children }) {
             }}
           />
         </>
-      )}
+      )} */}
       {/* main content */}
       <div
         className={classes.page}

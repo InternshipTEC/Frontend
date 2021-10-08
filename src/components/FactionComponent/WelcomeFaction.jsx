@@ -3,6 +3,7 @@ import IdrisElba from "../../blob/images/FactionIdrisElba.png";
 import Beatrice from "../../blob/images/FactionBeatrice.png";
 import Candor from "../../blob/images/FactionCandor.png";
 import Dauntless from "../../blob/images/FactionDauntless.png";
+import Erudite from "../../blob/images/Erudite.png";
 import Text from "../shared/Text";
 import Bar from "../../blob/images/FactionBar.png";
 import { useMediaQuery } from "react-responsive";
@@ -40,10 +41,6 @@ const Layout = styled.div`
   justify-content: space-between;
 `;
 
-const ElbaDiv = styled.div``;
-
-const BeatriceDiv = styled.div``;
-
 const WelcomeFaction = () => {
   const isMobile = useMediaQuery({
     query: "(min-width: 425px)",
@@ -53,21 +50,19 @@ const WelcomeFaction = () => {
       <Layout>
         <MainContent>
           <img
-            src={Dauntless}
+            src={Erudite}
             alt="dauntless"
             style={{ width: "20%", height: "auto" }}
           ></img>
           <TextDiv>
-            <Text type="secondary" size={2} color="rgba(226, 214, 220, 1)">
+            <Text type="secondary" size={2} color="black">
               {" "}
-              Dauntless{" "}
+              Erudite{" "}
             </Text>
-            <Text type="paragraph" color="rgba(226, 214, 220, 1)">
+            <Text type="paragraph" color="black">
               {" "}
-              Then there's Dauntless. They're our protectors, our soldiers, our
-              police. I always thought they were amazing. Brave, fearless, and
-              free. Some people think Dauntless are crazy, which they kind of
-              are.
+              The smart ones, the ones value knowledge and logic are Erudite.
+              They know everything.
             </Text>
           </TextDiv>
         </MainContent>

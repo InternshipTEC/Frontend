@@ -101,7 +101,7 @@ const Absen = () => {
             <Box>
               <hr
                 style={{
-                  backgroundColor: "white",
+                  backgroundColor: "#01448a",
                   height: "0.25rem",
                   width: "90%",
                   margin: "1rem auto",
@@ -166,7 +166,7 @@ const Absen = () => {
             >
               <hr
                 style={{
-                  backgroundColor: "red",
+                  backgroundColor: "#01448a",
                   height: "0.25rem",
                   width: "90%",
                   margin: "1rem auto",
