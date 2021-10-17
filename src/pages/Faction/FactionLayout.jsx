@@ -7,6 +7,8 @@ import WelcomeFaction from "../../components/FactionComponent/WelcomeFaction";
 import { motion } from "framer-motion";
 import Absen from "./Absen";
 import Tugas from "./Tugas";
+import SpesificTugas from "./SpesificTugas";
+import Materi from "./Materi";
 
 const FactionWrapper = styled.div`
   background-color: #fff;
@@ -40,11 +42,14 @@ const FactionLayout = () => {
             <Route exact path="/faction">
               <WelcomeFaction />
             </Route>
-            <Route path={`/faction/tugas`}>
-              <Tugas />
-            </Route>
             <Route path={`/faction/absen`}>
               <Absen />
+            </Route>
+            <Route path={`/faction/materi/:id?`}>
+              <Materi />
+            </Route>
+            <Route path={`/faction/tugas/:id?`}>
+              <Tugas />
             </Route>
           </Switch>
         </Layout>

@@ -1,12 +1,7 @@
+import { useMediaQuery } from "react-responsive";
 import styled, { css } from "styled-components";
-import IdrisElba from "../../blob/images/FactionIdrisElba.png";
-import Beatrice from "../../blob/images/FactionBeatrice.png";
-import Candor from "../../blob/images/FactionCandor.png";
-import Dauntless from "../../blob/images/FactionDauntless.png";
 import Erudite from "../../blob/images/Erudite.png";
 import Text from "../shared/Text";
-import Bar from "../../blob/images/FactionBar.png";
-import { useMediaQuery } from "react-responsive";
 
 const Wrapper = styled.div``;
 

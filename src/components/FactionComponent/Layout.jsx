@@ -1,7 +1,8 @@
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, MenuItem } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Avatar from "@material-ui/core/Avatar";
 import Drawer from "@material-ui/core/Drawer";
+import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -11,19 +12,26 @@ import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useRouteMatch } from "react-router";
 import { useHistory, useLocation } from "react-router-dom";
-import LogoTEC from "../../blob/images/LogoTEC.png";
-import DauntlessShade from "../../blob/images/DauntlessShade.png";
-import EruditeShade from "../../blob/images/eruditeShade.png";
-import { ReactComponent as Candor } from "../../blob/svg/candor.svg";
 import Erudite from "../../blob/images/Erudite.png";
-
+import LogoTEC from "../../blob/images/LogoTEC.png";
 import Text from "../shared/Text";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import Menu from "@mui/material/Menu";
+import { BACKEND_URL } from "../../controller";
+import axios from "axios";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => {
   return {
     page: {
+      marginLeft: drawerWidth,
+      background: "#fcfbf1",
+      width: "100%",
+      minHeight: "100vh",
+      padding: theme.spacing(3),
+    },
+    pageMobile: {
       background: "#fcfbf1",
       width: "100%",
       minHeight: "100vh",
@@ -88,6 +96,27 @@ export default function Layout({ children }) {
   const [username, setUsername] = useState(
     JSON.parse(localStorage.getItem("user")).name
   );
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const opened = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const [countNotification, setCountNotification] = useState(0);
+  React.useEffect(() => {
+    const getData = async () => {
+      const res = await axios.get(`${BACKEND_URL}/tugas/occuring/`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("auth")}`,
+        },
+      });
+      // setTugas(res.data);
+      setCountNotification(res.data.data.length);
+    };
+    getData();
+  }, []);
 
   let { path, url } = useRouteMatch();
 
@@ -99,6 +128,14 @@ export default function Layout({ children }) {
     {
       text: "Absen",
       path: `/faction/absen`,
+    },
+    {
+      text: "Materi",
+      path: `/faction/materi`,
+    },
+    {
+      text: "Tugas",
+      path: `/faction/tugas`,
     },
   ];
 
@@ -138,6 +175,32 @@ export default function Layout({ children }) {
           <Text type="secondary" color="black" className={classes.date}>
             Hello {username}
           </Text>
+          <IconButton
+            aria-label="Notification"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+          >
+            <Badge badgeContent={countNotification} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={opened}
+            onClose={handleClose}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            <MenuItem
+              onClick={() => {
+                history.push("/faction/tugas");
+              }}
+            >
+              Check Tugas
+            </MenuItem>
+          </Menu>
           <Avatar
             style={{ cursor: "pointer" }}
             className={classes.avatar}
@@ -229,7 +292,13 @@ export default function Layout({ children }) {
       )} */}
       {/* main content */}
       <div
-        className={classes.page}
+        className={
+          !isMobile
+            ? classes.pageMobile
+            : location.pathname === "/faction/absen"
+            ? classes.pageMobile
+            : classes.page
+        }
         onClick={() => {
           if (!isMobile && open) {
             setOpen(false);

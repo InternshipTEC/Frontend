@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Main = () => {
-	return (
-		<>
-			
-		</>
-	)
-}
+  const { id } = useParams();
+  const isMobile = useMediaQuery({
+    query: "(min-width: 425px)",
+  });
+  return <></>;
+};
 
-export default Main
+export default Main;
