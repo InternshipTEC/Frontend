@@ -98,13 +98,8 @@ const Acara = () => {
                       ))}
                     </>
                   )}
-                  <Button
-                    variant="contained"
-                    onClick={() =>
-                      history.push(`/faction/tugas/${singleTugas.id}`)
-                    }
-                  >
-                    View Tugas
+                  <Button variant="contained">
+                    <a href={singleTugas.iframeForm}>Lihat Tugas</a>
                   </Button>
                 </CTALayout>
               </TugasBox>
