@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import Absen from "./Absen";
 import Tugas from "./Tugas";
 import SpesificTugas from "./SpesificTugas";
+import FindYourPartner from "./FindYourPartner";
 import Materi from "./Materi";
 
 const FactionWrapper = styled.div`
@@ -50,6 +51,9 @@ const FactionLayout = () => {
             </Route>
             <Route path={`/faction/tugas/:id?`}>
               <Tugas />
+            </Route>
+            <Route path={`/faction/fyp`}>
+              <FindYourPartner />
             </Route>
           </Switch>
         </Layout>
