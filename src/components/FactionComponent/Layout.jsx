@@ -137,6 +137,10 @@ export default function Layout({ children }) {
       text: "Tugas",
       path: `/faction/tugas`,
     },
+    {
+      text: "FYP",
+      path: `/faction/fyp`,
+    },
   ];
 
   const isMobile = useMediaQuery({
@@ -211,9 +215,8 @@ export default function Layout({ children }) {
 
       <Drawer
         style={{
-          position: `${
-            location.pathname === "/faction/absen" ? "absolute" : ""
-          }`,
+          position: `${location.pathname === "/faction/absen" ? "absolute" : ""
+            }`,
           width: 0,
         }}
         className={classes.drawer}
@@ -296,8 +299,8 @@ export default function Layout({ children }) {
           !isMobile
             ? classes.pageMobile
             : location.pathname === "/faction/absen"
-            ? classes.pageMobile
-            : classes.page
+              ? classes.pageMobile
+              : classes.page
         }
         onClick={() => {
           if (!isMobile && open) {

@@ -5,6 +5,7 @@ import Landing from "../pages/Landing/Landing";
 import FactionLayout from "../pages/Faction/FactionLayout";
 import About from "../pages/About/About";
 import Profile from "../pages/Profile/Profile";
+import TransitionFaction from "../pages/TransitionFaction/TransitionFaction";
 
 // buat return {label,path,component} yang bakal di ambil di App.js
 const route = (label, path, component) => ({
@@ -18,6 +19,7 @@ export const SIGNUP_PAGE = route("Signup", "/signup", Signup);
 export const LOGIN_PAGE = route("Login", "/login", Login);
 export const LANDING_PAGE = route("Landing", "/", Landing);
 export const FACTION_PAGE = route("Faction", "/faction", FactionLayout);
+export const TRANSITION_FACTION_PAGE = route("Transition Page", "/transition", TransitionFaction);
 export const FACTION_ABSEN_PAGE = route(
   "Faction",
   "/faction/absen",
@@ -26,6 +28,11 @@ export const FACTION_ABSEN_PAGE = route(
 export const FACTION_TUGAS_PAGE = route(
   "Faction",
   "/faction/tugas",
+  FactionLayout
+);
+export const FACTION_FYP = route(
+  "Faction",
+  "/faction/fyp",
   FactionLayout
 );
 export const FACTION_TUGAS_DYNAMIC_PAGE = route(
@@ -50,12 +57,14 @@ export const PROFILE_PAGE = route("Profile", "/profile", Profile);
 // yang gak bisa diakses tanpa authentication
 export const AllPrivateRoutes = [
   PROFILE_PAGE,
+  TRANSITION_FACTION_PAGE,
   FACTION_PAGE,
   FACTION_ABSEN_PAGE,
   FACTION_TUGAS_PAGE,
   FACTION_TUGAS_DYNAMIC_PAGE,
   FACTION_MATERI_PAGE,
   FACTION_DYNAMIC_MATERI_PAGE,
+  FACTION_FYP,
 ];
 
 export const AllOpenRoutes = [LANDING_PAGE, LOGIN_PAGE, ABOUT_PAGE];

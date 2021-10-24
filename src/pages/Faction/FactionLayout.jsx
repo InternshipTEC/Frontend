@@ -1,13 +1,13 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import { Route, Switch, useRouteMatch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import styled, { css } from "styled-components";
 import Layout from "../../components/FactionComponent/Layout";
 import WelcomeFaction from "../../components/FactionComponent/WelcomeFaction";
+import FindYourPartner from "./FindYourPartner";
 import { motion } from "framer-motion";
 import Absen from "./Absen";
 import Tugas from "./Tugas";
-import SpesificTugas from "./SpesificTugas";
 import Materi from "./Materi";
 
 const FactionWrapper = styled.div`
@@ -44,6 +44,9 @@ const FactionLayout = () => {
             </Route>
             <Route path={`/faction/absen`}>
               <Absen />
+            </Route>
+            <Route path={`/faction/fyp`}>
+              <FindYourPartner />
             </Route>
             <Route path={`/faction/materi/:id?`}>
               <Materi />
