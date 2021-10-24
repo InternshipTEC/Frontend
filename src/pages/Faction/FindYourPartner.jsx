@@ -1,6 +1,7 @@
 import SearchIcon from '@material-ui/icons/Search';
 import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
+import MDEditor from '@uiw/react-md-editor';
 import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as HackerLogo } from '../../blob/svg/Hacker.svg';
@@ -8,6 +9,8 @@ import { ReactComponent as HipsterLogo } from '../../blob/svg/Hipster.svg';
 import { ReactComponent as HustlerLogo } from '../../blob/svg/Hustler.svg';
 import Text from "../../components/shared/Text";
 import { BACKEND_URL } from '../../controller';
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import Button from "@material-ui/core/Button";
 
 const RolesWrapper = styled.div`
   display:flex;
@@ -33,7 +36,7 @@ const RoleChoice = styled.div`
 const UserCard = styled.div`
   background: #FFFFFF;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-  padding: 1rem;
+  padding: 2rem;
   margin: 1rem;
 `
 
@@ -43,77 +46,16 @@ const FormWrapper = styled.div`
   padding: 1rem;
   margin: 1rem;
 `
-
-
-const SearchWrapper = styled.div`
-  font-family:'Manifold';
-  & .search-box{
-    width: fit-content;
-    height: fit-content;
-    position: relative;
-  }
-  & .search-box .input-search{
-    height: 50px;
-    width: 50px;
-    border-style: none;
-    padding: 10px;
-    font-size: 18px;
-    letter-spacing: 2px;
-    outline: none;
-    border-radius: 25px;
-    transition: all .5s ease-in-out;
-    background-color: white;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-    padding-right: 40px;
-    color: black;
-  }
-  & .search-box .input-search::placeholder{
-    color:rgba(0,0,0,.5);
-    font-size: 18px;
-    letter-spacing: 2px;
-    font-weight: 100;
-  }
-  & .search-box .btn-search{
-    width: 50px;
-    height: 50px;
-    border-style: none;
-    font-size: 20px;
-    font-weight: bold;
-    outline: none;
-    cursor: pointer;
-    border-radius: 50%;
-    position: absolute;
-    right: 0px;
-    color: black;
-    background-color:transparent;
-    pointer-events: painted;  
-  }
-  & .search-box .btn-search:focus ~ .input-search{
-    width: 300px;
-    border-radius: 0px;
-    background-color: transparent;
-    border-bottom:1px solid rgba(0,0,0,.5);
-    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
-    box-shadow: none;
-  }
-  & .search-box .input-search:focus{
-    width: 300px;
-    border-radius: 0px;
-    background-color: transparent;
-    border-bottom:1px solid rgba(0,0,0,.5);
-    transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
-    box-shadow: none;
-  }
-`
-
 const FindYourPartner = () => {
   const [users, setUsers] = React.useState()
+  const [desc, setDesc] = React.useState("")
   const [searchedName, setSearchedName] = React.useState("")
-  const [picker, setPicker] = React.useState(true)
+  const [picker, setPicker] = React.useState('hacker')
   const [roles, setRoles] = React.useState()
   const [user, setUser] = React.useState(
     JSON.parse(localStorage.getItem("user"))
   );
+  const [file, setFile] = React.useState()
 
   React.useEffect(() => {
     const getData = async () => {
@@ -130,10 +72,9 @@ const FindYourPartner = () => {
       toLogo("Hipster", HipsterLogo),
       toLogo("Hacker", HackerLogo),
       toLogo("Hustler", HustlerLogo),
-    ].filter(logo => logo.title.toLowerCase() !== 'hacker'))
+    ])
     getData();
   }, []);
-
 
   const variants = {
     scale: { scale: 1.25 },
@@ -141,14 +82,19 @@ const FindYourPartner = () => {
   };
   return <>
     <FormWrapper>
+      <Text type="secondary" color="black" align='center' size={1.5} >
+        Pick your role!
+      </Text>
+      <br />
+      <br />
       <RolesWrapper >
         {
           roles?.map((role, index) =>
             <motion.div
               variants={variants}
-              animate={(index ? !picker : picker) ? "scale" : "shrink"}
+              animate={(role.title.toLowerCase() === picker ? true : false) ? "scale" : "shrink"}
             >
-              <RoleChoice onClick={() => setPicker(!picker)}>
+              <RoleChoice onClick={() => setPicker(role.title.toLowerCase())}>
                 <Text type="secondary" color="black" align='center' style={{ padding: "0.5rem" }}>
                   {role.title}
                 </Text>
@@ -162,32 +108,69 @@ const FindYourPartner = () => {
       </RolesWrapper>
       <br />
       <br />
-      <div style={{ margin: "0 1rem", padding: "1rem", display: "flex", justifyContent: "space-between" }}>
-        <Text type="secondary" color="black" style={{ margin: "auto 0" }}>People</Text>
-        <SearchWrapper>
-          <div class="search-box">
-            <button class="btn-search"><SearchIcon /></button>
-            <input type="text" class="input-search" placeholder="Search partner" onChange={e => setSearchedName(e.target.value)} />
-          </div>
-        </SearchWrapper>
-      </div>
-      {
-        users?.filter((_, index) => (picker ? index % 2 : !(index % 2))).filter(user => user.name.toLowerCase().includes(searchedName.toLowerCase())).map(user => <>
-          <AnimatePresence>
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0 }}
-            >
-              <UserCard>
-                {user.name}
-              </UserCard>
-            </motion.div>
-          </AnimatePresence>
-        </>)
-      }
+      <Text type="secondary" color="black" align='center' size={1.5} >
+        Fill your profile information!
+      </Text>
+      <br />
+      <br />
+      <UploadButton file={file} setFile={setFile} label="Upload Profile Picture" />
+      <br />
+      <br />
+      <Text type="paragraph" style={{ fontWeight: "bold" }}>Profile Description:</Text>
+      <br />
+      <MDEditor
+        value={desc}
+        onChange={setDesc}
+      />
+      <br/>
+      <Button variant="contained" fullWidth color="primary" style={{textTransform:"none"}}>Submit Data</Button>
     </FormWrapper>
   </>
 }
+
+
+const UploadButton = ({ file, setFile, label }) => {
+  const [loading, setLoading] = React.useState(false)
+  const handleInput = (e) => {
+    setLoading(true)
+    setFile(e.target.files[0])
+    setLoading(false)
+  }
+  return <>
+    <Text type="paragraph" style={{ fontWeight: "bold" }}>{label}:</Text>
+    <br />
+    <input
+      accept="image/*"
+      id="contained-button-file"
+      style={{ display: "none" }}
+      multiple
+      type="file"
+      onChange={handleInput}
+    />
+    <label htmlFor="contained-button-file">
+      <Button
+        variant="contained"
+        color="default"
+        component="span"
+        startIcon={<CloudUploadIcon />}
+      >
+        {loading ? "Loading" : "Upload"}
+      </Button>
+      {
+        file
+        &&
+        <>
+          <br />
+          <br />
+          <Text color="green">
+            File sudah terupload.
+          </Text>
+        </>
+      }
+    </label>
+  </>
+}
+
+
 
 export default FindYourPartner

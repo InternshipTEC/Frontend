@@ -28,6 +28,11 @@ export const FACTION_TUGAS_PAGE = route(
   "/faction/tugas",
   FactionLayout
 );
+export const FACTION_FYP_PAGE = route(
+  "Faction",
+  "/faction/fyp",
+  FactionLayout
+);
 export const FACTION_TUGAS_DYNAMIC_PAGE = route(
   "Faction",
   "/faction/tugas/:id",
@@ -56,6 +61,7 @@ export const AllPrivateRoutes = [
   FACTION_TUGAS_DYNAMIC_PAGE,
   FACTION_MATERI_PAGE,
   FACTION_DYNAMIC_MATERI_PAGE,
+  FACTION_FYP_PAGE
 ];
 
 export const AllOpenRoutes = [LANDING_PAGE, LOGIN_PAGE, ABOUT_PAGE];
