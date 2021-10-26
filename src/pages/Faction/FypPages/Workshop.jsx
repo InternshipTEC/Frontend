@@ -23,12 +23,12 @@ const Workshop = () => {
       });
       const userData = data.data
       const fypProfile = userData.fypProfile
-      const { fypData } = await axios.get(`${BACKEND_URL}/fyp-blog/role/${fypProfile.role}`, {
+      const res = await axios.get(`${BACKEND_URL}/fyp-blog/role/${fypProfile.role}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("auth")}`,
         },
       });
-      const fypBlog = fypData.data
+      const fypBlog = res.data.data
       setMDSource(fypBlog.content)
     }
     getData()

@@ -45,13 +45,6 @@ const RoleChoice = styled.div`
   }
 `
 
-const UserCard = styled.div`
-  background: #FFFFFF;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
-  padding: 2rem;
-  margin: 1rem;
-`
-
 const FormWrapper = styled.div`
   background: #FFFFFF;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.25);
@@ -108,7 +101,7 @@ const FindYourPartner = ({ match }) => {
   const [MDSource, setMDSource] = React.useState("")
   const [registered, setRegistered] = React.useState(false)
   const [submit, setSubmit] = React.useState(false)
-  const toRoute = (name, Icon, Page, to) => ({ name, icon: <Icon />, page: <Page />, to })
+  const toRoute = (name, Icon, page, to) => ({ name, icon: <Icon />, page , to })
   const fypRoutes = [
     toRoute("Workshop", MenuBookIcon, Workshop, "/workshop"),
     toRoute("Partners List", PermContactCalendarIcon, Partner, "/partners"),
@@ -146,45 +139,47 @@ const FindYourPartner = ({ match }) => {
     {
       registered ?
         <>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-            {isDesktop
-              &&
-              <>
-                <Text type="primary" size={2} color="black" align='center' style={{ padding: "0.5rem" }}>
-                  Find Your Partner
-                </Text>
-                <br />
-                <br />
-                <br />
-              </>
-            }
-            <RolesWrapper>
-              {
-                fypRoutes.map(route =>
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                  >
-                    <RoleChoice style={isDesktop ? {} : { height: "7rem", width: "7rem" }} onClick={() => history.push(match.url + route.to)}>
-                      {
-                        isDesktop &&
-                        <IconWrapper>
-                          {route.icon}
-                        </IconWrapper>
-                      }
-                      <Text type="secondary" color="black" align='center' style={{ padding: "0.5rem" }}>
-                        {route.name}
-                      </Text>
-                    </RoleChoice>
-                  </motion.div>
-                )
+          <Switch>
+            {fypRoutes.map(route =>
+              <Route path={match.url + route.to} component={route.page} />
+            )}
+          <Route>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+              {isDesktop
+                &&
+                <>
+                  <Text type="primary" size={2} color="black" align='center' style={{ padding: "0.5rem" }}>
+                    Find Your Partner
+                  </Text>
+                  <br />
+                  <br />
+                  <br />
+                </>
               }
-            </RolesWrapper>
-            <Switch>
-              {fypRoutes.map(route =>
-                <Route exact path={match.url + route.to} component={route.page} />
-              )}
-            </Switch>
-          </div>
+              <RolesWrapper>
+                {
+                  fypRoutes.map(route =>
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <RoleChoice style={isDesktop ? {} : { height: "7rem", width: "7rem" }} onClick={() => history.push(match.url + route.to)}>
+                        {
+                          isDesktop &&
+                          <IconWrapper>
+                            {route.icon}
+                          </IconWrapper>
+                        }
+                        <Text type="secondary" color="black" align='center' style={{ padding: "0.5rem" }}>
+                          {route.name}
+                        </Text>
+                      </RoleChoice>
+                    </motion.div>
+                  )
+                }
+              </RolesWrapper>
+            </div>
+            </Route>
+          </Switch>
         </>
         :
         <RegisterComponent setSubmit={setSubmit} />

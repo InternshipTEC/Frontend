@@ -71,7 +71,6 @@ const Absen = () => {
           }
         );
         setEvents(absens.data);
-        console.log(events);
       } else {
         alert("Absen Failed");
       }

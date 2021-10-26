@@ -41,7 +41,7 @@ const FactionLayout = ({ match }) => {
             <Route path={`${match.url}/absen`} component={Absen} />
             <Route path={`${match.url}/materi/:id?`} component={Materi} />
             <Route path={`${match.url}/tugas/:id?`} component={Tugas} />
-            <Route exact path={`${match.url}/fyp`} component={FindYourPartner} />
+            <Route path={`${match.url}/fyp`} component={FindYourPartner} />
             <Route exact path="/" component={WelcomeFaction} />
           </Switch>
         </Layout>
