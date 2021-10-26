@@ -37,8 +37,7 @@ function App() {
             />
             ))}
             {AllPrivateRoutes.map(({path, component: Component})=>(
-              <PrivateRoute
-              exact
+            <PrivateRoute
               key={path}
               path={path}
               component={Component}

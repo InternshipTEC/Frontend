@@ -26,40 +26,30 @@ const FactionWrapper = styled.div`
 `;
 
 //Media Query untuk debugging putih-putih
-const FactionLayout = () => {
+const FactionLayout = ({ match }) => {
   const isMobile = useMediaQuery({
     query: "(min-width: 1200px)",
   });
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
     >
       <FactionWrapper mobile={isMobile}>
         <Layout>
           <Switch>
-            <Route exact path="/faction">
-              <WelcomeFaction />
-            </Route>
-            <Route path={`/faction/absen`}>
-              <Absen />
-            </Route>
-            <Route path={`/faction/materi/:id?`}>
-              <Materi />
-            </Route>
-            <Route path={`/faction/tugas/:id?`}>
-              <Tugas />
-            </Route>
-            <Route path={`/faction/fyp`}>
-              <FindYourPartner />
-            </Route>
+            <Route path={`${match.url}/absen`} component={Absen} />
+            <Route path={`${match.url}/materi/:id?`} component={Materi} />
+            <Route path={`${match.url}/tugas/:id?`} component={Tugas} />
+            <Route exact path={`${match.url}/fyp`} component={FindYourPartner} />
+            <Route exact path="/" component={WelcomeFaction} />
           </Switch>
         </Layout>
       </FactionWrapper>
     </motion.div>
   );
 };
+
+
 
 export default FactionLayout;

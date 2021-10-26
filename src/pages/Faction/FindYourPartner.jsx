@@ -3,17 +3,25 @@ import { motion } from 'framer-motion';
 import MDEditor from '@uiw/react-md-editor';
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from "react-router-dom";
 import { ReactComponent as HackerLogo } from '../../blob/svg/Hacker.svg';
 import { ReactComponent as HipsterLogo } from '../../blob/svg/Hipster.svg';
 import { ReactComponent as HustlerLogo } from '../../blob/svg/Hustler.svg';
 import Text from "../../components/shared/Text";
 import UploadButtonCroppable from "../../components/shared/UploadButtonCroppable";
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import GroupIcon from '@material-ui/icons/Group';
+import { Route, Switch } from "react-router-dom";
+import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
 import { BACKEND_URL } from '../../controller';
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import Button from "@material-ui/core/Button";
 import 'react-image-crop/dist/ReactCrop.css';
 import { Modal } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive"
+import Partner from './FypPages/Partner'
+import Team from './FypPages/Team'
+import Workshop from './FypPages/Workshop'
 import app from '../../base'
 
 const RolesWrapper = styled.div`
@@ -51,6 +59,17 @@ const FormWrapper = styled.div`
   margin: 1rem;
 `
 
+const IconWrapper = styled.div`
+  width:fit-content;
+  margin: 0 auto;
+  & svg {
+    display:block;
+    margin: 0 auto;
+    width:80%;
+    height:80%
+  }
+`
+
 function MyVerticallyCenteredModal(props) {
   const isDesktop = useMediaQuery({
     query: "(min-width: 1170px)",
@@ -78,13 +97,23 @@ function MyVerticallyCenteredModal(props) {
   );
 }
 
-const FindYourPartner = () => {
+const FindYourPartner = ({ match }) => {
   const [user, setUser] = React.useState(
     JSON.parse(localStorage.getItem("user"))
   );
+  const isDesktop = useMediaQuery({
+    query: "(min-width: 1170px)",
+  })
+  const history = useHistory()
   const [MDSource, setMDSource] = React.useState("")
   const [registered, setRegistered] = React.useState(false)
   const [submit, setSubmit] = React.useState(false)
+  const toRoute = (name, Icon, Page, to) => ({ name, icon: <Icon />, page: <Page />, to })
+  const fypRoutes = [
+    toRoute("Workshop", MenuBookIcon, Workshop, "/workshop"),
+    toRoute("Partners List", PermContactCalendarIcon, Partner, "/partners"),
+    toRoute("Team Up", GroupIcon, Team, "/team"),
+  ]
 
   React.useEffect(() => {
     const getData = async () => {
@@ -112,19 +141,58 @@ const FindYourPartner = () => {
     ;
     getData();
   }, [submit]);
+
   return <>
     {
       registered ?
-        <FormWrapper>
-          <MDEditor.Markdown source={MDSource} />
-        </FormWrapper>
+        <>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            {isDesktop
+              &&
+              <>
+                <Text type="primary" size={2} color="black" align='center' style={{ padding: "0.5rem" }}>
+                  Find Your Partner
+                </Text>
+                <br />
+                <br />
+                <br />
+              </>
+            }
+            <RolesWrapper>
+              {
+                fypRoutes.map(route =>
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    <RoleChoice style={isDesktop ? {} : { height: "7rem", width: "7rem" }} onClick={() => history.push(match.url + route.to)}>
+                      {
+                        isDesktop &&
+                        <IconWrapper>
+                          {route.icon}
+                        </IconWrapper>
+                      }
+                      <Text type="secondary" color="black" align='center' style={{ padding: "0.5rem" }}>
+                        {route.name}
+                      </Text>
+                    </RoleChoice>
+                  </motion.div>
+                )
+              }
+            </RolesWrapper>
+            <Switch>
+              {fypRoutes.map(route =>
+                <Route exact path={match.url + route.to} component={route.page} />
+              )}
+            </Switch>
+          </div>
+        </>
         :
-        <RegisterComponent setSubmit={setSubmit}/>
+        <RegisterComponent setSubmit={setSubmit} />
     }
   </>
 }
 
-const RegisterComponent = ({setSubmit}) => {
+const RegisterComponent = ({ setSubmit }) => {
   const [loading, setLoading] = React.useState(false)
   const [desc, setDesc] = React.useState("")
   const [picker, setPicker] = React.useState('hacker')
@@ -269,7 +337,5 @@ const UploadButton = ({ file, setOpen, label }) => {
     </label>
   </>
 }
-
-
 
 export default FindYourPartner

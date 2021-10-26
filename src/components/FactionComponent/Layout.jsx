@@ -17,7 +17,7 @@ import LogoTEC from "../../blob/images/LogoTEC.png";
 import Text from "../shared/Text";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Menu from "@mui/material/Menu";
-import { BACKEND_URL } from "../../controller";
+import { BACKEND_URL, socket } from "../../controller";
 import axios from "axios";
 
 const drawerWidth = 240;
