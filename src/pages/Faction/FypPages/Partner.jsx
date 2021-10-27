@@ -129,13 +129,15 @@ function MyVerticallyCenteredModal(props) {
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           doc.ref.parent.parent.get()
-            .then((snapshot) => {
+            .then(async (snapshot) => {
               const teamName = snapshot.data().name
-              db.collection('notification').add({
+              await db.collection('notification').add({
                 userId: props.userPicked?.id,
                 teamName,
                 teamCode: snapshot.id
               })
+              alert("Successfully invite user to team!")
+              props.onHide()
             })
         })
       })

@@ -10,7 +10,7 @@ import {
   ListItem,
   ListItemText,
   ListItemSecondaryAction
-  } from "@material-ui/core";
+} from "@material-ui/core";
 import Text from "../../../components/shared/Text";
 import BackButton from "../../../components/shared/BackButton";
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -22,6 +22,7 @@ import {
   MuiChat,
 } from 'chat-ui-react';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { useHistory } from "react-router-dom";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Col, Row } from 'react-bootstrap';
 import axios from 'axios'
@@ -83,12 +84,9 @@ const Team = () => {
 
 const TeamUp = () => {
   const classes = styles();
-  const exercises = [
-    { id: 1, title: "FYP ngab team invited you to join their team" },
-    { id: 2, title: "FYP ngab team invited you to join their team" },
-    { id: 3, title: "FYP ngab team invited you to join their team" },
-  ]
+  const [invitations, setInvitations] = React.useState([])
   const [teamName, setTeamName] = React.useState("Team Name")
+  const history = useHistory()
   const [teamCode, setTeamCode] = React.useState("Team Code")
   const teamsRef = db.collection('team');
   const [user, _] = React.useState(
@@ -108,13 +106,14 @@ const TeamUp = () => {
         userId: user.id,
         userName: user.name
       })
+      history.push('/faction/fyp/team')
     } catch (err) {
       alert(err.toString())
     }
   }
 
-  const joinTeam = async () => {
-    const docRef = teamsRef.doc(teamCode)
+  const joinTeam = () => {
+    const docRef = db.collection('team').doc(teamCode)
     docRef.get()
       .then(async (doc) => {
         if (doc.exists) {
@@ -124,6 +123,7 @@ const TeamUp = () => {
               userId: user.id,
               userName: user.name
             })
+            history.push('/faction/fyp/team')
           } catch (err) {
             alert(err.toString())
           }
@@ -131,9 +131,83 @@ const TeamUp = () => {
           alert("There is no team with such id!")
         }
       })
-
-
   }
+
+  const joinInvitation = (props) => {
+    const docRef = teamsRef.doc(props.teamCode)
+    docRef.get()
+      .then(async (doc) => {
+        if (doc.exists) {
+          const membersRef = docRef.collection('members')
+          try {
+            const snapshot = await membersRef.get()
+            var hacker=0, hipster=0, hustler=0;
+            for (const index in snapshot.docs) {
+              const { data } = await axios.get(`${BACKEND_URL}/users/fyp/${snapshot.docs[index].data().userId}`, {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("auth")}`,
+                },
+              });
+              const userData = data.data
+              const userRole = userData.fypProfile.role
+              if (userRole === "hacker") {
+                hacker += 1
+              } else if (userRole === "hipster") {
+                hipster += 1
+              } else {
+                hustler += 1
+              }
+            }
+            const { data } = await axios.get(`${BACKEND_URL}/users/fyp/${user.id}`, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("auth")}`,
+              },
+            });
+            const userData = data.data
+            const userRole = userData.fypProfile.role
+
+            if (
+              (userRole === "hacker" && hacker<1)
+              ||
+              (userRole === "hipster" && hipster<5)
+              ||
+              (userRole === "hustler" && hustler<4)
+            ) {
+              await membersRef.add({
+                userId: user.id,
+                userName: user.name
+              })
+              history.push('/faction/fyp/team')
+            } else {
+              alert("Team full!")
+            }
+          } catch (err) {
+            alert(err.toString())
+          }
+        } else {
+          alert("Id of team not found! possibly team deleted by admin, please contact fyp contact person")
+        }
+      })
+  }
+  
+  const [tempInvitation, setTempInvitation] = React.useState()
+
+  React.useEffect(() => {
+    db.collection('notification').where("userId", "==", user.id)
+      .get().then((snapshot) => {
+        snapshot.docs.forEach((docs) => {
+          setTempInvitation(docs.data())
+        })
+      })
+  }, [])
+
+  React.useEffect(()=>{
+    if(tempInvitation){
+      setInvitations([...invitations, tempInvitation])
+    }
+  },[tempInvitation])
+
+
 
   return <div style={{ height: '100vh' }}>
     <BackButton to={'/faction/fyp'} />
@@ -170,27 +244,18 @@ const TeamUp = () => {
         Invitations :
       </Text>
       <List>
-        {exercises.map(({ id, title }, idx) => (
+        {invitations.map((invitation, idx) => (
           <>
-            <ListItem key={id}>
-              <ListItemText primary={title} style={{ maxWidth: "70%" }} />
+            <ListItem key={idx}>
+              <ListItemText primary={invitation.teamName + " team invited you to join their team!"} style={{ maxWidth: "70%" }} />
               <ListItemSecondaryAction>
-                <IconButton
-                  color="primary"
-                  onClick={() => { }}
-                >
-                  <CheckCircleIcon />
-                </IconButton>
-                <IconButton
-                  color="red"
-                  onClick={() => { }}
-                >
-                  <CancelIcon />
-                </IconButton>
+                <Button onClick={() => joinInvitation({ teamCode: invitation.teamCode })} color="primary" variant="outlined">
+                  &nbsp; Join &nbsp;
+                </Button>
               </ListItemSecondaryAction>
             </ListItem>
             {
-              idx !== exercises.length
+              idx !== invitations.length
               &&
               <hr />
             }
@@ -215,6 +280,7 @@ const AfterTeamedUp = ({ team }) => {
   );
   const [loading, setLoading] = React.useState(true)
   const [userPhotoUrl, setPhotoUrl] = React.useState('-')
+  const history = useHistory()
   const messageRef = db.collection('chat');
   React.useEffect(() => {
     const getData = async () => {
@@ -240,9 +306,9 @@ const AfterTeamedUp = ({ team }) => {
         setTempMembers({ photoUrl, name, role })
       }
 
-      messageRef.where("teamId", "==", team.id).orderBy("createdAt", 'desc').limit(50)
+      messageRef.where("teamId", "==", team.id).orderBy("createdAt")
         .get().then(async (snapshot) => {
-          for (var i = 0; i < snapshot.docs.length - 1; i++) {
+          for (var i = 0; i < snapshot.docs.length; i++) {
             const data = snapshot.docs[i].data()
             if (user.id === data.userId) {
               await chatCtl.addMessage({
@@ -300,23 +366,15 @@ const AfterTeamedUp = ({ team }) => {
   }, [chatCtl, userPhotoUrl]);
 
   const exit = () => {
-    team.ref.collection("members").where("userId","==",user.id).get()
+    team.ref.collection("members").where("userId", "==", user.id).get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
           doc.ref.delete()
         })
       })
+    history.push('/faction/fyp/team')
   }
 
-  React.useMemo(async () => {
-    // change users_team to real user team
-    await chatCtl.addMessage({
-      type: 'text',
-      content: `Hello, What's your name.`,
-      self: false,
-      avatar: '-'
-    });
-  }, [chatCtl])
 
   // Only one component used for display
   return <>
@@ -347,10 +405,10 @@ const AfterTeamedUp = ({ team }) => {
           <hr />
           {
             loading
-            ? 
-            <CircularProgress />
-            :
-            <MuiChat chatController={chatCtl} />
+              ?
+              <CircularProgress />
+              :
+              <MuiChat chatController={chatCtl} />
           }
         </Paper>
       </Col>

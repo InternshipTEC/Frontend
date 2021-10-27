@@ -103,7 +103,7 @@ const FindYourPartner = ({ match }) => {
   const [MDSource, setMDSource] = React.useState("")
   const [registered, setRegistered] = React.useState(false)
   const [submit, setSubmit] = React.useState(false)
-  const toRoute = (name, Icon, page, to) => ({ name, icon: <Icon />, page , to })
+  const toRoute = (name, Icon, page, to) => ({ name, icon: <Icon />, page, to })
   const fypRoutes = [
     toRoute("Workshop", MenuBookIcon, Workshop, "/workshop"),
     toRoute("Partners List", PermContactCalendarIcon, Partner, "/partners"),
@@ -132,6 +132,7 @@ const FindYourPartner = ({ match }) => {
       } else {
         setRegistered(false)
       }
+      setLoading(false)
     };
     ;
     getData();
@@ -145,51 +146,51 @@ const FindYourPartner = ({ match }) => {
             {fypRoutes.map(route =>
               <Route path={match.url + route.to} component={route.page} />
             )}
-          <Route>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-              {isDesktop
-                &&
-                <>
-                  <Text type="primary" size={2} color="black" align='center' style={{ padding: "0.5rem" }}>
-                    Find Your Partner
-                  </Text>
-                  <br />
-                  <br />
-                  <br />
-                </>
-              }
-              <RolesWrapper>
-                {
-                  fypRoutes.map(route =>
-                    <motion.div
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      <RoleChoice style={isDesktop ? {} : { height: "7rem", width: "7rem" }} onClick={() => history.push(match.url + route.to)}>
-                        {
-                          isDesktop &&
-                          <IconWrapper>
-                            {route.icon}
-                          </IconWrapper>
-                        }
-                        <Text type="secondary" color="black" align='center' style={{ padding: "0.5rem" }}>
-                          {route.name}
-                        </Text>
-                      </RoleChoice>
-                    </motion.div>
-                  )
+            <Route>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                {isDesktop
+                  &&
+                  <>
+                    <Text type="primary" size={2} color="black" align='center' style={{ padding: "0.5rem" }}>
+                      Find Your Partner
+                    </Text>
+                    <br />
+                    <br />
+                    <br />
+                  </>
                 }
-              </RolesWrapper>
-            </div>
+                <RolesWrapper>
+                  {
+                    fypRoutes.map(route =>
+                      <motion.div
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <RoleChoice style={isDesktop ? {} : { height: "7rem", width: "7rem" }} onClick={() => history.push(match.url + route.to)}>
+                          {
+                            isDesktop &&
+                            <IconWrapper>
+                              {route.icon}
+                            </IconWrapper>
+                          }
+                          <Text type="secondary" color="black" align='center' style={{ padding: "0.5rem" }}>
+                            {route.name}
+                          </Text>
+                        </RoleChoice>
+                      </motion.div>
+                    )
+                  }
+                </RolesWrapper>
+              </div>
             </Route>
           </Switch>
         </>
         :
         (
-        loading ?
-        <CircularProgress/>
-        :
-        <RegisterComponent setSubmit={setSubmit} />
-    )
+          loading ?
+            <CircularProgress />
+            :
+            <RegisterComponent setSubmit={setSubmit} />
+        )
     }
   </>
 }
@@ -202,6 +203,7 @@ const RegisterComponent = ({ setSubmit }) => {
   const [user, _setUser] = React.useState(
     JSON.parse(localStorage.getItem("user"))
   );
+  const history = useHistory()
   const [file, setFile] = React.useState()
   const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery({
@@ -224,6 +226,10 @@ const RegisterComponent = ({ setSubmit }) => {
 
   const handleSubmit = async () => {
     setLoading(true)
+    if (!file || !picker || !desc) {
+      alert("Fill all the form!")
+      return
+    }
     try {
       const storage = app.storage()
       const storageRef = storage.ref()
@@ -244,6 +250,7 @@ const RegisterComponent = ({ setSubmit }) => {
         }
       );
       setSubmit(true)
+      history.push('/faction/fyp')
     } catch (err) {
       alert(err.toString())
     }

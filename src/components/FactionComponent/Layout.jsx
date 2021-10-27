@@ -96,6 +96,7 @@ export default function Layout({ children }) {
   const [username, setUsername] = useState(
     JSON.parse(localStorage.getItem("user")).name
   );
+  const [photoUrl, setPhotoUrl] = useState(username)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const opened = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -112,6 +113,14 @@ export default function Layout({ children }) {
           Authorization: `Bearer ${localStorage.getItem("auth")}`,
         },
       });
+      const { data } = await axios.get(`${BACKEND_URL}/users/fyp/${JSON.parse(localStorage.getItem("user")).id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("auth")}`,
+        },
+      });
+      const userData = data.data
+      const tempPhotoUrl = userData.fypProfile?.photoUrl
+      setPhotoUrl(tempPhotoUrl)
       // setTugas(res.data);
       setCountNotification(res.data.data.length);
     };
@@ -208,6 +217,7 @@ export default function Layout({ children }) {
           <Avatar
             style={{ cursor: "pointer" }}
             className={classes.avatar}
+            src={photoUrl}
             onClick={() => history.push("/profile")}
           />
         </Toolbar>
