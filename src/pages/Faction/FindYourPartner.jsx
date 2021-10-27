@@ -16,6 +16,7 @@ import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
 import { BACKEND_URL } from '../../controller';
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import Button from "@material-ui/core/Button";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import 'react-image-crop/dist/ReactCrop.css';
 import { Modal } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive"
@@ -97,6 +98,7 @@ const FindYourPartner = ({ match }) => {
   const isDesktop = useMediaQuery({
     query: "(min-width: 1170px)",
   })
+  const [loading, setLoading] = React.useState(true)
   const history = useHistory()
   const [MDSource, setMDSource] = React.useState("")
   const [registered, setRegistered] = React.useState(false)
@@ -182,7 +184,12 @@ const FindYourPartner = ({ match }) => {
           </Switch>
         </>
         :
+        (
+        loading ?
+        <CircularProgress/>
+        :
         <RegisterComponent setSubmit={setSubmit} />
+    )
     }
   </>
 }

@@ -8,6 +8,7 @@ import { Col, Row } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
 import parse from "html-react-parser";
 import { useParams } from "react-router";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import axios from "axios";
 
@@ -47,7 +48,7 @@ const SpesificTugas = () => {
     getData();
   }, []);
   return !specificTugas ? (
-    <h1>Loading...</h1>
+      <CircularProgress/>
   ) : (
     <IframeWrapper>{parse(specificTugas.iframeForm)}</IframeWrapper>
   );
@@ -105,7 +106,7 @@ const Acara = () => {
               </TugasBox>
             ))
           ) : (
-            <h1>Loading...</h1>
+          <CircularProgress/>
           )}
         </>
       )}

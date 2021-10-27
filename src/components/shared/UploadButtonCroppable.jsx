@@ -101,7 +101,6 @@ export default function UploadButtonCroppable(props) {
 
   const onDownload = async () => {
     const croppedImage = await generateDownload(image, croppedArea)
-    console.log(croppedImage)
     props.setFile(croppedImage);
     props.onHide()
   };

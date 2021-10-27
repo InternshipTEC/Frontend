@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import axios from 'axios'
 import { BACKEND_URL } from '../../../controller.js'
 import MDEditor from '@uiw/react-md-editor';
+import BackButton from "../../../components/shared/BackButton";
 
 const Container = styled.div`
   background: #FFFFFF;
@@ -33,9 +34,11 @@ const Workshop = () => {
     }
     getData()
   }, [])
-  return <Container>
-    <MDEditor.Markdown source={MDSource} />
-  </Container>
+  return <>
+    <BackButton to={'/faction/fyp'} />
+    <Container>
+      <MDEditor.Markdown source={MDSource} />
+    </Container></>
 }
 
 export default Workshop

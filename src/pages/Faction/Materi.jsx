@@ -6,6 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Text from "../../components/shared/Text";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { BACKEND_URL } from "../../controller";
 import { useParams } from "react-router";
 import { Viewer, Worker } from "@react-pdf-viewer/core";
@@ -49,7 +50,7 @@ const SpesificMateri = () => {
     getData();
   }, []);
   return !spesificMateri ? (
-    <h1>Loading...</h1>
+      <CircularProgress/>
   ) : (
     <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
       <div
@@ -129,7 +130,7 @@ const Materi = () => {
             ))}
           </>
         ) : (
-          <h1>Loading...</h1>
+      <CircularProgress/>
         )}
       </>
       {/* )} */}
