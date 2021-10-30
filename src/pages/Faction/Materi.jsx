@@ -1,7 +1,7 @@
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 import React from "react";
-import { Col, Modal, Row } from "react-bootstrap";
+import { Col,  Row } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";

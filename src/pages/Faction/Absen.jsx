@@ -16,11 +16,6 @@ const Box = styled.div`
   width: 22.5rem;
 `;
 
-const Line = styled.div`
-  width: 100%;
-  height: 1rem;
-`;
-
 const Absen = () => {
   const [events, setEvents] = React.useState([]);
   const [user, setUser] = React.useState(

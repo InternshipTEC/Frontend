@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled, {css} from "styled-components";
 import { useMediaQuery } from "react-responsive";
 import Text from "../../components/shared/Text";
-import RegisterForm from "../../components/LoginRegisterComponents/RegisterForm";
 import LoginForm from "../../components/LoginRegisterComponents/LoginForm";
 import Carrousel from "../../blob/images/Carrousel.png"
 import { Redirect } from "react-router";

@@ -1,7 +1,6 @@
 import { Avatar } from "@material-ui/core";
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-import { GlobalProvider } from "../../Auth";
 import { GlobalContext } from "../../Auth";
 import { BACKEND_URL } from "../../controller";
 import axios from "axios";
