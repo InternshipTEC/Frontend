@@ -252,7 +252,7 @@ const Partner = () => {
         toLogo("Hipster", HipsterLogo),
         toLogo("Hacker", HackerLogo),
         toLogo("Hustler", HustlerLogo),
-      ].filter(logo => logo.title.toLowerCase() !== userRole)
+      ]
 
       setRoles(tempRoles)
 
@@ -327,7 +327,7 @@ const Partner = () => {
       </SearchWrapper>
     </div>
     {
-      users?.filter(user => (user.fypProfile?.role === picker)).filter(user => user.name.toLowerCase().includes(searchedName.toLowerCase())).map(user => <>
+      users?.filter(user => (user.fypProfile?.role === picker)).filter(user => user?.name?.toLowerCase().includes(searchedName.toLowerCase())).map(user => <>
         <AnimatePresence>
           <motion.div
             initial={{ scale: 0 }}
