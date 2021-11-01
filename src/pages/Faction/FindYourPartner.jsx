@@ -24,7 +24,6 @@ import Partner from './FypPages/Partner'
 import Team from './FypPages/Team'
 import Workshop from './FypPages/Workshop'
 import app from '../../base'
-import storageApp from '../../storageBase.js'
 
 const RolesWrapper = styled.div`
   display:flex;
@@ -139,61 +138,63 @@ const FindYourPartner = ({ match }) => {
     getData();
   }, [submit]);
 
-  return <>
-    {
-      registered ?
-        <>
-          <Switch>
-            {fypRoutes.map(route =>
-              <Route path={match.url + route.to} component={route.page} />
-            )}
-            <Route>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-                {isDesktop
-                  &&
-                  <>
-                    <Text type="primary" size={2} color="black" align='center' style={{ padding: "0.5rem" }}>
-                      Find Your Partner
-                    </Text>
-                    <br />
-                    <br />
-                    <br />
-                  </>
-                }
-                <RolesWrapper>
-                  {
-                    fypRoutes.map(route =>
-                      <motion.div
-                        whileHover={{ scale: 1.1 }}
-                      >
-                        <RoleChoice style={isDesktop ? {} : { height: "7rem", width: "7rem" }} onClick={() => history.push(match.url + route.to)}>
-                          {
-                            isDesktop &&
-                            <IconWrapper>
-                              {route.icon}
-                            </IconWrapper>
-                          }
-                          <Text type="secondary" color="black" align='center' style={{ padding: "0.5rem" }}>
-                            {route.name}
-                          </Text>
-                        </RoleChoice>
-                      </motion.div>
-                    )
-                  }
-                </RolesWrapper>
-              </div>
-            </Route>
-          </Switch>
-        </>
-        :
-        (
-          loading ?
-            <CircularProgress />
-            :
-            <RegisterComponent setSubmit={setSubmit} />
-        )
-    }
-  </>
+  return <RegisterComponent setSubmit={setSubmit}/>
+
+  // return <>
+  //   {
+  //     registered ?
+  //       <>
+  //         <Switch>
+  //           {fypRoutes.map(route =>
+  //             <Route path={match.url + route.to} component={route.page} />
+  //           )}
+  //           <Route>
+  //             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+  //               {isDesktop
+  //                 &&
+  //                 <>
+  //                   <Text type="primary" size={2} color="black" align='center' style={{ padding: "0.5rem" }}>
+  //                     Find Your Partner
+  //                   </Text>
+  //                   <br />
+  //                   <br />
+  //                   <br />
+  //                 </>
+  //               }
+  //               <RolesWrapper>
+  //                 {
+  //                   fypRoutes.map(route =>
+  //                     <motion.div
+  //                       whileHover={{ scale: 1.1 }}
+  //                     >
+  //                       <RoleChoice style={isDesktop ? {} : { height: "7rem", width: "7rem" }} onClick={() => history.push(match.url + route.to)}>
+  //                         {
+  //                           isDesktop &&
+  //                           <IconWrapper>
+  //                             {route.icon}
+  //                           </IconWrapper>
+  //                         }
+  //                         <Text type="secondary" color="black" align='center' style={{ padding: "0.5rem" }}>
+  //                           {route.name}
+  //                         </Text>
+  //                       </RoleChoice>
+  //                     </motion.div>
+  //                   )
+  //                 }
+  //               </RolesWrapper>
+  //             </div>
+  //           </Route>
+  //         </Switch>
+  //       </>
+  //       :
+  //       (
+  //         loading ?
+  //           <CircularProgress />
+  //           :
+  //           <RegisterComponent setSubmit={setSubmit} />
+  //       )
+  //   }
+  // </>
 }
 
 const RegisterComponent = ({ setSubmit }) => {
@@ -232,11 +233,11 @@ const RegisterComponent = ({ setSubmit }) => {
       return
     }
     try {
-      const storage = storageApp.storage()
-      const storageRef = storage.ref()
-      const imageRef = storageRef.child(`fyp/${user.id}/${file.name}`)
-      await imageRef.put(file)
-      const photoUrl = await imageRef.getDownloadURL()
+      const imgFormData = new FormData()
+      imgFormData.append('file',file)
+      imgFormData.append("upload_preset", "jh7vh8wa")
+      const res = await axios.post('https://api.cloudinary.com/v1_1/dw4bwn79m/image/upload',imgFormData)
+      const photoUrl = res.data.url
       await axios.put(
         `${BACKEND_URL}/users/fyp/${user.id}`,
         {
