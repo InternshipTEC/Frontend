@@ -23,7 +23,6 @@ import { useMediaQuery } from "react-responsive"
 import Partner from './FypPages/Partner'
 import Team from './FypPages/Team'
 import Workshop from './FypPages/Workshop'
-import app from '../../base'
 
 const RolesWrapper = styled.div`
   display:flex;
@@ -138,63 +137,61 @@ const FindYourPartner = ({ match }) => {
     getData();
   }, [submit]);
 
-  return <RegisterComponent setSubmit={setSubmit}/>
-
-  // return <>
-  //   {
-  //     registered ?
-  //       <>
-  //         <Switch>
-  //           {fypRoutes.map(route =>
-  //             <Route path={match.url + route.to} component={route.page} />
-  //           )}
-  //           <Route>
-  //             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-  //               {isDesktop
-  //                 &&
-  //                 <>
-  //                   <Text type="primary" size={2} color="black" align='center' style={{ padding: "0.5rem" }}>
-  //                     Find Your Partner
-  //                   </Text>
-  //                   <br />
-  //                   <br />
-  //                   <br />
-  //                 </>
-  //               }
-  //               <RolesWrapper>
-  //                 {
-  //                   fypRoutes.map(route =>
-  //                     <motion.div
-  //                       whileHover={{ scale: 1.1 }}
-  //                     >
-  //                       <RoleChoice style={isDesktop ? {} : { height: "7rem", width: "7rem" }} onClick={() => history.push(match.url + route.to)}>
-  //                         {
-  //                           isDesktop &&
-  //                           <IconWrapper>
-  //                             {route.icon}
-  //                           </IconWrapper>
-  //                         }
-  //                         <Text type="secondary" color="black" align='center' style={{ padding: "0.5rem" }}>
-  //                           {route.name}
-  //                         </Text>
-  //                       </RoleChoice>
-  //                     </motion.div>
-  //                   )
-  //                 }
-  //               </RolesWrapper>
-  //             </div>
-  //           </Route>
-  //         </Switch>
-  //       </>
-  //       :
-  //       (
-  //         loading ?
-  //           <CircularProgress />
-  //           :
-  //           <RegisterComponent setSubmit={setSubmit} />
-  //       )
-  //   }
-  // </>
+  return <>
+    {
+      registered ?
+        <>
+          <Switch>
+            {fypRoutes.map(route =>
+              <Route path={match.url + route.to} component={route.page} />
+            )}
+            <Route>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                {isDesktop
+                  &&
+                  <>
+                    <Text type="primary" size={2} color="black" align='center' style={{ padding: "0.5rem" }}>
+                      Find Your Partner
+                    </Text>
+                    <br />
+                    <br />
+                    <br />
+                  </>
+                }
+                <RolesWrapper>
+                  {
+                    fypRoutes.map(route =>
+                      <motion.div
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        <RoleChoice style={isDesktop ? {} : { height: "7rem", width: "7rem" }} onClick={() => history.push(match.url + route.to)}>
+                          {
+                            isDesktop &&
+                            <IconWrapper>
+                              {route.icon}
+                            </IconWrapper>
+                          }
+                          <Text type="secondary" color="black" align='center' style={{ padding: "0.5rem" }}>
+                            {route.name}
+                          </Text>
+                        </RoleChoice>
+                      </motion.div>
+                    )
+                  }
+                </RolesWrapper>
+              </div>
+            </Route>
+          </Switch>
+        </>
+        :
+        (
+          loading ?
+            <CircularProgress />
+            :
+            <RegisterComponent setSubmit={setSubmit} />
+        )
+    }
+  </>
 }
 
 const RegisterComponent = ({ setSubmit }) => {
