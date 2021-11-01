@@ -24,6 +24,7 @@ import Partner from './FypPages/Partner'
 import Team from './FypPages/Team'
 import Workshop from './FypPages/Workshop'
 import app from '../../base'
+import storageApp from '../../storageBase.js'
 
 const RolesWrapper = styled.div`
   display:flex;
@@ -231,7 +232,7 @@ const RegisterComponent = ({ setSubmit }) => {
       return
     }
     try {
-      const storage = app.storage()
+      const storage = storageApp.storage()
       const storageRef = storage.ref()
       const imageRef = storageRef.child(`fyp/${user.id}/${file.name}`)
       await imageRef.put(file)

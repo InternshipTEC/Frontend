@@ -15,8 +15,6 @@ import BackButton from "../../../components/shared/BackButton";
 import { makeStyles } from "@material-ui/core";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useHistory } from "react-router-dom";
-import axios from 'axios'
-import { BACKEND_URL } from '../../../controller'
 import app from '../../../base'
 import firebase from 'firebase'
 import AfterTeamedUp from './Team/AfterTeamedUp.jsx'
@@ -131,47 +129,11 @@ const TeamUp = () => {
         if (doc.exists) {
           const membersRef = docRef.collection('members')
           try {
-            const snapshot = await membersRef.get()
-            var hacker=0, hipster=0, hustler=0;
-            for (const index in snapshot.docs) {
-              const { data } = await axios.get(`${BACKEND_URL}/users/fyp/${snapshot.docs[index].data().userId}`, {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem("auth")}`,
-                },
-              });
-              const userData = data.data
-              const userRole = userData.fypProfile.role
-              if (userRole === "hacker") {
-                hacker += 1
-              } else if (userRole === "hipster") {
-                hipster += 1
-              } else {
-                hustler += 1
-              }
-            }
-            const { data } = await axios.get(`${BACKEND_URL}/users/fyp/${user.id}`, {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("auth")}`,
-              },
-            });
-            const userData = data.data
-            const userRole = userData.fypProfile.role
-
-            if (
-              (userRole === "hacker" && hacker<1)
-              ||
-              (userRole === "hipster" && hipster<5)
-              ||
-              (userRole === "hustler" && hustler<4)
-            ) {
-              await membersRef.add({
-                userId: user.id,
-                userName: user.name
-              })
-              history.push('/faction/fyp/team')
-            } else {
-              alert("Team full!")
-            }
+            await membersRef.add({
+              userId: user.id,
+              userName: user.name
+            })
+            history.push('/faction/fyp/team')
           } catch (err) {
             alert(err.toString())
           }
@@ -180,7 +142,7 @@ const TeamUp = () => {
         }
       })
   }
-  
+
   const [tempInvitation, setTempInvitation] = React.useState()
 
   React.useEffect(() => {
@@ -192,11 +154,11 @@ const TeamUp = () => {
       })
   }, [])
 
-  React.useEffect(()=>{
-    if(tempInvitation){
+  React.useEffect(() => {
+    if (tempInvitation) {
       setInvitations([...invitations, tempInvitation])
     }
-  },[tempInvitation])
+  }, [tempInvitation])
 
 
 
