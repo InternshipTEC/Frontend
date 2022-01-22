@@ -1,10 +1,10 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Text from '../shared/Text'
 import { Link } from 'react-router-dom'
 import Image from 'react-bootstrap/Image'
 import { useMediaQuery } from 'react-responsive'
-import { motion,useAnimation } from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import Logo from "../../blob/svg/LogoUtama.svg"
 
@@ -34,7 +34,7 @@ const LinkWrapper = styled.div`
 `
 
 const Parg = styled.div`
-    margin: ${props => props.mobile ?` 3rem 9rem 0 9rem` : "0 1rem"};
+    margin: ${props => props.mobile ? ` 3rem 9rem 0 9rem` : "0 1rem"};
 `
 
 const RegistrationDeadline = styled.div`
@@ -51,98 +51,98 @@ const Jumbotron = () => {
         query: '(min-width: 500px)'
     });
     const calculateTimeLeft = () => {
-	var now = new Date()
-	now.setHours(now.getHours()-17)
+        var now = new Date()
+        now.setHours(now.getHours() - 17)
         var difference = new Date("2021-09-04") - now
 
         let timeLeft = {};
-    
+
         if (difference > 0) {
-          timeLeft = {
-            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-            minutes: Math.floor((difference / 1000 / 60) % 60),
-            seconds: Math.floor((difference / 1000) % 60),
-          };
+            timeLeft = {
+                days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+                hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+                minutes: Math.floor((difference / 1000 / 60) % 60),
+                seconds: Math.floor((difference / 1000) % 60),
+            };
         }
-    
+
         return timeLeft;
-      };
-    
-      const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-    
-      useEffect(() => {
+    };
+
+    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+    useEffect(() => {
         setTimeout(() => {
-          setTimeLeft(calculateTimeLeft());
+            setTimeLeft(calculateTimeLeft());
         }, 1000);
-      });
-    
-      const timerComponents = [];
-    
-      Object.keys(timeLeft).forEach((interval) => {
+    });
+
+    const timerComponents = [];
+
+    Object.keys(timeLeft).forEach((interval) => {
         if (!timeLeft[interval]) {
-          return;
+            return;
         }
-    
+
         timerComponents.push(
-          <>
-            {timeLeft[interval]} {interval}{" "}
-          </>
+            <>
+                {timeLeft[interval]} {interval}{" "}
+            </>
         );
-      });
-    
+    });
+
     const parg = {
-        hidden: {opacity: 0,y: 30},
-        visible: {opacity: 1, y: 0}
+        hidden: { opacity: 0, y: 30 },
+        visible: { opacity: 1, y: 0 }
     }
 
     const controls = useAnimation();
     const [ref, inView] = useInView();
 
-    useEffect(()=>{
-        if(inView){
+    useEffect(() => {
+        if (inView) {
             controls.start('visible')
         }
-    }, [controls,inView]);
-    
+    }, [controls, inView]);
+
     return (
         <>
             <Jumtron>
                 <motion.div
-                initial={{ opacity: 0}}
-                animate={{ opacity: 1, y: -80 }}
-                transition={{ duration : 2 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1, y: -80 }}
+                    transition={{ duration: 2 }}
                 >
-                <Text size={2.75} type="primary">
-                    WELCOME TO TEC INTERNSHIP
-                </Text>
-                 <Text size={2} fontStyle="italic" type="secondary">
-                    Global &nbsp; &nbsp; &nbsp; • &nbsp; &nbsp; &nbsp;  Enrich &nbsp; &nbsp; &nbsp;   •  &nbsp; &nbsp; &nbsp;  High Impact
-                </Text>
-                <Image src={Logo} height="300rem"/>
-                <Text type="secondary">
-                    <LinkWrapper>
-                        <NavLink to="/faction">
-                            Start The Journey
-                        </NavLink>
-                    </LinkWrapper>
-                </Text>
+                    <Text size={2.75} type="primary">
+                        WELCOME TO TEC INTERNSHIP
+                    </Text>
+                    <Text size={2} fontStyle="italic" type="secondary">
+                        Global &nbsp; &nbsp; &nbsp; • &nbsp; &nbsp; &nbsp;  Enrich &nbsp; &nbsp; &nbsp;   •  &nbsp; &nbsp; &nbsp;  High Impact
+                    </Text>
+                    <Image src={Logo} height="300rem" />
+                    <Text type="secondary">
+                        <LinkWrapper>
+                            <NavLink to="/faction">
+                                Start The "Journey"
+                            </NavLink>
+                        </LinkWrapper>
+                    </Text>
                 </motion.div>
             </Jumtron>
             <motion.p
-            ref={ref}
-            animate={controls}
-            initial="hidden"
-            transition={{duration:0.5}}
-            variants={parg}>
-            <Parg mobile={isMobile}>
-                <Text type="primary" size={3}>
-                    TEC INTERNSHIP
-                </Text>
-                <Text type="paragraph" align="justify" size={1.1}>
-                TEC Internship adalah proses penerimaan anggota baru yang dijalani oleh mahasiswa ITB sebelum menjadi anggota resmi TEC ITB. TEC Internship menjadi langkah awal calon anggota memperoleh keilmuan bisnis di TEC ITB. Pada TEC Internship akan banyak kegiatan untuk belajar ilmu bisnis seperti business class berupa webinar dan mentoring ataupun praktik langsung merancang suatu bisnis dengan diadakannya kompetisi bisnis antar peserta.
-                </Text>
-            </Parg>
+                ref={ref}
+                animate={controls}
+                initial="hidden"
+                transition={{ duration: 0.5 }}
+                variants={parg}>
+                <Parg mobile={isMobile}>
+                    <Text type="primary" size={3}>
+                        TEC INTERNSHIP
+                    </Text>
+                    <Text type="paragraph" align="justify" size={1.1}>
+                        TEC Internship adalah proses penerimaan anggota baru yang dijalani oleh mahasiswa ITB sebelum menjadi anggota resmi TEC ITB. TEC Internship menjadi langkah awal calon anggota memperoleh keilmuan bisnis di TEC ITB. Pada TEC Internship akan banyak kegiatan untuk belajar ilmu bisnis seperti business class berupa webinar dan mentoring ataupun praktik langsung merancang suatu bisnis dengan diadakannya kompetisi bisnis antar peserta.
+                    </Text>
+                </Parg>
             </motion.p>
         </>
     )

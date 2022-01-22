@@ -13,9 +13,7 @@ import { useRouteMatch } from "react-router";
 import { useHistory, useLocation } from "react-router-dom";
 import LogoTEC from "../../blob/images/LogoTEC.png";
 import DauntlessShade from "../../blob/images/DauntlessShade.png";
-import { ReactComponent as Candor } from "../../blob/svg/candor.svg";
 import { ReactComponent as Dauntless } from "../../blob/svg/dauntless.svg";
-import { ReactComponent as ShadeDauntless } from "../../blob/svg/ShadeDauntless.svg";
 
 import Text from "../shared/Text";
 
@@ -97,10 +95,6 @@ export default function Layout({ children }) {
       path: `/faction`,
     },
     {
-      text: "Tugas",
-      path: `/faction/tugas`,
-    },
-    {
       text: "Absen",
       path: `/faction/absen`,
     },
@@ -152,9 +146,8 @@ export default function Layout({ children }) {
 
       <Drawer
         style={{
-          position: `${
-            location.pathname === "/faction/absen" ? "absolute" : ""
-          }`,
+          position: `${location.pathname === "/faction/absen" ? "absolute" : ""
+            }`,
           width: 0,
         }}
         className={classes.drawer}
